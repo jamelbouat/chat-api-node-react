@@ -1,6 +1,10 @@
-interface IUser {
-    _id: string,
-    firstName: string,
-    lastName: string,
-    email: string
+import { Document } from 'mongoose';
+
+interface IUser extends Document {
+    email: string;
+    password: string;
+    firstName: string;
+    lastName: string;
 }
+
+export default IUser;
