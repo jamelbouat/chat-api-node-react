@@ -1,27 +1,23 @@
 import express from 'express';
 import IUser from '../interfaces/IUser';
-import ObjectNotFoundError from '../errors/commons/ObjectNotCreatedError';
-import HttpError from '../errors/HttpError';
+import ObjectNotRegisteredError from '../errors/ObjectNotRegisteredError';
 import IService from '../interfaces/IService';
 
 class BaseService implements IService {
     public model: IUser | any;
-    public objectNotCreatedError: HttpError;
 
     constructor() {
         this.model = null;
-        this.objectNotCreatedError = new ObjectNotFoundError();
     }
 
-    public async createElement(reqData: IUser): Promise<express.Response> {
+    public async registerElement(reqData: IUser): Promise<IUser | any> {
         const Model = this.model;
-        const NotCreatedError = this.objectNotCreatedError;
-
         const data = new Model({ ...reqData });
+
         try {
             return await data.save();
         } catch (error) {
-            throw NotCreatedError;
+            throw new ObjectNotRegisteredError(error.message);
         }
     }
 

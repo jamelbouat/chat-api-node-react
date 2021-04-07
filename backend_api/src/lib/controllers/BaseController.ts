@@ -1,30 +1,27 @@
-import express, { Router } from 'express';
+import express, {Router} from 'express';
 import IController from '../interfaces/IController';
-import Constants from '../../constants/constants';
 import IService from '../interfaces/IService';
+import IUser from '../interfaces/IUser';
+import HttpError from '../errors/HttpError';
 
 class BaseController implements IController {
     public service: IService | any;
     public router: Router;
 
-    constructor() {
-        this.service = null;
+    constructor(service: IService) {
+        this.service = service;
         this.router = Router();
     }
 
-    public async createElement(req: express.Request, res: express.Response): Promise<express.Response> {
-        const Service = this.service;
+    public async registerElement(req: express.Request, res: express.Response): Promise<IUser | any> {
+        const service = this.service;
         const data = req.body;
-        try {
-            await (Service && Service.createElement(data));
-            return res.status(201).json({ message: Constants.USER_CREATION_SUCCESS });
-        } catch (error) {
-            return res.status(error.status).json({ message: error.message });
-        }
+
+        return await (service && service.registerElement(data));
     }
 
     public async getElement(req: express.Request, res: express.Response): Promise<express.Response> {
-        return res.send('fff');
+        return res.send('ooooooss');
     }
 
     public async updateElement(req: express.Request, res: express.Response): Promise<void> {

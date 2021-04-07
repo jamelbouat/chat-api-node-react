@@ -4,8 +4,7 @@ import HttpError from '../errors/HttpError';
 
 interface IService {
     model: IUser | any;
-    objectNotCreatedError?: HttpError;
-    createElement: (reqData: IUser) => Promise<express.Response>;
+    registerElement: (reqData: IUser) => Promise<IUser | any>;
     getElement: (req: express.Request, res: express.Response, model: any) => Promise<void>;
     updateElement: (req: express.Request, res: express.Response, model: any) => Promise<void>;
     deleteElement: (req: express.Request, res: express.Response, model: any) => Promise<void>;

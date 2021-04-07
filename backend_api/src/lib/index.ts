@@ -11,7 +11,7 @@ const dbClient: DBClient = container.resolve('dbClient');
 
 // Controllers instances
 const userController: IController = container.resolve('userController');
-const notFoundController = container.resolve('notFoundController');
+const notFoundController: any = container.resolve('notFoundController');
 
 // Entry point of the application
 const server = new App(dbClient, [userController], notFoundController);
