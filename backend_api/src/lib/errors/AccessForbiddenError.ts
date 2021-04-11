@@ -1,13 +1,13 @@
 import HttpError from './HttpError';
 
-class AccessDeniedError implements HttpError {
+class AccessForbiddenError implements HttpError {
     message: string;
     status: number;
 
     constructor() {
-        this.message = 'Error: Access denied';
-        this.status = 401;
+        this.message = 'Error: Access forbidden';
+        this.status = 403;
     }
 }
 
-export default AccessDeniedError;
+export default AccessForbiddenError;

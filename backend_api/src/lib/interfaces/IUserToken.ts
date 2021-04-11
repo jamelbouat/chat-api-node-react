@@ -1,5 +1,7 @@
+import IUser from './IUser';
+
 interface IUserToken {
-    _id: string,
+    user: IUser,
 }
 
 export default IUserToken;

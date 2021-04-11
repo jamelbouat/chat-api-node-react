@@ -1,30 +1,18 @@
 import jwt from 'jsonwebtoken';
 
 import IUser from '../interfaces/IUser';
-import IUserToken from '../interfaces/IUserToken';
-import AccessForbiddenError from '../errors/AccessForbiddenError';
-import RefreshTokenMissingError from '../errors/RefreshTokenMissingError';
 
 const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET as string;
 const refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET as string;
 
-class TokenUserService {
+class UserTokenService {
     private userModel: any;
 
     constructor({ userModel }: { userModel: any }) {
         this.userModel = userModel;
     }
 
-    public async refreshToken(refreshToken: string): Promise<any> {
-        if(!refreshToken) {
-            throw new RefreshTokenMissingError();
-        }
-
-        const verifiedRefreshToken = jwt.verify(refreshToken, refreshTokenSecret) as IUserToken;
-        const user = await this.userModel.findById(verifiedRefreshToken.user._id);
-        if(!user || user.refreshTokens && !user.refreshTokens.includes(refreshToken)) {
-            throw new AccessForbiddenError();
-        }
+    public async getNewUserTokens(user: IUser, refreshToken: string): Promise<any> {
 
         const userWithoutSensitiveData = this.removeSensitiveDataFromUser(user);
         const newAccessToken = this.generateAccessToken(userWithoutSensitiveData);
@@ -83,4 +71,4 @@ class TokenUserService {
     }
 }
 
-export default TokenUserService;
+export default UserTokenService;

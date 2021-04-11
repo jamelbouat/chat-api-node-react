@@ -1,6 +1,5 @@
 import express from 'express';
 import IUser from './IUser';
-import HttpError from '../errors/HttpError';
 
 interface IService {
     model: IUser | any;

@@ -5,6 +5,7 @@ import {
     DELETE_USER_URL,
     GET_USER_URL,
     LOGIN_USER_URL,
+    LOGOUT_USER_URL,
     POST_USER_URL,
     UPDATE_USER_URL
 } from '../../config/url.config';
@@ -15,11 +16,14 @@ import IUserService from '../interfaces/IUserService';
 class UserController extends BaseController {
     private userService: IUserService;
     private userAuthMiddleware: any;
+    private isUserRefreshTokenValid: any;
 
-    constructor({ userService, userAuthMiddleware }: { userService : IUserService, userAuthMiddleware: any }) {
+    constructor({ userService, userAuthMiddleware, isUserRefreshTokenValid }:
+                    { userService : IUserService, userAuthMiddleware: any, isUserRefreshTokenValid : any }) {
         super(userService);
         this.userService = userService;
         this.userAuthMiddleware = userAuthMiddleware;
+        this.isUserRefreshTokenValid = isUserRefreshTokenValid;
         this.initializeRoutes();
     }
 
@@ -30,11 +34,13 @@ class UserController extends BaseController {
         this.router.delete(DELETE_USER_URL, this.deleteUser);
         this.router.post(ALL_USER_URL, this.userAuthMiddleware, this.getAllUsers);
         this.router.post(LOGIN_USER_URL, this.loginUser);
+        this.router.post(LOGOUT_USER_URL, this.isUserRefreshTokenValid, this.logoutUser);
     }
 
     private registerUser = async (req: express.Request, res: express.Response): Promise<IUser | any> => {
         try {
-            const user = await this.registerElement(req, res);
+            const reqData = req.body;
+            const user = await this.registerElement(reqData, res);
             res.status(201).json( { id: user._id, message: Constants.USER_CREATION_SUCCESS });
         } catch (error) {
             res.status(error.status).json({ message: error.message });
@@ -57,7 +63,7 @@ class UserController extends BaseController {
         try {
             const user = req.user;
             res.send(user);
-        } catch (error) {
+        } catch(error) {
             res.status(error.status).json({ message: error.message });
         }
     }
@@ -65,12 +71,23 @@ class UserController extends BaseController {
 
 
     private loginUser = async (req: express.Request, res: express.Response): Promise<IUser | any> => {
-        const reqData = req.body;
-
         try {
+            const reqData = req.body;
             const loggedUser = await this.userService.loginUser(reqData);
-            res.status(200).json( { ...loggedUser, message: Constants.USER_LOGGED_SUCCESS });
+            res.status(200).json( { ...loggedUser });
         } catch (error) {
+            res.status(error.status).json({ message: error.message });
+        }
+    }
+
+    private logoutUser = async (req: express.Request, res: express.Response): Promise<void> => {
+        try {
+            const user = req.user;
+            const refreshToken = req.refreshToken;
+
+            await this.userService.logoutUser(user, refreshToken);
+            res.status(204).json();
+        } catch (error){
             res.status(error.status).json({ message: error.message });
         }
     }

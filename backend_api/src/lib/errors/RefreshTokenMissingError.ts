@@ -1,13 +1,13 @@
 import HttpError from './HttpError';
 
-class AuthTokenMissingError implements HttpError {
+class RefreshTokenMissingError implements HttpError {
     message: string;
     status: number;
 
     constructor() {
-        this.message = 'Error: Authorization token is missing';
+        this.message = 'Error: Refresh token is missing';
         this.status = 403;
     }
 }
 
-export default AuthTokenMissingError;
+export default RefreshTokenMissingError;
