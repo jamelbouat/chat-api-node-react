@@ -1,0 +1,69 @@
+
+# node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# production
+/build
+
+# testing
+/coverage
+/report
+/tests/e2e/.tmp
+/tests/e2e/reports
+/tests/e2e/conf/*.tmp
+
+# dependencies
+/node_modules
+
+# REACT NATIVE
+
+# OSX
+
+# Xcode
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+*.xccheckout
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+*.xcuserstate
+project.xcworkspace
+
+# Android/IntelliJ
+.idea
+.gradle
+local.properties
+*.iml
+
+# BUCK
+buck-out/
+\.buckd/
+*.keystore
+
+# fastlane
+*/fastlane/report.xml
+*/fastlane/Preview.html
+*/fastlane/screenshots
+# Bundle artifact
+*.jsbundle

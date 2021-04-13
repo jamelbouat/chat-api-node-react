@@ -22,7 +22,6 @@ function IsUserRefreshTokenValid({ userModel }: { userModel: any}) {
             if(!user || user.refreshTokens && !user.refreshTokens.includes(refreshToken)) {
                 throw new AccessForbiddenError();
             }
-            console.log(refreshToken);
             req.user = user;
             req.refreshToken = refreshToken;
             next();
