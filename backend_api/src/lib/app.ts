@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import express from 'express';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 import DBClient from '../config/db.config';
 import Constants from '../constants/constants';
 import IController from './interfaces/IController';
@@ -29,6 +30,7 @@ class App {
     private initializeMiddlewares(): void {
         this.app.use(bodyParser.json());
         this.app.use(express.json());
+        this.app.use(cors());
     }
 
     private initializeRoutes() {

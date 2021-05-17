@@ -73,7 +73,9 @@ class UserController extends BaseController {
     private loginUser = async (req: express.Request, res: express.Response): Promise<IUser | any> => {
         try {
             const reqData = req.body;
+            console.log(reqData);
             const loggedUser = await this.userService.loginUser(reqData);
+            console.log(loggedUser);
             res.status(200).json( { ...loggedUser });
         } catch (error) {
             res.status(error.status).json({ message: error.message });

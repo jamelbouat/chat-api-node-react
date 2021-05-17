@@ -13,11 +13,9 @@ class BaseController implements IController {
         this.router = Router();
     }
 
-    public async registerElement(req: express.Request, res: express.Response): Promise<IUser | any> {
+    public async registerElement(reqData: express.Request, res: express.Response): Promise<IUser | any> {
         const service = this.service;
-        const data = req.body;
-
-        return await (service && service.registerElement(data));
+        return await (service && service.registerElement(reqData));
     }
 
     public async getElement(req: express.Request, res: express.Response): Promise<express.Response> {

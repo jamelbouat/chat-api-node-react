@@ -1,6 +1,7 @@
 import path from 'path';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 const config: webpack.Configuration = {
     mode: 'development',
@@ -21,6 +22,7 @@ const config: webpack.Configuration = {
                             '@babel/preset-react',
                             '@babel/preset-typescript',
                         ],
+                        plugins: [ 'react-hot-loader/babel' ]
                     },
                 },
             },
@@ -34,6 +36,10 @@ const config: webpack.Configuration = {
             template: 'src/index.html',
         }),
         new webpack.HotModuleReplacementPlugin(),
+        new ForkTsCheckerWebpackPlugin(),
+        new webpack.ProvidePlugin({
+            process: 'process/browser',
+        })
     ],
     devtool: 'inline-source-map',
     devServer: {
