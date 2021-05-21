@@ -1,8 +1,8 @@
-import {Action, Dispatch} from 'redux';
+import { Action, Dispatch } from 'redux';
 import { push } from 'connected-react-router';
 
 import { ROUTES } from '../constants';
-import {ROUTE_CHANGE} from './types';
+import { ROUTE_CHANGE } from './types';
 
 export interface IRouteAction extends Action {
     payload: {

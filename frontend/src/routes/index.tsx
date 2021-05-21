@@ -7,7 +7,7 @@ import Home from '../containers/Home';
 import PrivateRoute from '../containers/PrivateRoute';
 import RestrictRoute from '../containers/RestrictRoute';
 import Dashboard from '../containers/Dashboard';
-import {ROUTES} from '../constants';
+import { ROUTES } from '../constants';
 
 const Routes: React.FC = () => {
     return(

@@ -1,4 +1,4 @@
-import {LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_USER} from '../actions/types';
+import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_USER } from '../actions/types';
 import { IUserAction } from '../interfaces';
 
 const initialState = {

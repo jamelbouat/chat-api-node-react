@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import {RootState} from '../../typings/redux';
-import {ThunkDispatch} from 'redux-thunk';
-import {Action} from 'redux';
+import { RootState } from '../../typings/redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { Action } from 'redux';
 import NavigationBar from '../components/NavigationBar';
 
 const mapStateToProps = (state: RootState) => ({

@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import Login from '../components/pages/Login';
-import {RootState} from '../../typings/redux';
-import {ThunkDispatch} from 'redux-thunk';
-import {Action} from 'redux';
-import {ILoginValues } from '../interfaces';
-import {loginUser} from '../actions/login';
+import { RootState } from '../../typings/redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { Action } from 'redux';
+import { ILoginValues } from '../interfaces';
+import { loginUser } from '../actions/login';
 
 const mapStateToProps = (state: RootState) => ({
     isLoading: state.loginState.isLoading,

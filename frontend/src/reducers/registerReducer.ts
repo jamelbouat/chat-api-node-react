@@ -1,4 +1,4 @@
-import {Action} from 'redux';
+import { Action } from 'redux';
 import { REGISTER_FAILURE, REGISTER_REQUEST, REGISTER_SUCCESS } from '../actions/types';
 
 const initialState = {

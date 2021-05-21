@@ -10,7 +10,7 @@ interface Props {
 }
 
 const RestrictRoute: React.FC<Props> = (props) => {
-    const {isAuthenticated, component: Component, ...rest} = props;
+    const { isAuthenticated, component: Component, ...rest } = props;
 
     return (
         <Route
@@ -20,7 +20,7 @@ const RestrictRoute: React.FC<Props> = (props) => {
                     <Redirect
                         to={{
                             pathname: ROUTES.DASHBOARD,
-                            state: {from: props.location},
+                            state: { from: props.location },
                         }}
                     />
                 )

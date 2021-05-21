@@ -2,7 +2,7 @@ import { IRegisterValues } from '../interfaces';
 import { Dispatch } from 'redux';
 import { REGISTER_FAILURE, REGISTER_REQUEST, REGISTER_SUCCESS } from './types';
 import { userService } from '../services/userService';
-import {ALERT_TYPE, setAlertError, setAlertSuccess} from './alert';
+import { ALERT_TYPE, setAlertError, setAlertSuccess } from './alert';
 
 export const registerUser = (values: IRegisterValues) => async (dispatch: Dispatch): Promise<void> => {
     dispatch(registerRequest());

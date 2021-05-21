@@ -1,4 +1,4 @@
-import {Action, Dispatch, Middleware, MiddlewareAPI} from 'redux';
+import { Action, Dispatch, Middleware, MiddlewareAPI } from 'redux';
 import { refreshTokens } from '../actions/refreshTokens';
 
 export const jwtMiddleware: Middleware = (store: MiddlewareAPI) => (next: Dispatch) => (action: Action) => {

@@ -1,8 +1,8 @@
 import { AppBar, Button, makeStyles, Toolbar, Typography } from '@material-ui/core';
 import { Chat } from '@material-ui/icons';
 import React from 'react';
-import {ROUTES} from '../constants';
-import {Link} from 'react-router-dom';
+import { ROUTES } from '../constants';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(() => ({
     title: {

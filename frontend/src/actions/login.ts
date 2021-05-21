@@ -1,8 +1,8 @@
-import {ILoginResponseData, ILoginValues} from '../interfaces';
+import { ILoginResponseData, ILoginValues } from '../interfaces';
 import { Dispatch } from 'redux';
-import {LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_USER, REMOVE_TOKENS, SET_INITIAL_TOKENS} from './types';
+import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_USER, REMOVE_TOKENS, SET_INITIAL_TOKENS } from './types';
 import { userService } from '../services/userService';
-import {ALERT_TYPE, setAlertError} from './alert';
+import { ALERT_TYPE, setAlertError } from './alert';
 import * as storage from '../utils/localStorage';
 
 export const loginUser = (values: ILoginValues) => async (dispatch: Dispatch) => {

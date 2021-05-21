@@ -1,7 +1,7 @@
-import {connect, ConnectedProps } from 'react-redux';
-import {RootState} from '../../typings/redux';
-import {ThunkDispatch} from 'redux-thunk';
-import {Action} from 'redux';
+import { connect } from 'react-redux';
+import { RootState } from '../../typings/redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { Action } from 'redux';
 import PrivateRoute from '../routes/PrivateRoute';
 
 const mapStateToProps = (state: RootState) => ({

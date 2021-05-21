@@ -8,7 +8,7 @@ import {
     registerFormFieldsValidationSchema
 } from '../CustomField';
 import useStyles from '../makeFormStyles';
-import {IRegisterValues} from '../../interfaces';
+import { IRegisterValues } from '../../interfaces';
 import { removeProperties } from '../../utils/objects';
 import AlertInfo from '../AlertInfo';
 import ProgressIndicator from '../ProgressIndicator';

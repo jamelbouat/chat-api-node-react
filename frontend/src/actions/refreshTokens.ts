@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 import { refreshTokensService } from '../services';
-import {CLEAR_REFRESH_TOKENS_PROMISE, REMOVE_TOKENS, SET_NEW_TOKENS, SET_REFRESH_TOKENS_PROMISE} from './types';
-import {ITokens} from '../interfaces';
+import { CLEAR_REFRESH_TOKENS_PROMISE, REMOVE_TOKENS, SET_NEW_TOKENS, SET_REFRESH_TOKENS_PROMISE } from './types';
+import { ITokens } from '../interfaces';
 import * as storage from '../utils/localStorage';
 
 export const refreshTokens = () => (dispatch: Dispatch): Promise<void> => {

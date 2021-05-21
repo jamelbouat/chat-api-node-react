@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import {RootState} from '../../typings/redux';
-import {ThunkDispatch} from 'redux-thunk';
-import {Action} from 'redux';
+import { RootState } from '../../typings/redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { Action } from 'redux';
 import RestrictRoute from '../routes/RestrictRoute';
 
 const mapStateToProps = (state: RootState) => ({

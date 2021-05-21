@@ -1,4 +1,4 @@
-import {Action} from 'redux';
+import { Action } from 'redux';
 import {
     CLEAR_REFRESH_TOKENS_PROMISE,
     REMOVE_TOKENS,

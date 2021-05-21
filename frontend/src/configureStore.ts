@@ -4,7 +4,7 @@ import { routerMiddleware } from 'connected-react-router';
 import thunkMiddleware from 'redux-thunk';
 
 import createRootReducer from './reducers';
-import {jwtMiddleware} from './middlewares/jwtMiddleware';
+import { jwtMiddleware } from './middlewares/jwtMiddleware';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const history = createBrowserHistory();
