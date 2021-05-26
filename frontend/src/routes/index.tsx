@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router';
+import { Switch, Route, Redirect } from 'react-router';
 
 import Login from '../containers/Login';
 import Register from '../containers/Register';
@@ -18,7 +18,9 @@ const Routes: React.FC = () => {
             <RestrictRoute exact path={ ROUTES.HOME } component={ Home } />
             <RestrictRoute exact path={ ROUTES.LOGIN } component={ Login } />
             <RestrictRoute exact path={ ROUTES.REGISTER } component={ Register } />
-            <Route path='*' component={ Home } />
+            <Route path='*' component={ Home } >
+                <Redirect to={ ROUTES.HOME }/>
+            </Route>
         </Switch>
     );
 };

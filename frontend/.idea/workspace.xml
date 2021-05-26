@@ -20,51 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cc81a06f-aa8b-4af9-8a82-fa15fa32c6b4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/Spinner.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/pages/Profile.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/Profile.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/sessionStorage.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend_api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/services/UserTokenService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/services/UserTokenService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/.env" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/alert.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/alertInfo.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/login.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/login.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/refreshTokens.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/refreshTokens.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/register.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/register.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/route.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/CustomField.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CustomField.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/HomeBackgroundImage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/HomeBackgroundImage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/NavigationBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NavigationBar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ProgressIndicator.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ProgressIndicator.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pages/Dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/Dashboard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pages/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/Login.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pages/Register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/Register.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/configureStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/configureStore.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Dashboard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Dashboard.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Login.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Login.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/NavigationBar.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/NavigationBar.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Register.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Register.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interfaces/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mainTheme.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/mainTheme.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/middlewares/jwtMiddleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/middlewares/jwtMiddleware.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/alertReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/alertInfoReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/loginReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/loginReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/refreshTokensReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/refreshTokensReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/registerReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/registerReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/RestrictRoute.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/RestrictRoute.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/fetchApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/fetchApi.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/refreshTokensService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/refreshTokensService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/userService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/userService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/localStorage.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/objects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/objects.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.dev.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.dev.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,7 +111,7 @@
       <workItem from="1619693054069" duration="29654000" />
       <workItem from="1619954048827" duration="93705000" />
       <workItem from="1620640360057" duration="184447000" />
-      <workItem from="1621591418594" duration="108212000" />
+      <workItem from="1621591418594" duration="109221000" />
     </task>
     <servers />
   </component>
