@@ -1,27 +1,24 @@
-import { ILoginResponseData, ILoginValues } from '../interfaces';
 import { Dispatch } from 'redux';
+import { push } from 'connected-react-router';
+
+import { ILoginResponseData, ILoginValues } from '../interfaces';
 import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_USER, REMOVE_TOKENS, SET_INITIAL_TOKENS } from './types';
 import { userService } from '../services/userService';
-import { ALERT_TYPE, setAlertError } from './alert';
-import * as storage from '../utils/localStorage';
+import { ALERT_TYPE, setAlertInfoToError } from './alertInfo';
+import { ROUTES } from '../constants';
 
 export const loginUser = (values: ILoginValues) => async (dispatch: Dispatch) => {
     dispatch(loginRequest());
+
     try {
         const user = await userService.loginUser(values);
-        console.log('user==',user);
-        storage.saveTokensToStorage({
-            accessToken: user.accessToken,
-            refreshToken: user.refreshToken
-        });
-
         dispatch(setInitialTokens(user));
-
         dispatch(loginSuccess(user));
-        // redirect to home page if success
+        // dispatch(push(ROUTES.DASHBOARD));
+
     } catch (error) {
         dispatch(loginFailure());
-        dispatch(setAlertError(ALERT_TYPE.LOGIN_FAIL, error.message));
+        dispatch(setAlertInfoToError(ALERT_TYPE.LOGIN_FAIL, error.message));
     }
 };
 
@@ -30,7 +27,7 @@ const loginRequest = () => (
 );
 
 const loginSuccess = (user: ILoginResponseData) => (
-    { type: LOGIN_SUCCESS, payload: user.user }
+    { type: LOGIN_SUCCESS, payload: user }
 );
 
 const loginFailure = () => (
@@ -45,8 +42,8 @@ const setInitialTokens = (user: ILoginResponseData) => ({
     }
 });
 
-const logoutUser = () => (dispatch: Dispatch): void => {
-    storage.removeTokens();
+export const logoutUser = () => (dispatch: Dispatch): void => {
     dispatch({ type: REMOVE_TOKENS });
     dispatch({ type: LOGOUT_USER });
+    dispatch(push(ROUTES.HOME));
 };

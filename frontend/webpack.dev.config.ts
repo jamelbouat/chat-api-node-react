@@ -2,6 +2,7 @@ import path from 'path';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
+import { DefinePlugin } from 'webpack';
 
 const config: webpack.Configuration = {
     mode: 'development',
@@ -39,6 +40,9 @@ const config: webpack.Configuration = {
         new ForkTsCheckerWebpackPlugin(),
         new webpack.ProvidePlugin({
             process: 'process/browser',
+        }),
+        new DefinePlugin({
+            'process.env.REACT_APP_API_URL': JSON.stringify('http://localhost:4300/api')
         })
     ],
     devtool: 'inline-source-map',

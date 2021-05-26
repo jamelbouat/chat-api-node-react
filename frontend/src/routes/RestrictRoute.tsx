@@ -25,7 +25,7 @@ const RestrictRoute: React.FC<Props> = (props) => {
                     />
                 )
                     : (
-                        <Component {...props} />
+                        <Component { ...props } />
                     )
             }
         />

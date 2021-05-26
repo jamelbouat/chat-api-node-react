@@ -1,16 +1,18 @@
 import { connect } from 'react-redux';
-import { RootState } from '../../typings/redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { Action } from 'redux';
-import Dashboard from '../components/pages/Dashboard';
+
+import Profile from '../components/pages/Profile';
+import { RootState } from '../../typings/redux';
 
 const mapStateToProps = (state: RootState) => ({
-    user: state.loginState.user,
+    user: state.loginState.user
 });
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<RootState, any, Action>) => ({
+
 });
 
 export default connect(
-    mapStateToProps, null
-)(Dashboard);
+    mapStateToProps, mapDispatchToProps
+)(Profile);

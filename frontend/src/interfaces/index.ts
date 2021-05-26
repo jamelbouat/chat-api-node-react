@@ -26,13 +26,13 @@ export interface IUserAction extends Action {
 }
 
 export interface IAccessToken {
-    token: string,
-    expiresAt: string
+    token: string | null,
+    expiresAt: number | null
 }
 
 export interface ITokens {
     accessToken: IAccessToken
-    refreshToken: string;
+    refreshToken: string | null;
 }
 
 export type ILoginResponseData = IUser & ITokens;

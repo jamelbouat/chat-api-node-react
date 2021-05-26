@@ -13,12 +13,10 @@ const registerReducer = (state = initialState, action: Action) => {
             };
 
         case REGISTER_SUCCESS:
+        case REGISTER_FAILURE:
             return {
                 isLoading: false
             };
-
-        case REGISTER_FAILURE:
-            return state;
 
         default:
             return state;

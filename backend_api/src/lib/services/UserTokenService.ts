@@ -4,8 +4,8 @@ import IUser from '../interfaces/IUser';
 
 const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET as string;
 const refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET as string;
-const accessTokenExpiresIn = '600s';
-const refreshTokenExpiresIn = '6000s';
+const accessTokenExpiresIn = 300;
+const refreshTokenExpiresIn = 3000;
 
 class UserTokenService {
     private userModel: any;
@@ -30,8 +30,8 @@ class UserTokenService {
         return configurableUser;
     }
 
-    private generateAccessToken(userWithoutSensitiveData: any): { token: string, expiresAt: string } {
-        const expiresAt = Date.now() + accessTokenExpiresIn;
+    private generateAccessToken(userWithoutSensitiveData: any): { token: string, expiresAt: number } {
+        const expiresAt = Date.now() + accessTokenExpiresIn * 1000; // expiresAt in ms
         const newAccessToken = this.getNewJwtToken(userWithoutSensitiveData, accessTokenSecret, accessTokenExpiresIn);
         return { token: newAccessToken, expiresAt };
     }
@@ -65,7 +65,7 @@ class UserTokenService {
         return newRefreshToken;
     }
 
-    private getNewJwtToken(payload: any, secret: string, expiresIn: string) {
+    private getNewJwtToken(payload: any, secret: string, expiresIn: number) {
         return jwt.sign({ user: payload }, secret, { expiresIn });
     }
 

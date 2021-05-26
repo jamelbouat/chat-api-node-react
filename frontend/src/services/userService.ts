@@ -14,7 +14,6 @@ const loginUser = async (values: ILoginValues) => {
     try {
         const user: ILoginResponseData = await fetchApi('user/login', requestOptions(values));
         return user;
-
     } catch (error) {
         throw error;
     }
@@ -23,7 +22,6 @@ const loginUser = async (values: ILoginValues) => {
 const registerUser = async (values: IRegisterValues) => {
     try {
         return await fetchApi('user/register', requestOptions(values));
-
     } catch (error) {
         throw error;
     }

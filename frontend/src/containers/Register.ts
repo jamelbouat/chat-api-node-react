@@ -5,15 +5,19 @@ import { registerUser } from '../actions/register';
 import { Action } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { RootState } from '../../typings/redux';
+import { clearAlertInfo } from '../actions/alertInfo';
 
 const mapStateToProps = (state: RootState) => ({
     isLoading: state.registerState.isLoading,
-    alert: state.alert
+    alertInfo: state.alertInfo
 });
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<RootState, any, Action>) => ({
-    registerUser: (values: IRegisterValues) => {
-        dispatch(registerUser(values));
+    registerUser: async (values: IRegisterValues) => {
+        await dispatch(registerUser(values));
+    },
+    clearAlert: () => {
+        dispatch(clearAlertInfo());
     }
 });
 

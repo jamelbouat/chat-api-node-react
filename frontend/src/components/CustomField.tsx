@@ -81,4 +81,5 @@ export const registerFormFieldsValidationSchema = Yup.object({
 
     confirmPassword: Yup.string()
         .oneOf([Yup.ref('password'), null], 'Passwords must match')
+        .required('Required')
 });

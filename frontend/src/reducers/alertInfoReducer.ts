@@ -1,12 +1,12 @@
-import { CLEAR_ALERT_ERROR, SET_ALERT_ERROR, SET_ALERT_SUCCESS } from '../actions/types';
-import { IAlertAction } from '../actions/alert';
+import { CLEAR_ALERT, SET_ALERT_ERROR, SET_ALERT_SUCCESS } from '../actions/types';
+import { IAlertAction } from '../actions/alertInfo';
 
 const initialState = {
     alertType: null,
     alertMessage: null
 };
 
-export const alertReducer = (state = initialState, action: IAlertAction) => {
+export const alertInfoReducer = (state = initialState, action: IAlertAction) => {
     switch (action.type) {
         case SET_ALERT_ERROR:
         case SET_ALERT_SUCCESS:
@@ -15,7 +15,7 @@ export const alertReducer = (state = initialState, action: IAlertAction) => {
                 alertMessage: action.payload.alertMessage
             };
 
-        case CLEAR_ALERT_ERROR:
+        case CLEAR_ALERT:
             return {
                 alertType: null,
                 alertMessage: null

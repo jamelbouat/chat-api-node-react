@@ -1,4 +1,4 @@
-import { CLEAR_ALERT_ERROR, SET_ALERT_ERROR, SET_ALERT_SUCCESS } from './types';
+import { CLEAR_ALERT, SET_ALERT_ERROR, SET_ALERT_SUCCESS } from './types';
 import { Action } from 'redux';
 
 export enum ALERT_TYPE {
@@ -7,14 +7,16 @@ export enum ALERT_TYPE {
     REGISTER_SUCCESS = 'REGISTER_SUCCESS'
 }
 
-export interface IAlertAction extends Action {
-    payload: {
-        alertType: ALERT_TYPE,
-        alertMessage: string
-    }
+export interface IAlert {
+    alertType: ALERT_TYPE,
+    alertMessage: string
 }
 
-export const setAlertError = (errorType: ALERT_TYPE, errorMessage: string): IAlertAction => (
+export interface IAlertAction extends Action {
+    payload: IAlert
+}
+
+export const setAlertInfoToError = (errorType: ALERT_TYPE, errorMessage: string): IAlertAction => (
     {
         type: SET_ALERT_ERROR,
         payload: {
@@ -24,7 +26,7 @@ export const setAlertError = (errorType: ALERT_TYPE, errorMessage: string): IAle
     }
 );
 
-export const setAlertSuccess = (successType: ALERT_TYPE, successMessage: string): IAlertAction => (
+export const setAlertInfoToSuccess = (successType: ALERT_TYPE, successMessage: string): IAlertAction => (
     {
         type: SET_ALERT_SUCCESS,
         payload: {
@@ -34,8 +36,8 @@ export const setAlertSuccess = (successType: ALERT_TYPE, successMessage: string)
     }
 );
 
-export const clearAlertError = (): Action => (
+export const clearAlertInfo = (): Action => (
     {
-        type: CLEAR_ALERT_ERROR
+        type: CLEAR_ALERT
     }
 );

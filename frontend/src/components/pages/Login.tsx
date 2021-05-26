@@ -1,5 +1,5 @@
-import React from 'react';
-import { Button, Container, Grid, Link, Paper, Typography } from '@material-ui/core';
+import React, { useEffect } from 'react';
+import { Button, Container, Grid, Paper, Typography } from '@material-ui/core';
 import { Form, Formik, FormikHelpers } from 'formik';
 
 import { MyTextField, MyPasswordField, loginFormFieldsValidationSchema } from '../CustomField';
@@ -7,6 +7,9 @@ import useStyles from '../makeFormStyles';
 import { ILoginResponseData, ILoginValues } from '../../interfaces';
 import AlertInfo from '../AlertInfo';
 import ProgressIndicator from '../ProgressIndicator';
+import { IAlert } from '../../actions/alertInfo';
+import { Link } from 'react-router-dom';
+import { ROUTES } from '../../constants';
 
 interface Values {
     email: string;
@@ -18,20 +21,24 @@ interface Props {
     user: ILoginResponseData,
     isAuthenticated: boolean,
     loginUser: (values: ILoginValues) => void,
-    alert: {
-        alertType: string,
-        alertMessage: string
-    }
+    clearAlert: () => void,
+    alertInfo: IAlert
 }
 
 const Login: React.FC<Props> = (props) => {
     const classes = useStyles();
-    const { isLoading, user, isAuthenticated, alert, loginUser  } = props;
-
     const initialValues = { email: '', password: '' };
-    const alertType = alert.alertType === 'LOGIN_FAIL' ? 'error' :
-        alert.alertType === 'REGISTER_SUCCESS' ? 'success' : null;
-    const alertMessage = alert.alertMessage || 'error !';
+    const { isLoading, user, isAuthenticated, alertInfo, loginUser, clearAlert } = props;
+
+    const alertType = alertInfo.alertType === 'LOGIN_FAIL' ? 'error' :
+        alertInfo.alertType === 'REGISTER_SUCCESS' ? 'success' : null;
+    const alertMessage = alertInfo.alertMessage || 'error !';
+
+    useEffect(() => {
+        return () => {
+            clearAlert();
+        };
+    }, []);
 
     return (
         <main className={ classes.layout }>
@@ -56,9 +63,9 @@ const Login: React.FC<Props> = (props) => {
                         validationSchema={ loginFormFieldsValidationSchema }
 
                         onSubmit={ async (values: Values, { setSubmitting }: FormikHelpers<Values>) => {
-                            setSubmitting(true);
+                            // setSubmitting(true);
                             await loginUser(values);
-                            setSubmitting(false);
+                            // setSubmitting(false);
                         }}
                     >
                         {
@@ -93,16 +100,20 @@ const Login: React.FC<Props> = (props) => {
                                     >
                                             Sign in
                                     </Button>
-                                    <Grid container className={ classes.links }>
+                                    <Grid container className={ classes.links } >
                                         <Grid item>
-                                            <Link href="#" variant="body2">
-                                                Forgot password?
-                                            </Link>
+                                            <Typography variant='subtitle2'>
+                                                <Link to={ ROUTES.LOGIN } >
+                                                    Forgot password?
+                                                </Link>
+                                            </Typography>
                                         </Grid>
                                         <Grid item>
-                                            <Link href="#" variant="body2">
-                                                {'Don\'t have an account? Sign up'}
-                                            </Link>
+                                            <Typography variant='subtitle2'>
+                                                <Link to={ ROUTES.REGISTER } >
+                                                    {'Don\'t have an account? Sign up'}
+                                                </Link>
+                                            </Typography>
                                         </Grid>
                                     </Grid>
                                 </Form>

@@ -26,7 +26,6 @@ export const loginReducer = (state = initialState, action: IUserAction) => {
         case LOGIN_FAILURE:
         case LOGOUT_USER:
             return {
-                ...state,
                 isLoading: false,
                 user: null,
                 isAuthenticated: false
@@ -34,6 +33,5 @@ export const loginReducer = (state = initialState, action: IUserAction) => {
 
         default:
             return state;
-
     }
 };

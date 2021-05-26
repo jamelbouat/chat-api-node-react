@@ -5,10 +5,12 @@ import { ConnectedRouter } from 'connected-react-router';
 import { CssBaseline, ThemeProvider } from '@material-ui/core';
 
 import { history, configureStore } from './configureStore';
+import { saveStateToSessionStorage } from './utils/sessionStorage';
 import App from './App';
 import theme from './mainTheme';
 
-export const store = configureStore();
+const store = configureStore();
+store.subscribe(() => saveStateToSessionStorage(store.getState()));
 
 ReactDOM.render(
     <ThemeProvider theme={ theme }>

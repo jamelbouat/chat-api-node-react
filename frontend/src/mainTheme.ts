@@ -8,7 +8,8 @@ const theme = createMuiTheme({
                     margin: 0,
                     padding: 0,
                     overflowX: 'hidden',
-                }
+                    position: 'relative'
+                },
             }
         },
     },

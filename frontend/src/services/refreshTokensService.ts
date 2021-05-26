@@ -1,4 +1,4 @@
-const apiUrl = process.env.REACT_APP_API_URL;
+import { fetchApi } from './fetchApi';
 
 const requestOptions = () => ({
     method: 'POST',
@@ -7,12 +7,11 @@ const requestOptions = () => ({
 
 const refreshTokens = async () => {
     try {
-        const response = await fetch(`${apiUrl}/user/token`, requestOptions());
+        const response = await fetchApi('user/token', requestOptions());
         return await response.json();
     } catch (error) {
-        return error;
+        throw error;
     }
-
 };
 
 export const refreshTokensService = {

@@ -1,5 +1,5 @@
-import React from 'react';
-import { Button, Container, Link, Paper, Typography } from '@material-ui/core';
+import React, { useEffect } from 'react';
+import { Button, Container, Paper, Typography } from '@material-ui/core';
 import { Form, Formik, FormikHelpers } from 'formik';
 
 import {
@@ -12,6 +12,9 @@ import { IRegisterValues } from '../../interfaces';
 import { removeProperties } from '../../utils/objects';
 import AlertInfo from '../AlertInfo';
 import ProgressIndicator from '../ProgressIndicator';
+import { ROUTES } from '../../constants';
+import { Link } from 'react-router-dom';
+import { IAlert } from '../../actions/alertInfo';
 
 interface Values {
     firstName: string;
@@ -24,18 +27,23 @@ interface Values {
 interface Props {
     isLoading: boolean,
     registerUser: (values: IRegisterValues) => void,
-    alert: {
-        alertType: string,
-        alertMessage: string
-    }
+    clearAlert: () => void,
+    alertInfo: IAlert
 }
 
 const Register: React.FC<Props> = (props) => {
     const classes = useStyles();
     const initialValues = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
-    const { isLoading, registerUser, alert } = props;
-    const alertType = alert.alertType === 'REGISTER_SUCCESS' ? 'success' : null;
-    const alertMessage = alert.alertMessage || 'error !';
+    const { isLoading, registerUser, alertInfo, clearAlert } = props;
+
+    const alertType = alertInfo.alertType === 'REGISTER_FAIL' && 'error';
+    const alertMessage = alertInfo.alertMessage || 'error !';
+
+    useEffect(() => {
+        return () => {
+            clearAlert();
+        };
+    }, []);
 
     return (
         <main className={ classes.layout }>
@@ -61,9 +69,9 @@ const Register: React.FC<Props> = (props) => {
 
                         onSubmit={ async (values: Values, { setSubmitting }: FormikHelpers<Values>) => {
                             const registrationValues = removeProperties(values, 'confirmPassword');
-                            setSubmitting(true);
+                            // setSubmitting(true);
                             await registerUser(registrationValues as IRegisterValues);
-                            setSubmitting(false);
+                            // setSubmitting(false);
                         }}
                     >
                         {
@@ -127,8 +135,8 @@ const Register: React.FC<Props> = (props) => {
                                     >
                                             Sign up
                                     </Button>
-                                    <Typography variant='subtitle1'>
-                                        <Link href="#" variant="body2">
+                                    <Typography variant='subtitle2'>
+                                        <Link to={ ROUTES.LOGIN }>
                                             {'Already have an account? Sign in'}
                                         </Link>
                                     </Typography>

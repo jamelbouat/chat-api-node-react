@@ -6,24 +6,16 @@ import {
     SET_NEW_TOKENS,
     SET_REFRESH_TOKENS_PROMISE
 } from '../actions/types';
-import { getTokensFromStorage } from '../utils/localStorage';
-
-const { accessToken, refreshToken } = getTokensFromStorage();
+import { ITokens } from '../interfaces';
 
 const initialState = {
-    accessToken,
-    refreshToken,
+    accessToken: null,
+    refreshToken: null,
     refreshTokensPromise: null
 };
 
 interface ITokenAction extends Action {
-    payload : {
-        accessToken: {
-            token: string,
-            expiresAt: string
-        }
-        refreshToken: string;
-    };
+    payload: ITokens & Promise<void>;
 }
 
 export const refreshTokensReducer = (state = initialState, action: ITokenAction) => {
@@ -31,11 +23,17 @@ export const refreshTokensReducer = (state = initialState, action: ITokenAction)
         case SET_INITIAL_TOKENS:
         case SET_NEW_TOKENS:
             return {
-                ...action.payload
+                ...state,
+                accessToken: {
+                    token: action.payload.accessToken.token,
+                    expiresAt: action.payload.accessToken.expiresAt,
+                },
+                refreshToken: action.payload.refreshToken
             };
 
         case REMOVE_TOKENS:
             return {
+                ...state,
                 accessToken: {
                     token: null,
                     expiresAt: null
