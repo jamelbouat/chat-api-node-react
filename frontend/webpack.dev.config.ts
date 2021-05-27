@@ -2,7 +2,8 @@ import path from 'path';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
-import { DefinePlugin } from 'webpack';
+import DotenvWebpackPlugin from 'dotenv-webpack';
+import NodePolyfillPlugin from 'node-polyfill-webpack-plugin';
 
 const config: webpack.Configuration = {
     mode: 'development',
@@ -41,9 +42,8 @@ const config: webpack.Configuration = {
         new webpack.ProvidePlugin({
             process: 'process/browser',
         }),
-        new DefinePlugin({
-            'process.env.REACT_APP_API_URL': JSON.stringify('http://localhost:4300/api')
-        })
+        new DotenvWebpackPlugin(),
+        new NodePolyfillPlugin()
     ],
     devtool: 'inline-source-map',
     devServer: {

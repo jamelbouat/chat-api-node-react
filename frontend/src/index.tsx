@@ -8,9 +8,10 @@ import { history, configureStore } from './configureStore';
 import { saveStateToSessionStorage } from './utils/sessionStorage';
 import App from './App';
 import theme from './mainTheme';
+import { throttle } from './utils/throttle';
 
 const store = configureStore();
-store.subscribe(() => saveStateToSessionStorage(store.getState()));
+store.subscribe(() => throttle(() => saveStateToSessionStorage(store.getState()),1000));
 
 ReactDOM.render(
     <ThemeProvider theme={ theme }>

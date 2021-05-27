@@ -1,13 +1,16 @@
 import { RootState } from '../../typings/redux';
+import CryptoJS from 'crypto-js';
 // import { ITokens, IAccessToken } from '../interfaces';
+
+const secretKey = process.env.REACT_APP_API_SECRET_KEY as string;
 
 export const getStateFromSessionStorage = (): RootState => {
     try {
-        const serializedState = sessionStorage.getItem('state');
-        if (serializedState === null) {
+        const encryptedState = sessionStorage.getItem('state');
+        if (encryptedState === null) {
             return undefined;
         }
-        return JSON.parse(serializedState);
+        return decryptState(encryptedState);
     } catch(e) {
         return undefined;
     }
@@ -15,10 +18,25 @@ export const getStateFromSessionStorage = (): RootState => {
 
 export const saveStateToSessionStorage = (state: RootState): void => {
     try {
-        const serializedState = JSON.stringify(state);
-        sessionStorage.setItem('state', serializedState);
+        const encryptedState = encryptState(state);
+        sessionStorage.setItem('state', encryptedState);
     } catch(e) {
     }
+};
+
+export const removeStateFromStorage = (): void => {
+    sessionStorage.removeItem('state');
+};
+
+const encryptState = (state: RootState) => {
+    return CryptoJS.AES
+        .encrypt(JSON.stringify(state), secretKey)
+        .toString();
+};
+
+const decryptState = (encryptedState: string) => {
+    const bytes = CryptoJS.AES.decrypt(encryptedState, secretKey);
+    return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
 };
 
 // export const saveTokensToStorage = (tokens: ITokens): void => {

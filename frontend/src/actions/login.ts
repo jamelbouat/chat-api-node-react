@@ -6,8 +6,9 @@ import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_USER, REMOVE_TOKENS
 import { userService } from '../services/userService';
 import { ALERT_TYPE, setAlertInfoToError } from './alertInfo';
 import { ROUTES } from '../constants';
+import * as storage from '../utils/sessionStorage';
 
-export const loginUser = (values: ILoginValues) => async (dispatch: Dispatch) => {
+export const loginUser = (values: ILoginValues) => async (dispatch: Dispatch): Promise<void> => {
     dispatch(loginRequest());
 
     try {
@@ -43,6 +44,7 @@ const setInitialTokens = (user: ILoginResponseData) => ({
 });
 
 export const logoutUser = () => (dispatch: Dispatch): void => {
+    storage.removeStateFromStorage();
     dispatch({ type: REMOVE_TOKENS });
     dispatch({ type: LOGOUT_USER });
     dispatch(push(ROUTES.HOME));
