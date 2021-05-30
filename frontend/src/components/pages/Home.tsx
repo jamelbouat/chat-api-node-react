@@ -1,7 +1,8 @@
 import React from 'react';
+
 import HomeBackgroundImage from '../HomeBackgroundImage';
 
-const Home: React.FC<any> = () => {
+const Home: React.FC = () => {
     return (
         <>
             <HomeBackgroundImage />

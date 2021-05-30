@@ -22,7 +22,9 @@
         "indent": ["error", 4, { "SwitchCase": 1 }],
         "semi": ["error", "always"],
         "quotes": ["error", "single", { "avoidEscape": true }],
-        "object-curly-spacing": ["error", "always"]
+        "object-curly-spacing": ["error", "always"],
+        "template-curly-spacing": ["error", "always"],
+        "react/jsx-curly-spacing": ["error", "always"]
     },
     "settings": {
         "react": {

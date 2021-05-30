@@ -8,40 +8,33 @@ import {
     registerFormFieldsValidationSchema
 } from '../CustomField';
 import useStyles from '../makeFormStyles';
-import { IRegisterValues } from '../../interfaces';
+import { IAlert, IRegisterValues } from '../../interfaces';
 import { removeProperties } from '../../utils/objects';
 import AlertInfo from '../AlertInfo';
 import ProgressIndicator from '../ProgressIndicator';
-import { ROUTES } from '../../constants';
+import { ALERT_TYPE, ROUTES } from '../../constants';
 import { Link } from 'react-router-dom';
-import { IAlert } from '../../actions/alertInfo';
 
-interface Values {
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
-    confirmPassword: string
-}
+type Values = IRegisterValues & { confirmPassword: string };
 
 interface Props {
     isLoading: boolean,
+    alertInfo: IAlert,
     registerUser: (values: IRegisterValues) => void,
-    clearAlert: () => void,
-    alertInfo: IAlert
+    clearAlertInfo: () => void,
 }
 
 const Register: React.FC<Props> = (props) => {
     const classes = useStyles();
     const initialValues = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
-    const { isLoading, registerUser, alertInfo, clearAlert } = props;
+    const { isLoading, registerUser, alertInfo, clearAlertInfo } = props;
 
-    const alertType = alertInfo.alertType === 'REGISTER_FAIL' && 'error';
+    const alertType = alertInfo.alertType === ALERT_TYPE.FAILURE && 'error';
     const alertMessage = alertInfo.alertMessage || 'error !';
 
     useEffect(() => {
         return () => {
-            clearAlert();
+            clearAlertInfo();
         };
     }, []);
 
@@ -72,7 +65,7 @@ const Register: React.FC<Props> = (props) => {
                             // setSubmitting(true);
                             await registerUser(registrationValues as IRegisterValues);
                             // setSubmitting(false);
-                        }}
+                        } }
                     >
                         {
                             ({ isSubmitting, isValid }) => (
@@ -131,7 +124,7 @@ const Register: React.FC<Props> = (props) => {
                                         color='primary'
                                         variant='contained'
                                         disabled={ !isValid || isSubmitting  }
-                                        classes={{ root: classes.button, disabled: classes.disabled }}
+                                        classes={ { root: classes.button, disabled: classes.disabled } }
                                     >
                                             Sign up
                                     </Button>

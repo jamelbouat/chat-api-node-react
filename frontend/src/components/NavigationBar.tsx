@@ -1,44 +1,46 @@
-import { AppBar, Button, makeStyles, Toolbar, Typography } from '@material-ui/core';
-import { Chat as ChatIcon, ExitToApp as ExitToAppIcon, AccountBoxRounded } from '@material-ui/icons';
-import React, { Fragment } from 'react';
-import { ROUTES } from '../constants';
-import { Link } from 'react-router-dom';
+import { AppBar, Button, makeStyles, Toolbar, Typography, Tooltip } from '@material-ui/core';
+import { Chat as ChatIcon, ExitToApp as ExitToAppIcon, AccountBoxRounded, Home as HomeIcon } from '@material-ui/icons';
+import React from 'react';
 
 const useStyles = makeStyles(() => ({
     title: {
         flexGrow: 1
-    },
-    link: {
-        textDecoration: 'none',
-        color: 'inherit'
     },
     icon: {
         cursor: 'pointer',
         '&:hover': {
             opacity: '0.5'
         },
-        margin: '0 5px',
-        fontSize: '36px'
+        margin: '0 8px',
+        fontSize: '32px'
     }
 }));
 
 interface Props {
     isAuthenticated: boolean;
     viewProfile: () => void;
-    logoutUser: () => void
+    logoutUser: () => void;
+    redirectToDashboard: () => void;
+    redirectToLogin: () => void;
+    redirectToRegister: () => void
 }
 
 const NavigationBar: React.FC<Props> = (props) => {
     const classes = useStyles();
-    const { isAuthenticated, viewProfile, logoutUser } = props;
+    const {
+        isAuthenticated,
+        viewProfile,
+        logoutUser,
+        redirectToDashboard,
+        redirectToLogin,
+        redirectToRegister
+    } = props;
 
-    const handleLogout = () => {
-        logoutUser();
-    };
-
-    const handleProfileIconClick = () => {
-        viewProfile();
-    };
+    const handleLogout = () => logoutUser();
+    const handleProfileIconClick = () => viewProfile();
+    const handleHomeIconClick = () => redirectToDashboard();
+    const handleLoginClick = () => redirectToLogin();
+    const handleRegisterClick = () => redirectToRegister();
 
     return(
         <AppBar position='relative'>
@@ -51,28 +53,39 @@ const NavigationBar: React.FC<Props> = (props) => {
                 {
                     !isAuthenticated ?
                         <>
-                            <Link to={ ROUTES.LOGIN } className={ classes.link }>
-                                <Button color='inherit'>
-                                    Sign in
-                                </Button>
-                            </Link>
-                            <Link to={ ROUTES.REGISTER } className={ classes.link }>
-                                <Button color='inherit' variant='outlined'>
-                                    Sign up
-                                </Button>
-                            </Link>
+                            <Button
+                                color='inherit'
+                                onClick={ handleLoginClick }
+                            >
+                                Sign in
+                            </Button>
+                            <Button
+                                color='inherit'
+                                variant='outlined'
+                                onClick={ handleRegisterClick }
+                            >
+                                Sign up
+                            </Button>
                         </> :
                         <>
-                            <AccountBoxRounded
-                                onClick={ handleProfileIconClick }
-                                titleAccess='My profile'
-                                className={ classes.icon }
-                            />
-                            <ExitToAppIcon
-                                onClick={ handleLogout }
-                                titleAccess='Logout'
-                                className={ classes.icon }
-                            />
+                            <Tooltip title='Home' arrow>
+                                <HomeIcon
+                                    onClick={ handleHomeIconClick }
+                                    className={ classes.icon }
+                                />
+                            </Tooltip>
+                            <Tooltip title='My profile' arrow>
+                                <AccountBoxRounded
+                                    onClick={ handleProfileIconClick }
+                                    className={ classes.icon }
+                                />
+                            </Tooltip>
+                            <Tooltip title='Logout' arrow>
+                                <ExitToAppIcon
+                                    onClick={ handleLogout }
+                                    className={ classes.icon }
+                                />
+                            </Tooltip>
                         </>
                 }
             </Toolbar>

@@ -11,6 +11,6 @@ const mapStateToProps = (state: RootState) => ({
 const mapDispatchToProps = (dispatch: ThunkDispatch<RootState, any, Action>) => ({
 });
 
-export default connect<any, any, RootState>(
+export default connect<any, any, any, RootState>(
     mapStateToProps, mapDispatchToProps
 )(PrivateRoute);

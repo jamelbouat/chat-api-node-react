@@ -1,6 +1,9 @@
 import { ILoginResponseData, ILoginValues, IRegisterValues } from '../interfaces';
 import { fetchApi } from './fetchApi';
 
+const loginPathname = process.env.REACT_APP_API_LOGIN_USER || '';
+const registerPathname = process.env.REACT_APP_API_REGISTER_USER || '';
+
 const requestOptions = (values: ILoginValues | IRegisterValues) => ({
     method: 'POST',
     headers: {
@@ -12,7 +15,7 @@ const requestOptions = (values: ILoginValues | IRegisterValues) => ({
 
 const loginUser = async (values: ILoginValues) => {
     try {
-        const user: ILoginResponseData = await fetchApi('user/login', requestOptions(values));
+        const user: ILoginResponseData = await fetchApi(loginPathname, requestOptions(values));
         return user;
     } catch (error) {
         throw error;
@@ -21,7 +24,7 @@ const loginUser = async (values: ILoginValues) => {
 
 const registerUser = async (values: IRegisterValues) => {
     try {
-        return await fetchApi('user/register', requestOptions(values));
+        return await fetchApi(registerPathname, requestOptions(values));
     } catch (error) {
         throw error;
     }

@@ -18,6 +18,15 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<RootState, any, Action>) => 
     },
     viewProfile: () => {
         dispatch(push(ROUTES.PROFILE));
+    },
+    redirectToDashboard: () => {
+        dispatch(push(ROUTES.DASHBOARD));
+    },
+    redirectToLogin: () => {
+        dispatch(push(ROUTES.LOGIN));
+    },
+    redirectToRegister: () => {
+        dispatch(push(ROUTES.REGISTER));
     }
 });
 

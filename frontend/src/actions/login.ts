@@ -2,24 +2,31 @@ import { Dispatch } from 'redux';
 import { push } from 'connected-react-router';
 
 import { ILoginResponseData, ILoginValues } from '../interfaces';
-import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_USER, REMOVE_TOKENS, SET_INITIAL_TOKENS } from './types';
+import {
+    CLEAR_LOGIN_ALERT,
+    LOGIN_FAILURE,
+    LOGIN_REQUEST,
+    LOGIN_SUCCESS,
+    LOGOUT_USER,
+    REMOVE_TOKENS,
+    SET_INITIAL_TOKENS, SET_LOGIN_ALERT_SUCCESS,
+} from './types';
 import { userService } from '../services/userService';
-import { ALERT_TYPE, setAlertInfoToError } from './alertInfo';
 import { ROUTES } from '../constants';
 import * as storage from '../utils/sessionStorage';
+import { setInitialTokens } from './refreshTokens';
 
 export const loginUser = (values: ILoginValues) => async (dispatch: Dispatch): Promise<void> => {
     dispatch(loginRequest());
 
     try {
-        const user = await userService.loginUser(values);
-        dispatch(setInitialTokens(user));
-        dispatch(loginSuccess(user));
+        const userResponseData = await userService.loginUser(values);
+        dispatch(setInitialTokens(userResponseData));
+        dispatch(loginSuccess(userResponseData));
         // dispatch(push(ROUTES.DASHBOARD));
 
     } catch (error) {
-        dispatch(loginFailure());
-        dispatch(setAlertInfoToError(ALERT_TYPE.LOGIN_FAIL, error.message));
+        dispatch(loginFailure(error.message));
     }
 };
 
@@ -27,25 +34,34 @@ const loginRequest = () => (
     { type: LOGIN_REQUEST }
 );
 
-const loginSuccess = (user: ILoginResponseData) => (
-    { type: LOGIN_SUCCESS, payload: user }
-);
-
-const loginFailure = () => (
-    { type: LOGIN_FAILURE }
-);
-
-const setInitialTokens = (user: ILoginResponseData) => ({
-    type: SET_INITIAL_TOKENS,
+const loginSuccess = (userResponseData: ILoginResponseData) => ({
+    type: LOGIN_SUCCESS,
     payload: {
-        accessToken: user.accessToken,
-        refreshToken: user.refreshToken
+        user: userResponseData.user
     }
 });
 
+const loginFailure = (errorMessage: string) => ({
+    type: LOGIN_FAILURE,
+    payload: {
+        alertMessage: errorMessage
+    }
+});
+
+export const setLoginAlertToSuccess = (successMessage: string) => ({
+    type: SET_LOGIN_ALERT_SUCCESS,
+    payload: {
+        alertMessage: successMessage
+    }
+});
+
+export const clearLoginAlertInfo = () =>({
+    type: CLEAR_LOGIN_ALERT
+});
+
 export const logoutUser = () => (dispatch: Dispatch): void => {
-    storage.removeStateFromStorage();
     dispatch({ type: REMOVE_TOKENS });
     dispatch({ type: LOGOUT_USER });
+    storage.removeStateFromStorage();
     dispatch(push(ROUTES.HOME));
 };

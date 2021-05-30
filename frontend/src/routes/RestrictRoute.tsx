@@ -1,27 +1,22 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { RouteComponentProps } from 'react-router';
+
 import { ROUTES } from '../constants';
+import { IRoute } from '../interfaces';
 
-interface Props {
-    isAuthenticated: boolean,
-    component: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>,
-    rest: { exact: boolean, path: ROUTES }
-}
-
-const RestrictRoute: React.FC<Props> = (props) => {
+const RestrictRoute: React.FC<IRoute> = (props) => {
     const { isAuthenticated, component: Component, ...rest } = props;
 
     return (
         <Route
-            {...rest}
-            render={(props) =>
+            { ...rest }
+            render={ (props) =>
                 isAuthenticated ? (
                     <Redirect
-                        to={{
+                        to={ {
                             pathname: ROUTES.DASHBOARD,
                             state: { from: props.location },
-                        }}
+                        } }
                     />
                 )
                     : (

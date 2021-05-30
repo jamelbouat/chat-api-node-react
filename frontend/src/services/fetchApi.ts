@@ -1,12 +1,12 @@
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
-export const fetchApi = async (fetchUrl: string, requestOptions: RequestInit) => {
+export const fetchApi = async (fetchPathname: string, requestOptions: RequestInit) => {
     try {
-        const response = await fetch(`${ apiUrl }/${ fetchUrl }`, requestOptions);
+        const response = await fetch(`${ apiUrl }/${ fetchPathname }`, requestOptions);
         const data = await response.json();
-        console.log('data=',data);
-        console.log(`url=${ apiUrl }/${ fetchUrl }`);
+        console.log('data= ',data);
+        console.log(`url= ${ apiUrl }/${ fetchPathname }`);
 
         if (response.status >= 200 && response.status < 300) {
             // const contentType = response.headers.get('Content-Type');

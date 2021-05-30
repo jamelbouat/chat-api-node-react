@@ -1,4 +1,4 @@
-import { Action } from 'redux';
+import { ITokenAction } from '../interfaces';
 import {
     CLEAR_REFRESH_TOKENS_PROMISE,
     REMOVE_TOKENS,
@@ -6,17 +6,12 @@ import {
     SET_NEW_TOKENS,
     SET_REFRESH_TOKENS_PROMISE
 } from '../actions/types';
-import { ITokens } from '../interfaces';
 
 const initialState = {
     accessToken: null,
     refreshToken: null,
     refreshTokensPromise: null
 };
-
-interface ITokenAction extends Action {
-    payload: ITokens & Promise<void>;
-}
 
 export const refreshTokensReducer = (state = initialState, action: ITokenAction) => {
     switch (action.type) {

@@ -4,39 +4,31 @@ import { Form, Formik, FormikHelpers } from 'formik';
 
 import { MyTextField, MyPasswordField, loginFormFieldsValidationSchema } from '../CustomField';
 import useStyles from '../makeFormStyles';
-import { ILoginResponseData, ILoginValues } from '../../interfaces';
+import { IAlert, ILoginValues, IUser } from '../../interfaces';
 import AlertInfo from '../AlertInfo';
 import ProgressIndicator from '../ProgressIndicator';
-import { IAlert } from '../../actions/alertInfo';
 import { Link } from 'react-router-dom';
-import { ROUTES } from '../../constants';
-
-interface Values {
-    email: string;
-    password: string;
-}
+import { ALERT_TYPE, ROUTES } from '../../constants';
 
 interface Props {
     isLoading: boolean,
-    user: ILoginResponseData,
-    isAuthenticated: boolean,
+    alertInfo: IAlert,
     loginUser: (values: ILoginValues) => void,
-    clearAlert: () => void,
-    alertInfo: IAlert
+    clearAlertInfo: () => void
 }
 
 const Login: React.FC<Props> = (props) => {
     const classes = useStyles();
     const initialValues = { email: '', password: '' };
-    const { isLoading, user, isAuthenticated, alertInfo, loginUser, clearAlert } = props;
+    const { isLoading, alertInfo, loginUser, clearAlertInfo } = props;
 
-    const alertType = alertInfo.alertType === 'LOGIN_FAIL' ? 'error' :
-        alertInfo.alertType === 'REGISTER_SUCCESS' ? 'success' : null;
+    const alertType = alertInfo.alertType === ALERT_TYPE.FAILURE ? 'error' :
+        alertInfo.alertType === ALERT_TYPE.SUCCESS ? 'success' : null;
     const alertMessage = alertInfo.alertMessage || 'error !';
 
     useEffect(() => {
         return () => {
-            clearAlert();
+            clearAlertInfo();
         };
     }, []);
 
@@ -45,7 +37,7 @@ const Login: React.FC<Props> = (props) => {
             {
                 isLoading && <ProgressIndicator/>
             }
-            <Paper elevation={ 3 } className={ classes.paper}>
+            <Paper elevation={ 3 } className={ classes.paper }>
                 <Container>
                     {
                         alertType &&
@@ -62,11 +54,11 @@ const Login: React.FC<Props> = (props) => {
                         initialValues={ initialValues }
                         validationSchema={ loginFormFieldsValidationSchema }
 
-                        onSubmit={ async (values: Values, { setSubmitting }: FormikHelpers<Values>) => {
+                        onSubmit={ async (values: ILoginValues, { setSubmitting }: FormikHelpers<ILoginValues>) => {
                             // setSubmitting(true);
                             await loginUser(values);
                             // setSubmitting(false);
-                        }}
+                        } }
                     >
                         {
                             ({ isSubmitting, isValid }) => (
@@ -96,7 +88,7 @@ const Login: React.FC<Props> = (props) => {
                                         color='primary'
                                         variant='contained'
                                         disabled={ !isValid || isSubmitting  }
-                                        classes={{ root: classes.button, disabled: classes.disabled }}
+                                        classes={ { root: classes.button, disabled: classes.disabled } }
                                     >
                                             Sign in
                                     </Button>

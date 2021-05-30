@@ -6,3 +6,9 @@ export enum ROUTES {
     PROFILE = '/app/profile',
     HOME = '/',
 }
+
+export enum ALERT_TYPE {
+    FAILURE = 'FAILURE',
+    WARNING = 'WARNING',
+    SUCCESS = 'SUCCESS'
+}
