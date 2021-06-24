@@ -1,8 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-const Dashboard: React.FC = () => {
+import { IAlert, IUser } from '../../interfaces';
+import Spinner from '../Spinner';
+import UserCard from '../UserCard';
+import toastAlert from '../toastAlert';
+
+interface Props {
+    isLoading: boolean,
+    users: IUser[],
+    alertInfo: IAlert
+    getUsers: () => void
+}
+
+const Dashboard: React.FC<Props> = (props) => {
+    const { isLoading, users, alertInfo, getUsers } = props;
+    const alertType = alertInfo.alertType;
+    const alertMessage = alertInfo.alertMessage || 'error !';
+
+    useEffect(() => {
+        alertType && !isLoading && toastAlert(alertType, alertMessage);
+        getUsers();
+    }, []);
+
     return (
-        <div>Dashboard</div>
+        <>
+            {
+                isLoading ?
+                    <Spinner /> :
+                    users && users.map(user => <UserCard key={ user._id } user={ user } />)
+            }
+        </>
     );
 };
 

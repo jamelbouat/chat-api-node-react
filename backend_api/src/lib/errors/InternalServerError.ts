@@ -1,11 +1,8 @@
-import HttpError from './HttpError';
+import HttpError from './commons/HttpError';
 
-class InternalServerError implements HttpError {
-    message: string;
-    status: number;
-
+class InternalServerError extends HttpError {
     constructor() {
-        this.message = 'Error: Internal server Error';
+        super('Internal server Error');
         this.status = 500;
     }
 }

@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import IUser from '../interfaces/IUser';
+import { IUserLoginData, IUserRegisterData, IUserUpdateData } from '../interfaces/user';
 
 const registerSchema = Joi.object({
     email: Joi.string()
@@ -28,9 +28,29 @@ const registerSchema = Joi.object({
         .max(5),
 });
 
-const userRegisterDataValidation = (data: IUser): any => {
-    return registerSchema.validate(data);
-};
+const updateSchema = Joi.object({
+    email: Joi.string()
+        .email({ minDomainSegments: 2 }),
+
+    password: Joi.string()
+        .alphanum()
+        .min(3)
+        .max(30),
+
+    firstName: Joi.string()
+        .alphanum()
+        .min(3)
+        .max(30),
+
+    lastName: Joi.string()
+        .alphanum()
+        .min(3)
+        .max(30),
+
+    refreshTokens: Joi.array()
+        .default([])
+        .max(5)
+});
 
 const loginSchema = Joi.object({
     email: Joi.string()
@@ -44,8 +64,16 @@ const loginSchema = Joi.object({
         .required(),
 });
 
-const userLoginDataValidation = (data: IUser): any => {
+const userRegisterDataValidation = (data: IUserRegisterData): any => {
+    return registerSchema.validate(data);
+};
+
+const userLoginDataValidation = (data: IUserLoginData): any => {
     return loginSchema.validate(data);
 };
 
-export { userRegisterDataValidation, userLoginDataValidation };
+const userUpdateDataValidation = (data: IUserUpdateData): any => {
+    return updateSchema.validate(data);
+};
+
+export { userRegisterDataValidation, userLoginDataValidation, userUpdateDataValidation };

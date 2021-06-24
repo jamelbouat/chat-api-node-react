@@ -1,11 +1,8 @@
-import HttpError from './HttpError';
+import HttpError from './commons/HttpError';
 
-class RefreshTokenMissingError implements HttpError {
-    message: string;
-    status: number;
-
+class RefreshTokenMissingError extends HttpError {
     constructor() {
-        this.message = 'Error: Refresh token is missing';
+        super('Refresh token is missing');
         this.status = 403;
     }
 }

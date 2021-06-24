@@ -1,23 +1,31 @@
-import { Action, Dispatch, Middleware, MiddlewareAPI } from 'redux';
+import { Action, Dispatch, Middleware } from 'redux';
+
 import { refreshTokens } from '../actions/refreshTokens';
+import { RootState } from '../interfaces';
+import { ThunkDispatch } from 'redux-thunk';
+import { CLEAR_REFRESH_TOKENS_PROMISE, SET_NEW_TOKENS, SET_REFRESH_TOKENS_PROMISE } from '../actions/types';
 
-export const jwtMiddleware: Middleware = (store: MiddlewareAPI) => (next: Dispatch) => (action: Action) => {
-    const tokenState = store.getState().tokenState;
-    const accessToken = tokenState && tokenState.accessToken && tokenState.accessToken;
-    const tokenExpiresAt = accessToken && accessToken.expiresAt && accessToken.expiresAt;
-    const refreshTokensPromise = tokenState.refreshTokensPromise;
-    const dateNow = Date.now();
-    const isTokenStillValid = (tokenExpiresAt - dateNow) > 6000; // 6000ms = 6s
+export const jwtMiddleware: Middleware = ({ getState, dispatch } : { getState: RootState, dispatch: ThunkDispatch<RootState, any, Action> }) =>
+    (next: Dispatch) => (action: Action) => {
+        const tokensState = getState().tokensState;
+        const accessToken = tokensState && tokensState.accessToken && tokensState.accessToken;
+        const refreshToken = tokensState && tokensState.refreshToken;
+        const tokenExpiresAt = accessToken && accessToken.expiresAt && accessToken.expiresAt;
+        const refreshTokensPromise = tokensState.refreshTokensPromise;
+        const dateNow = Date.now();
+        const isTokenStillValid = (tokenExpiresAt - dateNow) > 6000; // 6000ms = 6s
 
-    if(typeof action !== 'function' || !accessToken || !tokenExpiresAt || isTokenStillValid) {
-        return next(action);
-    }
+        if (!accessToken.token || isTokenStillValid ||
+            action.type === SET_REFRESH_TOKENS_PROMISE ||
+            action.type === CLEAR_REFRESH_TOKENS_PROMISE ||
+            action.type === SET_NEW_TOKENS) {
+            return next(action);
+        }
 
-    (async () => {
-        refreshTokensPromise ?
-            await refreshTokensPromise :
-            await refreshTokens();
-
-        return next(action);
-    })();
-};
+        (async () => {
+            refreshTokensPromise ?
+                await refreshTokensPromise :
+                await refreshTokens(dispatch, refreshToken);
+            return next(action);
+        })();
+    };

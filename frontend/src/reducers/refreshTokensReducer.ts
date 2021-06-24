@@ -8,7 +8,10 @@ import {
 } from '../actions/types';
 
 const initialState = {
-    accessToken: null,
+    accessToken: {
+        token: null,
+        expiresAt: null
+    },
     refreshToken: null,
     refreshTokensPromise: null
 };
@@ -28,18 +31,13 @@ export const refreshTokensReducer = (state = initialState, action: ITokenAction)
 
         case REMOVE_TOKENS:
             return {
-                ...state,
-                accessToken: {
-                    token: null,
-                    expiresAt: null
-                },
-                refreshToken: null
+                ...initialState
             };
 
         case SET_REFRESH_TOKENS_PROMISE:
             return {
                 ...state,
-                refreshTokensPromise: action.payload
+                refreshTokensPromise: action.payload.promise
             };
 
         case CLEAR_REFRESH_TOKENS_PROMISE:

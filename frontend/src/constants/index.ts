@@ -8,7 +8,8 @@ export enum ROUTES {
 }
 
 export enum ALERT_TYPE {
-    FAILURE = 'FAILURE',
-    WARNING = 'WARNING',
-    SUCCESS = 'SUCCESS'
+    ERROR = 'error',
+    WARNING = 'warning',
+    SUCCESS = 'success',
+    INFO = 'info'
 }

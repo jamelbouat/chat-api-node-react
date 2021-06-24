@@ -1,6 +1,6 @@
+import React from 'react';
 import { AppBar, Button, makeStyles, Toolbar, Typography, Tooltip } from '@material-ui/core';
 import { Chat as ChatIcon, ExitToApp as ExitToAppIcon, AccountBoxRounded, Home as HomeIcon } from '@material-ui/icons';
-import React from 'react';
 
 const useStyles = makeStyles(() => ({
     title: {
@@ -18,7 +18,7 @@ const useStyles = makeStyles(() => ({
 
 interface Props {
     isAuthenticated: boolean;
-    viewProfile: () => void;
+    redirectToProfile: () => void;
     logoutUser: () => void;
     redirectToDashboard: () => void;
     redirectToLogin: () => void;
@@ -29,7 +29,7 @@ const NavigationBar: React.FC<Props> = (props) => {
     const classes = useStyles();
     const {
         isAuthenticated,
-        viewProfile,
+        redirectToProfile,
         logoutUser,
         redirectToDashboard,
         redirectToLogin,
@@ -37,7 +37,7 @@ const NavigationBar: React.FC<Props> = (props) => {
     } = props;
 
     const handleLogout = () => logoutUser();
-    const handleProfileIconClick = () => viewProfile();
+    const handleProfileIconClick = () => redirectToProfile();
     const handleHomeIconClick = () => redirectToDashboard();
     const handleLoginClick = () => redirectToLogin();
     const handleRegisterClick = () => redirectToRegister();

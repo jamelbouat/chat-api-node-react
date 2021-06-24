@@ -1,36 +1,40 @@
-import express from 'express';
+import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import AccessDeniedError from '../errors/AccessDeniedError';
-import IUserToken from '../interfaces/IUserToken';
+
 import RefreshTokenMissingError from '../errors/RefreshTokenMissingError';
 import AccessForbiddenError from '../errors/AccessForbiddenError';
+import { IUser, IUserWithoutSensitiveData } from '../interfaces/user';
+import AccessUnauthorizedError from '../errors/AccessUnauthorizedError';
+import { IUserService } from '../interfaces/service';
 
-function IsUserRefreshTokenValid({ userModel }: { userModel: any}) {
-    return async (req: express.Request, res: express.Response, next: express.NextFunction): Promise<void> => {
+function IsUserRefreshTokenValid({ userService }: { userService: IUserService }) {
+    return async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         const refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET as string;
         const refreshToken = req.body.refreshToken;
+        let verifiedRefreshToken;
 
-        try {
-            if(!refreshToken) {
-                throw new RefreshTokenMissingError();
-            }
-
-            const verifiedRefreshToken = jwt.verify(refreshToken, refreshTokenSecret) as IUserToken;
-
-            // Check if the refreshTokens array includes the received one
-            const user = await userModel.findById(verifiedRefreshToken.user._id);
-            if(!user || user.refreshTokens && !user.refreshTokens.includes(refreshToken)) {
-                throw new AccessForbiddenError();
-            }
-            req.user = user;
-            req.refreshToken = refreshToken;
-            next();
-
-        } catch (err) {
-            const error = err.status ? err : new AccessDeniedError();
-            res.status(error.status).json({ message: error.message });
+        if (!refreshToken) {
+            next(new RefreshTokenMissingError());
+            return;
         }
 
+        try {
+            verifiedRefreshToken = jwt.verify(refreshToken, refreshTokenSecret) as { user: IUserWithoutSensitiveData };
+        } catch (error) {
+            next(new AccessUnauthorizedError());
+            return;
+        }
+
+        // Check if the refreshTokens array includes the received refresh token
+        const user = await userService.getElementWithSensitiveData(verifiedRefreshToken.user._id) as IUser;
+        if (!user || user.refreshTokens && !user.refreshTokens.includes(refreshToken)) {
+            next(new AccessForbiddenError());
+            return;
+        }
+
+        req.user = user;
+        req.refreshToken = refreshToken;
+        next();
     };
 }
 

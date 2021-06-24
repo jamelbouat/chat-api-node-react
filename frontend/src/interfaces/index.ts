@@ -3,6 +3,10 @@ import React from 'react';
 import { RouteComponentProps } from 'react-router';
 
 import { ALERT_TYPE } from '../constants';
+import { store } from '../index';
+
+// State
+export type RootState = ReturnType<typeof store.getState>;
 
 // Tokens
 export interface IAccessToken {
@@ -15,17 +19,14 @@ export interface ITokens {
     refreshToken: string | null;
 }
 
-
 // authentication
 export interface IUser {
-    user: {
-        _id: string
-        email: string;
-        firstName: string;
-        lastName: string;
-        createdAt: string;
-        updatedAt: string
-    }
+    _id: string
+    email: string;
+    firstName: string;
+    lastName: string;
+    createdAt: string;
+    updatedAt: string
 }
 
 export interface ILoginValues {
@@ -40,16 +41,19 @@ export interface IRegisterValues {
     password: string;
 }
 
-export type ILoginResponseData = IUser & ITokens;
-
+export type ILoginResponseData = { user: IUser } & ITokens;
 
 // Actions
 export interface ILoginAction extends Action {
-    payload: IUser & { alertMessage: string };
+    payload: { user: IUser } & IAlert;
 }
 
 export interface IRegisterAction extends Action {
-    payload: { alertMessage: string };
+    payload: IAlert;
+}
+
+export interface IUsersAction extends Action {
+    payload: { users: IUser[] } & { alertMessage: string };
 }
 
 export interface IAlert {
@@ -57,14 +61,9 @@ export interface IAlert {
     alertMessage: string
 }
 
-// export interface IAlertAction extends Action {
-//     payload: IAlert
-// }
-
 export interface ITokenAction extends Action {
-    payload: ITokens & Promise<void>;
+    payload: ITokens & { promise: Promise<void> };
 }
-
 
 // Route
 export interface IRoute {
@@ -73,3 +72,6 @@ export interface IRoute {
     path: string;
     component: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>;
 }
+
+// Fetch API
+export type methodType = 'POST' | 'GET' | 'PUT' | 'DELETE';

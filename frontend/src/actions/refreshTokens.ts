@@ -1,5 +1,11 @@
-import { Dispatch } from 'redux';
+import { Action, Dispatch } from 'redux';
+import { push } from 'connected-react-router';
+
 import { refreshTokensService } from '../services';
+import { ILoginResponseData, ITokens } from '../interfaces';
+import { ALERT_TYPE, ROUTES } from '../constants';
+import { removeUserData, setLoginAlert } from './login';
+import * as storage from '../utils/sessionStorage';
 import {
     CLEAR_REFRESH_TOKENS_PROMISE,
     REMOVE_TOKENS,
@@ -7,45 +13,47 @@ import {
     SET_NEW_TOKENS,
     SET_REFRESH_TOKENS_PROMISE
 } from './types';
-import { ILoginResponseData, ITokens } from '../interfaces';
-import { ROUTES } from '../constants';
-import { push } from 'connected-react-router';
 
-export const refreshTokens = () => (dispatch: Dispatch): Promise<void> => {
-    const refreshTokensPromise = async () => {
+export const refreshTokens = async (dispatch: Dispatch, refreshToken: string): Promise<void> => {
+    const refreshTokensPromise = async (): Promise<void> => {
         try {
-            const newTokens: ITokens = await refreshTokensService.refreshTokens();
+            const newTokens: ITokens = await refreshTokensService.refreshTokens(refreshToken);
             dispatch(setNewTokens(newTokens));
             dispatch(clearRefreshTokensPromise());
             return Promise.resolve();
 
-        } catch(error) {
-            removeTokens();
-            push(ROUTES.LOGIN);
-            return Promise.reject();
+        } catch (error) {
+            logoutAndRedirectToLogin(dispatch);
         }
     };
 
     const promise = refreshTokensPromise();
-    setRefreshTokensPromise(promise);
-    return promise;
+    dispatch(setRefreshTokensPromise(promise));
+    return await promise;
 };
 
-const removeTokens = () => (dispatch: Dispatch): void => {
-    dispatch({ type: REMOVE_TOKENS });
+const setNewTokens = (newTokens: ITokens) => ({
+    type: SET_NEW_TOKENS, payload: newTokens
+});
+
+const setRefreshTokensPromise = (promise: Promise<void>) => ({
+    type: SET_REFRESH_TOKENS_PROMISE,
+    payload: {
+        promise
+    }
+});
+
+const clearRefreshTokensPromise = () => ({
+    type: CLEAR_REFRESH_TOKENS_PROMISE
+});
+
+const logoutAndRedirectToLogin = (dispatch: Dispatch) => {
+    dispatch(removeTokens());
+    dispatch(removeUserData());
+    storage.removeStateFromStorage();
+    dispatch(setLoginAlert(ALERT_TYPE.INFO, 'Session timed out, try to connect !'));
+    push(ROUTES.LOGIN);
 };
-
-const setNewTokens = (newTokens: ITokens) => (
-    { type: SET_NEW_TOKENS, payload: newTokens }
-);
-
-const setRefreshTokensPromise = (promise: Promise<void>) => (
-    { type: SET_REFRESH_TOKENS_PROMISE, payload: promise }
-);
-
-const clearRefreshTokensPromise = () => (
-    { type: CLEAR_REFRESH_TOKENS_PROMISE }
-);
 
 export const setInitialTokens = (userResponseData: ILoginResponseData) => ({
     type: SET_INITIAL_TOKENS,
@@ -53,4 +61,8 @@ export const setInitialTokens = (userResponseData: ILoginResponseData) => ({
         accessToken: userResponseData.accessToken,
         refreshToken: userResponseData.refreshToken
     }
+});
+
+export const removeTokens = (): Action => ({
+    type: REMOVE_TOKENS
 });

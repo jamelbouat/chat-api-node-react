@@ -1,19 +1,16 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Container, Paper, Typography } from '@material-ui/core';
 import { Form, Formik, FormikHelpers } from 'formik';
 
-import {
-    MyTextField,
-    MyPasswordField,
-    registerFormFieldsValidationSchema
-} from '../CustomField';
+import { MyTextField, MyPasswordField } from '../CustomFields';
 import useStyles from '../makeFormStyles';
 import { IAlert, IRegisterValues } from '../../interfaces';
 import { removeProperties } from '../../utils/objects';
 import AlertInfo from '../AlertInfo';
 import ProgressIndicator from '../ProgressIndicator';
-import { ALERT_TYPE, ROUTES } from '../../constants';
-import { Link } from 'react-router-dom';
+import { ROUTES } from '../../constants';
+import { registerFormFieldsValidationSchema } from '../../utils/formsDataValidation';
 
 type Values = IRegisterValues & { confirmPassword: string };
 
@@ -21,20 +18,19 @@ interface Props {
     isLoading: boolean,
     alertInfo: IAlert,
     registerUser: (values: IRegisterValues) => void,
-    clearAlertInfo: () => void,
+    clearRegisterAlert: () => void,
 }
 
 const Register: React.FC<Props> = (props) => {
     const classes = useStyles();
     const initialValues = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
-    const { isLoading, registerUser, alertInfo, clearAlertInfo } = props;
-
-    const alertType = alertInfo.alertType === ALERT_TYPE.FAILURE && 'error';
+    const { isLoading, registerUser, alertInfo, clearRegisterAlert } = props;
+    const alertType = alertInfo.alertType;
     const alertMessage = alertInfo.alertMessage || 'error !';
 
     useEffect(() => {
         return () => {
-            clearAlertInfo();
+            clearRegisterAlert();
         };
     }, []);
 

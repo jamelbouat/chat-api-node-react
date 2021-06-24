@@ -1,5 +1,6 @@
-import { RootState } from '../../typings/redux';
 import CryptoJS from 'crypto-js';
+
+import { RootState } from '../interfaces';
 // import { ITokens, IAccessToken } from '../interfaces';
 
 const secretKey = process.env.REACT_APP_API_SECRET_KEY as string;
@@ -20,8 +21,7 @@ export const saveStateToSessionStorage = (state: RootState): void => {
     try {
         const encryptedState = encryptState(state);
         sessionStorage.setItem('state', encryptedState);
-    } catch(e) {
-    }
+    } catch(e) {}
 };
 
 export const removeStateFromStorage = (): void => {

@@ -1,26 +1,27 @@
 import 'dotenv/config';
-import express from 'express';
+import express, { Application } from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+
 import DBClient from '../config/db.config';
 import Constants from '../constants/constants';
-import IController from './interfaces/IController';
+import errorHandlerMiddleware from './middlewares/errorHandlerMiddleware';
+import { IController } from './interfaces/controller';
 
 class App {
-    private app: express.Application;
+    private app: Application;
     private dbClient: DBClient;
     private controllers: IController[];
-    private notFoundController: any;
 
-    constructor(dbClient: DBClient, controllers: IController[], notFoundController: any) {
+    constructor(dbClient: DBClient, controllers: IController[]) {
         this.app = express();
         this.dbClient = dbClient;
         this.controllers = controllers;
-        this.notFoundController = notFoundController;
 
         this.makeDatabaseConnection();
         this.initializeMiddlewares();
         this.initializeRoutes();
+        this.initializeErrorHandlers();
     }
 
     private async makeDatabaseConnection() {
@@ -37,7 +38,10 @@ class App {
         this.controllers.map(controller => {
             this.app.use('/', controller.router);
         });
-        this.app.use(this.notFoundController);
+    }
+
+    private initializeErrorHandlers() {
+        this.app.use(errorHandlerMiddleware);
     }
 
     public listen(): void {

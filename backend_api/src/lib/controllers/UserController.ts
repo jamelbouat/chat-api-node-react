@@ -1,5 +1,7 @@
-import express from 'express';
+import { NextFunction, Request, Response } from 'express';
+
 import BaseController from './BaseController';
+import { IUserService } from '../interfaces/service';
 import {
     ALL_USER_URL,
     DELETE_USER_URL,
@@ -9,17 +11,19 @@ import {
     POST_USER_URL,
     UPDATE_USER_URL
 } from '../../config/url.config';
-import Constants from '../../constants/constants';
-import IUser from '../interfaces/IUser';
-import IUserService from '../interfaces/IUserService';
 
 class UserController extends BaseController {
     private userService: IUserService;
-    private userAuthMiddleware: any;
-    private isUserRefreshTokenValid: any;
+    private userAuthMiddleware: () => Promise<void>;
+    private isUserRefreshTokenValid: () => Promise<void>;
 
     constructor({ userService, userAuthMiddleware, isUserRefreshTokenValid }:
-                    { userService : IUserService, userAuthMiddleware: any, isUserRefreshTokenValid : any }) {
+                    {
+                        userService : IUserService,
+                        userAuthMiddleware: () => Promise<void>,
+                        isUserRefreshTokenValid : () => Promise<void>
+                    })
+    {
         super(userService);
         this.userService = userService;
         this.userAuthMiddleware = userAuthMiddleware;
@@ -29,68 +33,52 @@ class UserController extends BaseController {
 
     private initializeRoutes() {
         this.router.post(POST_USER_URL, this.registerUser);
-        this.router.get(GET_USER_URL, this.getUser);
-        this.router.patch(UPDATE_USER_URL, this.updateUser);
-        this.router.delete(DELETE_USER_URL, this.deleteUser);
-        this.router.post(ALL_USER_URL, this.userAuthMiddleware, this.getAllUsers);
+        this.router.get(GET_USER_URL, this.userAuthMiddleware, this.getUser);
+        this.router.post(UPDATE_USER_URL, this.userAuthMiddleware, this.updateUser);
+        this.router.delete(DELETE_USER_URL, this.userAuthMiddleware, this.deleteUser);
+        this.router.get(ALL_USER_URL, this.userAuthMiddleware, this.getAllUsers);
         this.router.post(LOGIN_USER_URL, this.loginUser);
-        this.router.post(LOGOUT_USER_URL, this.isUserRefreshTokenValid, this.logoutUser);
+        this.router.post(LOGOUT_USER_URL, this.logoutUser);
     }
 
-    private registerUser = async (req: express.Request, res: express.Response): Promise<IUser | any> => {
+    private registerUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        await this.registerElement(req, res, next);
+    }
+
+    private getUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        await this.getElement(req, res, next);
+    }
+
+    private updateUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        await this.updateElement(req, res, next);
+    }
+
+    private deleteUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        await this.deleteElement(req, res, next);
+    }
+
+    private getAllUsers = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        await this.getAllElements(req, res, next);
+    }
+
+    private loginUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const reqData = req.body;
-            const user = await this.registerElement(reqData, res);
-            res.status(201).json( { id: user._id, message: Constants.USER_CREATION_SUCCESS });
-        } catch (error) {
-            res.status(error.status).json({ message: error.message });
-        }
-    }
-
-    private getUser = async (req: express.Request, res: express.Response) => {
-        await this.getElement(req, res);
-    }
-
-    private updateUser = async (req: express.Request, res: express.Response) => {
-        await this.updateElement(req, res);
-    }
-
-    private deleteUser = async (req: express.Request, res: express.Response) => {
-        await this.deleteElement(req, res);
-    }
-
-    private getAllUsers = async (req: express.Request, res: express.Response) => {
-        try {
-            const user = req.user;
-            res.send(user);
-        } catch(error) {
-            res.status(error.status).json({ message: error.message });
-        }
-    }
-
-
-
-    private loginUser = async (req: express.Request, res: express.Response): Promise<IUser | any> => {
-        try {
-            const reqData = req.body;
-            console.log(reqData);
             const loggedUser = await this.userService.loginUser(reqData);
-            console.log(loggedUser);
             res.status(200).json( { ...loggedUser });
         } catch (error) {
-            res.status(error.status).json({ message: error.message });
+            next(error);
         }
     }
 
-    private logoutUser = async (req: express.Request, res: express.Response): Promise<void> => {
+    private logoutUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const user = req.user;
             const refreshToken = req.refreshToken;
-
             await this.userService.logoutUser(user, refreshToken);
             res.status(204).json();
         } catch (error){
-            res.status(error.status).json({ message: error.message });
+            next(error);
         }
     }
 }

@@ -1,20 +1,19 @@
-import { Dispatch } from 'redux';
+import { Action, Dispatch } from 'redux';
 import { push } from 'connected-react-router';
 
-import { ILoginResponseData, ILoginValues } from '../interfaces';
+import { ILoginResponseData, ILoginValues, IRegisterAction } from '../interfaces';
+import { userService } from '../services';
+import * as storage from '../utils/sessionStorage';
+import { removeTokens, setInitialTokens } from './refreshTokens';
+import { ALERT_TYPE, ROUTES } from '../constants';
 import {
     CLEAR_LOGIN_ALERT,
     LOGIN_FAILURE,
     LOGIN_REQUEST,
     LOGIN_SUCCESS,
-    LOGOUT_USER,
-    REMOVE_TOKENS,
-    SET_INITIAL_TOKENS, SET_LOGIN_ALERT_SUCCESS,
+    REMOVE_USER_DATA,
+    SET_LOGIN_ALERT
 } from './types';
-import { userService } from '../services/userService';
-import { ROUTES } from '../constants';
-import * as storage from '../utils/sessionStorage';
-import { setInitialTokens } from './refreshTokens';
 
 export const loginUser = (values: ILoginValues) => async (dispatch: Dispatch): Promise<void> => {
     dispatch(loginRequest());
@@ -30,9 +29,9 @@ export const loginUser = (values: ILoginValues) => async (dispatch: Dispatch): P
     }
 };
 
-const loginRequest = () => (
-    { type: LOGIN_REQUEST }
-);
+const loginRequest = () => ({
+    type: LOGIN_REQUEST
+});
 
 const loginSuccess = (userResponseData: ILoginResponseData) => ({
     type: LOGIN_SUCCESS,
@@ -48,20 +47,25 @@ const loginFailure = (errorMessage: string) => ({
     }
 });
 
-export const setLoginAlertToSuccess = (successMessage: string) => ({
-    type: SET_LOGIN_ALERT_SUCCESS,
+export const removeUserData = (): Action => ({
+    type: REMOVE_USER_DATA
+});
+
+export const setLoginAlert = (alertType: ALERT_TYPE, alertMessage: string): IRegisterAction => ({
+    type: SET_LOGIN_ALERT,
     payload: {
-        alertMessage: successMessage
+        alertType,
+        alertMessage
     }
 });
 
-export const clearLoginAlertInfo = () =>({
+export const clearLoginAlert = (): Action =>({
     type: CLEAR_LOGIN_ALERT
 });
 
-export const logoutUser = () => (dispatch: Dispatch): void => {
-    dispatch({ type: REMOVE_TOKENS });
-    dispatch({ type: LOGOUT_USER });
+export const logoutAndRedirectToHome = () => (dispatch: Dispatch): void => {
+    dispatch(removeTokens());
+    dispatch(removeUserData());
     storage.removeStateFromStorage();
     dispatch(push(ROUTES.HOME));
 };

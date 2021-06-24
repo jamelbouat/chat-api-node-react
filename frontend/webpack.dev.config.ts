@@ -14,6 +14,17 @@ const config: webpack.Configuration = {
     module: {
         rules: [
             {
+                test: /\.css$/,
+                use: [
+                    {
+                        loader: 'style-loader'
+                    },
+                    {
+                        loader: 'css-loader'
+                    }
+                ]
+            },
+            {
                 test: /\.(ts|js)x?$/i,
                 exclude: /node_modules/,
                 use: {
@@ -31,7 +42,7 @@ const config: webpack.Configuration = {
         ],
     },
     resolve: {
-        extensions: ['.tsx', '.ts', '.js'],
+        extensions: ['.tsx', '.ts', '.js', '.css'],
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -45,7 +56,7 @@ const config: webpack.Configuration = {
         new DotenvWebpackPlugin(),
         new NodePolyfillPlugin()
     ],
-    devtool: 'inline-source-map',
+    devtool: 'source-map',
     devServer: {
         contentBase: path.join(__dirname, 'build'),
         historyApiFallback: true,

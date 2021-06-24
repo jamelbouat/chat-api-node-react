@@ -1,11 +1,8 @@
-import HttpError from './HttpError';
+import HttpError from './commons/HttpError';
 
-class ObjectNotLoggedError implements HttpError {
-    message: string;
-    status: number;
-
+class ObjectNotLoggedError extends HttpError {
     constructor(message?: string) {
-        this.message = `Error: ${ message || 'Not logged' }`;
+        super(message || 'Error: Not logged');
         this.status = 400;
     }
 }

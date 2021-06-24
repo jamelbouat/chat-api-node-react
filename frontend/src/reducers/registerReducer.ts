@@ -28,7 +28,7 @@ const registerReducer = (state = initialState, action: IRegisterAction) => {
             return {
                 isLoading: false,
                 alertInfo: {
-                    alertType: ALERT_TYPE.FAILURE,
+                    alertType: ALERT_TYPE.ERROR,
                     alertMessage: action.payload.alertMessage
                 }
             };

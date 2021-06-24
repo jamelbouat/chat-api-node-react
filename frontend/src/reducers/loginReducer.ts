@@ -1,12 +1,12 @@
+import { ILoginAction } from '../interfaces';
+import { ALERT_TYPE } from '../constants';
 import {
     CLEAR_LOGIN_ALERT,
     LOGIN_FAILURE,
     LOGIN_REQUEST,
     LOGIN_SUCCESS,
-    LOGOUT_USER, SET_LOGIN_ALERT_SUCCESS,
+    REMOVE_USER_DATA, SET_LOGIN_ALERT,
 } from '../actions/types';
-import { ILoginAction } from '../interfaces';
-import { ALERT_TYPE } from '../constants';
 
 const initialState = {
     isLoading: false,
@@ -18,7 +18,7 @@ const initialState = {
     }
 };
 
-export const loginReducer = (state = initialState, action: ILoginAction) => {
+const loginReducer = (state = initialState, action: ILoginAction) => {
     switch (action.type) {
         case LOGIN_REQUEST:
             return {
@@ -43,21 +43,21 @@ export const loginReducer = (state = initialState, action: ILoginAction) => {
                 user: null,
                 isAuthenticated: false,
                 alertInfo: {
-                    alertType: ALERT_TYPE.FAILURE,
+                    alertType: ALERT_TYPE.ERROR,
                     alertMessage: action.payload.alertMessage
                 }
             };
 
-        case LOGOUT_USER:
+        case REMOVE_USER_DATA:
             return {
                 ...initialState
             };
 
-        case SET_LOGIN_ALERT_SUCCESS:
+        case SET_LOGIN_ALERT:
             return {
                 ...state,
                 alertInfo: {
-                    alertType: ALERT_TYPE.SUCCESS,
+                    alertType: action.payload.alertType,
                     alertMessage: action.payload.alertMessage
                 }
             };
@@ -75,3 +75,5 @@ export const loginReducer = (state = initialState, action: ILoginAction) => {
             return state;
     }
 };
+
+export { loginReducer };

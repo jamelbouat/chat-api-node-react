@@ -18,6 +18,8 @@
     "rules": {
         "indent": ["error", 4],
         "semi": ["error", "always"],
-        "quotes": ["error", "single"]
+        "quotes": ["error", "single", { "avoidEscape": true }],
+        "object-curly-spacing": ["error", "always"],
+        "template-curly-spacing": ["error", "always"]
     }
 }

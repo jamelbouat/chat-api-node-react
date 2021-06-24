@@ -1,12 +1,34 @@
+import { methodType } from '../interfaces';
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
-export const fetchApi = async (fetchPathname: string, requestOptions: RequestInit) => {
+const defaultHeaders = new Headers({
+    'Accept': 'application/json, text/plain',
+    'Content-Type': 'application/json'
+});
+
+const combinedHeaders = (headers: Headers | undefined): void => {
+    headers && headers.forEach((value, key) => {
+        defaultHeaders.set(key, value);
+    });
+};
+
+const requestOptions = (method: methodType, headers?: Headers, body?: string) => {
+    combinedHeaders(headers);
+    return {
+        method,
+        headers: defaultHeaders,
+        body
+    };
+};
+
+export const fetchApi = async (fetchPathname: string, method: methodType, headers?: Headers, body?: string) => {
+    const options = requestOptions(method, headers, body);
     try {
-        const response = await fetch(`${ apiUrl }/${ fetchPathname }`, requestOptions);
+        const response = await fetch(`${ apiUrl }/${ fetchPathname }`, options);
         const data = await response.json();
-        console.log('data= ',data);
-        console.log(`url= ${ apiUrl }/${ fetchPathname }`);
+        console.log('Response data= ', data);
+        console.log(`URL = ${ apiUrl }/${ fetchPathname }`);
 
         if (response.status >= 200 && response.status < 300) {
             // const contentType = response.headers.get('Content-Type');
@@ -14,7 +36,7 @@ export const fetchApi = async (fetchPathname: string, requestOptions: RequestIni
             return data;
             // }
         } else {
-            throw data;
+            throw new Error(data.message);
         }
 
     } catch (error) {

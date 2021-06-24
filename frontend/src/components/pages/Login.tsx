@@ -2,33 +2,32 @@ import React, { useEffect } from 'react';
 import { Button, Container, Grid, Paper, Typography } from '@material-ui/core';
 import { Form, Formik, FormikHelpers } from 'formik';
 
-import { MyTextField, MyPasswordField, loginFormFieldsValidationSchema } from '../CustomField';
+import { MyTextField, MyPasswordField } from '../CustomFields';
 import useStyles from '../makeFormStyles';
-import { IAlert, ILoginValues, IUser } from '../../interfaces';
+import { IAlert, ILoginValues } from '../../interfaces';
 import AlertInfo from '../AlertInfo';
 import ProgressIndicator from '../ProgressIndicator';
 import { Link } from 'react-router-dom';
-import { ALERT_TYPE, ROUTES } from '../../constants';
+import { ROUTES } from '../../constants';
+import { loginFormFieldsValidationSchema } from '../../utils/formsDataValidation';
 
 interface Props {
     isLoading: boolean,
     alertInfo: IAlert,
     loginUser: (values: ILoginValues) => void,
-    clearAlertInfo: () => void
+    clearLoginAlert: () => void
 }
 
 const Login: React.FC<Props> = (props) => {
     const classes = useStyles();
     const initialValues = { email: '', password: '' };
-    const { isLoading, alertInfo, loginUser, clearAlertInfo } = props;
-
-    const alertType = alertInfo.alertType === ALERT_TYPE.FAILURE ? 'error' :
-        alertInfo.alertType === ALERT_TYPE.SUCCESS ? 'success' : null;
+    const { isLoading, alertInfo, loginUser, clearLoginAlert } = props;
+    const alertType = alertInfo.alertType;
     const alertMessage = alertInfo.alertMessage || 'error !';
 
     useEffect(() => {
         return () => {
-            clearAlertInfo();
+            clearLoginAlert();
         };
     }, []);
 

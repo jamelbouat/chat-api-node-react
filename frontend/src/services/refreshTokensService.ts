@@ -1,16 +1,12 @@
 import { fetchApi } from './fetchApi';
+import { ITokens } from '../interfaces';
 
 const tokenPathname = process.env.REACT_APP_API_TOKEN_USER || '';
+const stringifyBody = (refreshToken: string) => JSON.stringify({ refreshToken });
 
-const requestOptions = () => ({
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' }
-});
-
-const refreshTokens = async () => {
+const refreshTokens = async (refreshToken: string): Promise<ITokens>  => {
     try {
-        const response = await fetchApi(tokenPathname, requestOptions());
-        return await response.json();
+        return await fetchApi(tokenPathname, 'POST', undefined, stringifyBody(refreshToken));
     } catch (error) {
         throw error;
     }

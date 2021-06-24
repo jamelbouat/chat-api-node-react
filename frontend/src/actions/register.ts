@@ -1,10 +1,11 @@
-import { IRegisterValues } from '../interfaces';
-import { Dispatch } from 'redux';
-import { CLEAR_REGISTER_ALERT, REGISTER_FAILURE, REGISTER_REQUEST, REGISTER_SUCCESS } from './types';
-import { userService } from '../services/userService';
-import { ROUTES } from '../constants';
+import { Action, Dispatch } from 'redux';
 import { push } from 'connected-react-router';
-import { setLoginAlertToSuccess } from './login';
+
+import { IRegisterValues } from '../interfaces';
+import { CLEAR_REGISTER_ALERT, REGISTER_FAILURE, REGISTER_REQUEST, REGISTER_SUCCESS } from './types';
+import { userService } from '../services';
+import { ALERT_TYPE, ROUTES } from '../constants';
+import { setLoginAlert } from './login';
 
 export const registerUser = (values: IRegisterValues) => async (dispatch: Dispatch): Promise<void> => {
     dispatch(registerRequest());
@@ -12,7 +13,7 @@ export const registerUser = (values: IRegisterValues) => async (dispatch: Dispat
     try {
         const { message } = await userService.registerUser(values);
         dispatch(registerSuccess());
-        dispatch(setLoginAlertToSuccess(message));
+        dispatch(setLoginAlert(ALERT_TYPE.SUCCESS, message));
         dispatch(push(ROUTES.LOGIN));
 
     } catch (error) {
@@ -20,13 +21,13 @@ export const registerUser = (values: IRegisterValues) => async (dispatch: Dispat
     }
 };
 
-const registerRequest = () => (
-    { type: REGISTER_REQUEST }
-);
+const registerRequest = () => ({
+    type: REGISTER_REQUEST
+});
 
-const registerSuccess = () => (
-    { type: REGISTER_SUCCESS }
-);
+const registerSuccess = () => ({
+    type: REGISTER_SUCCESS
+});
 
 const registerFailure = (errorMessage: string) => ({
     type: REGISTER_FAILURE,
@@ -35,7 +36,7 @@ const registerFailure = (errorMessage: string) => ({
     }
 });
 
-export const clearRegisterAlertInfo = () =>({
+export const clearRegisterAlert = (): Action =>({
     type: CLEAR_REGISTER_ALERT
 });
 

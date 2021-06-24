@@ -1,11 +1,8 @@
-import HttpError from './HttpError';
+import HttpError from './commons/HttpError';
 
-class ObjectNotRegisteredError implements HttpError {
-    message: string;
-    status: number;
-
+class ObjectNotRegisteredError extends HttpError {
     constructor(message?: string) {
-        this.message = `Error: ${ message || 'Resource not created' }`;
+        super(message || 'Error: Resource not created');
         this.status = 400;
     }
 }

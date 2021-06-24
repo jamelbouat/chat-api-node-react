@@ -1,11 +1,8 @@
-import HttpError from './HttpError';
+import HttpError from './commons/HttpError';
 
-class AccessForbiddenError implements HttpError {
-    message: string;
-    status: number;
-
+class AccessForbiddenError extends HttpError {
     constructor() {
-        this.message = 'Error: Access forbidden';
+        super('Access forbidden');
         this.status = 403;
     }
 }

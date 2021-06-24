@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { FieldAttributes, useField } from 'formik';
 import { IconButton, InputAdornment, TextField } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
-import * as Yup from 'yup';
 
 export interface FieldProps extends FieldAttributes<any> {
     label: string,
@@ -24,11 +23,11 @@ const MyField: React.FC<FieldProps> = ({ name, ...props }) => {
     );
 };
 
-export const MyTextField: React.FC<FieldProps> = (props) => {
+const MyTextField: React.FC<FieldProps> = (props) => {
     return MyField(props);
 };
 
-export const MyPasswordField: React.FC<FieldProps> = (props) => {
+const MyPasswordField: React.FC<FieldProps> = (props) => {
     const [ showPassword, setShowPassword ] = useState(false);
     const type = showPassword ? 'text' : 'password';
 
@@ -52,36 +51,4 @@ export const MyPasswordField: React.FC<FieldProps> = (props) => {
     return MyField({ ...props, type, InputProps });
 };
 
-export const loginFormFieldsValidationSchema = Yup.object({
-    email: Yup.string()
-        .email('Invalid email address')
-        .required('Required'),
-
-    password: Yup.string()
-        .min(6, 'Must be at least 6 characters')
-        .required('Required'),
-});
-
-export const registerFormFieldsValidationSchema = Yup.object({
-    firstName: Yup.string()
-        .max(20, 'Must be 15 characters or less')
-        .min(3, 'Must be at least 3 characters long')
-        .required('Required'),
-
-    lastName: Yup.string()
-        .max(20, 'Must be 20 characters or less')
-        .min(3, 'Must be at least 3 characters long')
-        .required('Required'),
-
-    email: Yup.string()
-        .email('Invalid email address')
-        .required('Required'),
-
-    password: Yup.string()
-        .min(6, 'Must be at least 6 characters')
-        .required('Required'),
-
-    confirmPassword: Yup.string()
-        .oneOf([Yup.ref('password'), null], 'Passwords must match')
-        .required('Required')
-});
+export { MyTextField, MyPasswordField };

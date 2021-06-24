@@ -1,40 +1,66 @@
-import express from 'express';
-import IUser from '../interfaces/IUser';
+import { Model } from 'mongoose';
+
 import ObjectNotRegisteredError from '../errors/ObjectNotRegisteredError';
-import IService from '../interfaces/IService';
+import { IService, IRequestDataType, IResponseDataType } from '../interfaces/service';
+import { IUser } from '../interfaces/user';
+import HttpError from '../errors/commons/HttpError';
+import ResourceNotFoundError from '../errors/ResourceNotFoundError';
+import ResourceNotUpdatedError from '../errors/ResourceNotUpdatedError';
+import ResourceNotDeletedError from '../errors/ResourceNotDeletedError';
 
 class BaseService implements IService {
-    public model: IUser | any;
+    public model: Model<IUser> | any;
 
-    constructor() {
-        this.model = null;
-    }
-
-    public async registerElement(reqData: IUser): Promise<IUser | any> {
+    public async registerBaseElement(reqData: IRequestDataType): Promise<HttpError | void> {
         const Model = this.model;
         const data = new Model({ ...reqData });
 
         try {
-            return await data.save();
+            await data.save();
         } catch (error) {
             throw new ObjectNotRegisteredError(error.message);
         }
     }
 
-    public async getElement(req: express.Request, res: express.Response, model: any): Promise<void> {
-        return Promise.resolve(undefined);
+    public async getBaseElementById(_id: string): Promise<IResponseDataType | HttpError> {
+        try {
+            return await this.model.findOne({ _id });
+        } catch (error) {
+            throw new ResourceNotFoundError(error.message);
+        }
     }
 
-    public async updateElement(req: express.Request, res: express.Response, model: any): Promise<void> {
-        return Promise.resolve(undefined);
+    public async getBaseElementByEmail(email: string): Promise<IResponseDataType | HttpError> {
+        try {
+            return await this.model.findOne({ email });
+        } catch (error) {
+            throw new ResourceNotFoundError(error.message);
+        }
     }
 
-    public async deleteElement(req: express.Request, res: express.Response, model: any): Promise<void> {
-        return Promise.resolve(undefined);
+    public async updateBaseElement(_id: string, reqData: IRequestDataType): Promise<IResponseDataType | HttpError> {
+        try {
+            return await this.model.findOneAndUpdate({ _id }, reqData, { new: true, useFindAndModify: false });
+        } catch (error) {
+            throw new ResourceNotUpdatedError(error.message);
+        }
     }
 
+    public async deleteBaseElement(_id: string): Promise<void | HttpError> {
+        try {
+            return await this.model.deleteOne({ _id });
+        } catch (error) {
+            throw new ResourceNotDeletedError();
+        }
+    }
 
-
+    public async getAllBaseElements(): Promise<IResponseDataType[] | HttpError> {
+        try {
+            return await this.model.find();
+        } catch (error) {
+            throw new ResourceNotDeletedError();
+        }
+    }
 }
 
 export default BaseService;

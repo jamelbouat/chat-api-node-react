@@ -1,16 +1,19 @@
-import express, { Router } from 'express';
+import { NextFunction, Request, Response, Router } from 'express';
 
 import { GET_NEW_USER_TOKEN_URL } from '../../config/url.config';
+import AccessForbiddenError from '../errors/AccessForbiddenError';
 
 class UserTokenController {
     private userTokenService: any;
-    private router;
-    private isUserRefreshTokenValid;
+    private router: Router;
+    private isUserRefreshTokenValid: () => Promise<void>;
 
-    constructor(
-        { userTokenService, isUserRefreshTokenValid }:
-            { userTokenService: any, isUserRefreshTokenValid: any }
-    ) {
+    constructor({ userTokenService, isUserRefreshTokenValid }:
+            {
+                userTokenService: any,
+                isUserRefreshTokenValid: () => Promise<void>
+            })
+    {
         this.userTokenService = userTokenService;
         this.router = Router();
         this.isUserRefreshTokenValid = isUserRefreshTokenValid;
@@ -21,15 +24,14 @@ class UserTokenController {
         this.router.post(GET_NEW_USER_TOKEN_URL, this.isUserRefreshTokenValid, this.getNewUserTokens);
     }
 
-    private getNewUserTokens = async (req: express.Request, res: express.Response) => {
+    private getNewUserTokens = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const user = req.user;
-            const refreshToken = req.refreshToken as string;
-            const newTokens = await this.userTokenService.getNewUserTokens(user, refreshToken);
+            const oldRefreshToken = req.refreshToken as string;
+            const newTokens = await this.userTokenService.getNewUserTokens(user, oldRefreshToken);
             res.status(200).json({ ...newTokens });
         } catch(err) {
-            const status = err.status ? err.status : '401';
-            res.status(status).json({ message: err.message });
+            next(new AccessForbiddenError());
         }
     }
 }

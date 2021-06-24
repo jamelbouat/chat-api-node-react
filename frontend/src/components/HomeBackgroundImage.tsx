@@ -1,20 +1,9 @@
 import React, { useEffect, useState } from 'react';
+
 import useWindowDimensions from '../utils/useWindowDimensionsHook';
 import Spinner from './Spinner';
-import { createStyles, makeStyles } from '@material-ui/core';
-
-const useStyles = makeStyles(() =>
-    createStyles({
-        spinner: {
-            position: 'absolute',
-            top: '50vh',
-            left: '50vw'
-        }
-    }),
-);
 
 const HomeBackgroundImage: React.FC = () => {
-    const classes = useStyles();
     const { width, height } = useWindowDimensions();
     const [ isLoading, setLoading ] = useState(true);
     const [ src, setSrc ] = useState('');
@@ -27,12 +16,16 @@ const HomeBackgroundImage: React.FC = () => {
             setSrc(url);
             setLoading(false);
         };
+        image.onerror = () => {
+            setSrc('');
+            setLoading(false);
+        };
     }, [url]);
 
     return(
         <div>
             {
-                isLoading ? <Spinner className={ classes.spinner }/> :
+                isLoading ? <Spinner /> :
                     <img
                         src={ src }
                         alt='Image not loaded'
