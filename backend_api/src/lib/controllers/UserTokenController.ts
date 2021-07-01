@@ -2,20 +2,22 @@ import { NextFunction, Request, Response, Router } from 'express';
 
 import { GET_NEW_USER_TOKEN_URL } from '../../config/url.config';
 import AccessForbiddenError from '../errors/AccessForbiddenError';
+import { IController } from '../interfaces/controller';
+import { IUserTokenService } from '../interfaces/service';
 
-class UserTokenController {
-    private userTokenService: any;
-    private router: Router;
+class UserTokenController implements IController {
+    public router: Router;
+    private service: IUserTokenService;
     private isUserRefreshTokenValid: () => Promise<void>;
 
     constructor({ userTokenService, isUserRefreshTokenValid }:
             {
-                userTokenService: any,
+                userTokenService: IUserTokenService,
                 isUserRefreshTokenValid: () => Promise<void>
             })
     {
-        this.userTokenService = userTokenService;
         this.router = Router();
+        this.service = userTokenService;
         this.isUserRefreshTokenValid = isUserRefreshTokenValid;
         this.initializeRoutes();
     }
@@ -28,7 +30,7 @@ class UserTokenController {
         try {
             const user = req.user;
             const oldRefreshToken = req.refreshToken as string;
-            const newTokens = await this.userTokenService.getNewUserTokens(user, oldRefreshToken);
+            const newTokens = await this.service.getNewUserTokens(user, oldRefreshToken);
             res.status(200).json({ ...newTokens });
         } catch(err) {
             next(new AccessForbiddenError());

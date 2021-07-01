@@ -9,33 +9,34 @@ import {
     IUserUpdateData, IUserWithoutSensitiveData,
 } from '../interfaces/user';
 import BaseService from './BaseService';
-import ObjectNotLoggedError from '../errors/ObjectNotLoggedError';
+import UserNotLoggedError from '../errors/UserNotLoggedError';
 import HttpError from '../errors/commons/HttpError';
 import ResourceNotUpdatedError from '../errors/ResourceNotUpdatedError';
-import ObjectNotRegisteredError from '../errors/ObjectNotRegisteredError';
+import ResourceNotRegisteredError from '../errors/ResourceNotRegisteredError';
 import {
     userLoginDataValidation,
     userRegisterDataValidation,
     userUpdateDataValidation
 } from '../validations/userDataValidation';
 import { generateAccessAndRefreshTokens, removeSensitiveDataFromUser } from '../../utils/token';
+import { IResponseDataType, IUserService } from '../interfaces/service';
+import ResourceNotFoundError from '../errors/ResourceNotFoundError';
 
-class UserService extends BaseService {
+class UserService extends BaseService implements IUserService {
 
     constructor({ userModel }: { userModel: Model<IUser>}) {
-        super();
-        super.model = userModel;
+        super(userModel);
     }
 
-    public async registerElement(reqData: IUserRegisterData): Promise<HttpError | void> {
-        const user = await super.getBaseElementByEmail(reqData.email);
+    public async registerElement(reqData: IUserRegisterData): Promise<void | HttpError> {
+        const user = await this.getBaseElementByEmail(reqData.email);
         if (user) {
-            throw new ObjectNotRegisteredError(`Email ${ reqData.email } already exists`);
+            throw new ResourceNotRegisteredError(`Email ${ reqData.email } already exists`);
         }
 
         const { error } = userRegisterDataValidation(reqData);
         if (error) {
-            throw new ObjectNotRegisteredError(error.details[0].message);
+            throw new ResourceNotRegisteredError(error.details[0].message);
         }
 
         const salt = await bcrypt.genSalt();
@@ -44,20 +45,20 @@ class UserService extends BaseService {
     }
 
     public async getElement(_id: string): Promise<IUserWithoutSensitiveData | HttpError> {
-        const user = await super.getBaseElementById(_id) as IUser;
+        const user = await this.getBaseElementById(_id) as IUser;
         if (!user) {
-            throw new ResourceNotUpdatedError('User does not exist');
+            throw new ResourceNotFoundError('User does not exist');
         }
         const userWithoutSensitiveData = removeSensitiveDataFromUser(user) ;
         return { ...userWithoutSensitiveData };
     }
 
-    public async getElementWithSensitiveData(_id: string): Promise<IUser | HttpError> {
-        return await super.getBaseElementById(_id);
+    public async getElementWithSensitiveData(_id: string): Promise<IResponseDataType | HttpError> {
+        return await this.getBaseElementById(_id);
     }
 
     public async updateElement(_id: string, reqData: IUserUpdateData): Promise<IUserWithoutSensitiveData | HttpError> {
-        const user = await super.getBaseElementById(_id);
+        const user = await this.getBaseElementById(_id);
         if (!user) {
             throw new ResourceNotUpdatedError('User does not exist');
         }
@@ -65,19 +66,19 @@ class UserService extends BaseService {
         if (error) {
             throw new ResourceNotUpdatedError(error.details[0].message);
         }
-        const updatedUser = await super.updateBaseElement(_id, reqData) as IUser;
+        const updatedUser = await this.updateBaseElement(_id, reqData) as IUser;
         const userWithoutSensitiveData = removeSensitiveDataFromUser(updatedUser) ;
         return { ...userWithoutSensitiveData };
     }
 
     public async deleteElement(_id: string): Promise<void | HttpError> {
-        return await super.deleteBaseElement(_id);
+        return await this.deleteBaseElement(_id);
     }
 
     public async getAllElements(): Promise<IUserWithoutSensitiveData[] | HttpError> {
-        const users = await super.getAllBaseElements() as IUser[];
+        const users = await this.getAllBaseElements() as IUser[];
         if (!users) {
-            throw new ResourceNotUpdatedError('Users list is empty');
+            throw new ResourceNotFoundError('Users list is empty');
         }
         return users.map((user: IUser) => removeSensitiveDataFromUser(user));
     }
@@ -89,19 +90,19 @@ class UserService extends BaseService {
     }
 
     public async loginUser(reqData: IUserLoginData): Promise<IUserLoginResponseData | HttpError> {
-        const user = await super.getBaseElementByEmail(reqData.email) as IUser;
+        const user = await this.getBaseElementByEmail(reqData.email) as IUser;
         if (!user) {
-            throw new ObjectNotLoggedError(`Email ${ reqData.email } does not exist`);
+            throw new UserNotLoggedError(`Email ${ reqData.email } does not exist`);
         }
 
         const { error } = userLoginDataValidation(reqData);
         if (error) {
-            throw new ObjectNotLoggedError(error.details[0].message);
+            throw new UserNotLoggedError(error.details[0].message);
         }
 
         const validPassword = await bcrypt.compare(reqData.password, user.password);
         if (!validPassword) {
-            throw new ObjectNotLoggedError('wrong email or password');
+            throw new UserNotLoggedError('wrong email or password');
         }
 
         const userWithoutSensitiveData = removeSensitiveDataFromUser(user);
@@ -116,7 +117,7 @@ class UserService extends BaseService {
             userRefreshTokensArr = [];
         }
         userRefreshTokensArr.push(refreshToken);
-        await super.updateBaseElement(user._id, { refreshTokens: userRefreshTokensArr });
+        await this.updateBaseElement(user._id, { refreshTokens: userRefreshTokensArr });
     }
 }
 

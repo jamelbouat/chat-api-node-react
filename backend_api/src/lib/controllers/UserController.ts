@@ -13,7 +13,6 @@ import {
 } from '../../config/url.config';
 
 class UserController extends BaseController {
-    private userService: IUserService;
     private userAuthMiddleware: () => Promise<void>;
     private isUserRefreshTokenValid: () => Promise<void>;
 
@@ -25,7 +24,6 @@ class UserController extends BaseController {
                     })
     {
         super(userService);
-        this.userService = userService;
         this.userAuthMiddleware = userAuthMiddleware;
         this.isUserRefreshTokenValid = isUserRefreshTokenValid;
         this.initializeRoutes();
@@ -64,7 +62,7 @@ class UserController extends BaseController {
     private loginUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const reqData = req.body;
-            const loggedUser = await this.userService.loginUser(reqData);
+            const loggedUser = await this.service.loginUser(reqData);
             res.status(200).json( { ...loggedUser });
         } catch (error) {
             next(error);
@@ -75,7 +73,7 @@ class UserController extends BaseController {
         try {
             const user = req.user;
             const refreshToken = req.refreshToken;
-            await this.userService.logoutUser(user, refreshToken);
+            await this.service.logoutUser(user, refreshToken);
             res.status(204).json();
         } catch (error){
             next(error);

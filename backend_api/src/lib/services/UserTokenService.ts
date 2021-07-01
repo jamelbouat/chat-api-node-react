@@ -1,9 +1,9 @@
 import { IUser } from '../interfaces/user';
 import { ITokens } from '../interfaces/token';
 import { generateAccessAndRefreshTokens } from '../../utils/token';
-import { IUserService } from '../interfaces/service';
+import { IUserService, IUserTokenService } from '../interfaces/service';
 
-class UserTokenService {
+class UserTokenService implements IUserTokenService {
     private userService: IUserService;
 
     constructor({ userService }: { userService: IUserService }) {

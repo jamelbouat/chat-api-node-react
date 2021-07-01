@@ -20,99 +20,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cc81a06f-aa8b-4af9-8a82-fa15fa32c6b4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../backend_api/src/lib/errors/AccessTokenMissingError.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend_api/src/lib/errors/AccessUnauthorizedError.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend_api/src/lib/errors/ResourceNotDeletedError.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend_api/src/lib/errors/ResourceNotFoundError.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend_api/src/lib/errors/ResourceNotUpdatedError.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend_api/src/lib/errors/commons/HttpError.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend_api/src/lib/interfaces/service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend_api/src/lib/interfaces/token.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend_api/src/lib/interfaces/user.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend_api/src/lib/middlewares/errorHandlerMiddleware.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend_api/src/utils/objects.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend_api/src/utils/token.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/actions/users.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/UserCard.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reducers/usersReducer.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/formsDataValidation.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/tokens.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/.eslintrc.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend_api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/config/db.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/config/db.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/config/di.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/config/di.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/config/url.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/config/url.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/constants/constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/constants/constants.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/app.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/controllers/BaseController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/controllers/BaseController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/controllers/NotFoundController.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/controllers/UserController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/controllers/UserController.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/controllers/UserTokenController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/controllers/UserTokenController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/errors/AccessDeniedError.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/errors/AccessForbiddenError.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/errors/AccessForbiddenError.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/errors/AuthTokenMissingError.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/errors/HttpError.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/errors/InternalServerError.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/errors/InternalServerError.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/errors/ObjectNotLoggedError.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/errors/ObjectNotLoggedError.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/errors/ObjectNotRegisteredError.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/errors/ObjectNotRegisteredError.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/errors/PageNotFoundError.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/errors/RefreshTokenMissingError.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/errors/RefreshTokenMissingError.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/helpers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/interfaces/controller.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/interfaces/IController.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/interfaces/IService.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/interfaces/IUser.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/interfaces/IUserService.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/interfaces/IUserToken.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/middlewares/isUserRefreshTokenValid.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/middlewares/isUserRefreshTokenValid.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/middlewares/userAuthMiddleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/middlewares/userAuthMiddleware.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/models/UserModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/models/UserModel.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/errors/ObjectNotLoggedError.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/errors/UserNotLoggedError.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/errors/ObjectNotRegisteredError.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/errors/ResourceNotRegisteredError.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/interfaces/controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/interfaces/controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/interfaces/service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/interfaces/service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/models/BaseModel.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/services/BaseService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/services/BaseService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/services/JWTService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/interfaces/object.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/services/UserService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/services/UserService.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/services/UserTokenService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/services/UserTokenService.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/validations/userDataValidation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/validations/userDataValidation.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend_api/src/utils/token.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/utils/token.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/login.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/login.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/refreshTokens.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/register.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/register.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/CustomField.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CustomFields.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/HomeBackgroundImage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/HomeBackgroundImage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/NavigationBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NavigationBar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Spinner.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Spinner.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pages/Dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/Dashboard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pages/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/Login.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pages/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/Profile.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pages/Register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/Register.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Dashboard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Dashboard.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Home.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Home.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Login.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Login.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/NavigationBar.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/NavigationBar.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/PrivateRoute.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/PrivateRoute.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Profile.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Profile.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Register.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Register.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/RestrictRoute.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/RestrictRoute.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interfaces/index.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/middlewares/jwtMiddleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/middlewares/jwtMiddleware.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/loginReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/loginReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/refreshTokensReducer.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/registerReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/registerReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/fetchApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/fetchApi.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/refreshTokensService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/refreshTokensService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/userService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/userService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/sessionStorage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/sessionStorage.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/useWindowDimensionsHook.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/useWindowDimensionsHook.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/typings/redux.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/typings/redux.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.dev.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.dev.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -220,7 +142,8 @@
       <workItem from="1623540756403" duration="63687000" />
       <workItem from="1623752008029" duration="89144000" />
       <workItem from="1624055652328" duration="19791000" />
-      <workItem from="1624211129402" duration="39423000" />
+      <workItem from="1624211129402" duration="41515000" />
+      <workItem from="1624965424357" duration="1236000" />
     </task>
     <servers />
   </component>
@@ -284,82 +207,94 @@
     <state x="655" y="218" width="424" height="491" key="FileChooserDialogImpl/308.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1624017157468" />
     <state x="774" y="1235" width="424" height="491" key="FileChooserDialogImpl/308.1080.1366.768/0.0.1920.1080@308.1080.1366.768" timestamp="1620048923749" />
     <state x="466" y="177" key="FileChooserDialogImpl/308.1080.1366.768/0.27.1366.741@0.27.1366.741" timestamp="1619913624412" />
-    <state width="1897" height="256" key="GridCell.Tab.0.bottom" timestamp="1624432804823">
-      <screen x="0" y="27" width="1920" height="1053" />
+    <state width="1897" height="256" key="GridCell.Tab.0.bottom" timestamp="1624964352177">
+      <screen x="308" y="1080" width="1366" height="768" />
     </state>
     <state width="1897" height="308" key="GridCell.Tab.0.bottom/308.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1624101223510" />
     <state width="1343" height="232" key="GridCell.Tab.0.bottom/308.1080.1366.768/0.0.1920.1080@308.1080.1366.768" timestamp="1618274490110" />
     <state width="1343" height="305" key="GridCell.Tab.0.bottom/308.1080.1366.768/0.27.1366.741@0.27.1366.741" timestamp="1624211905772" />
     <state width="1897" height="256" key="GridCell.Tab.0.bottom/308.1080.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1624432804823" />
-    <state width="1897" height="256" key="GridCell.Tab.0.center" timestamp="1624432804822">
-      <screen x="0" y="27" width="1920" height="1053" />
+    <state width="1897" height="256" key="GridCell.Tab.0.bottom/308.1080.1366.768/0.27.1920.1053@308.1080.1366.768" timestamp="1624964352177" />
+    <state width="1897" height="256" key="GridCell.Tab.0.center" timestamp="1624964352177">
+      <screen x="308" y="1080" width="1366" height="768" />
     </state>
     <state width="1897" height="308" key="GridCell.Tab.0.center/308.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1624101223509" />
     <state width="1343" height="232" key="GridCell.Tab.0.center/308.1080.1366.768/0.0.1920.1080@308.1080.1366.768" timestamp="1618274490109" />
     <state width="1343" height="305" key="GridCell.Tab.0.center/308.1080.1366.768/0.27.1366.741@0.27.1366.741" timestamp="1624211905772" />
     <state width="1897" height="256" key="GridCell.Tab.0.center/308.1080.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1624432804822" />
-    <state width="1897" height="256" key="GridCell.Tab.0.left" timestamp="1624432804822">
-      <screen x="0" y="27" width="1920" height="1053" />
+    <state width="1897" height="256" key="GridCell.Tab.0.center/308.1080.1366.768/0.27.1920.1053@308.1080.1366.768" timestamp="1624964352177" />
+    <state width="1897" height="256" key="GridCell.Tab.0.left" timestamp="1624964352177">
+      <screen x="308" y="1080" width="1366" height="768" />
     </state>
     <state width="1897" height="308" key="GridCell.Tab.0.left/308.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1624101223509" />
     <state width="1343" height="232" key="GridCell.Tab.0.left/308.1080.1366.768/0.0.1920.1080@308.1080.1366.768" timestamp="1618274490107" />
     <state width="1343" height="305" key="GridCell.Tab.0.left/308.1080.1366.768/0.27.1366.741@0.27.1366.741" timestamp="1624211905772" />
     <state width="1897" height="256" key="GridCell.Tab.0.left/308.1080.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1624432804822" />
-    <state width="1897" height="256" key="GridCell.Tab.0.right" timestamp="1624432804822">
-      <screen x="0" y="27" width="1920" height="1053" />
+    <state width="1897" height="256" key="GridCell.Tab.0.left/308.1080.1366.768/0.27.1920.1053@308.1080.1366.768" timestamp="1624964352177" />
+    <state width="1897" height="256" key="GridCell.Tab.0.right" timestamp="1624964352177">
+      <screen x="308" y="1080" width="1366" height="768" />
     </state>
     <state width="1897" height="308" key="GridCell.Tab.0.right/308.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1624101223510" />
     <state width="1343" height="232" key="GridCell.Tab.0.right/308.1080.1366.768/0.0.1920.1080@308.1080.1366.768" timestamp="1618274490109" />
     <state width="1343" height="305" key="GridCell.Tab.0.right/308.1080.1366.768/0.27.1366.741@0.27.1366.741" timestamp="1624211905772" />
     <state width="1897" height="256" key="GridCell.Tab.0.right/308.1080.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1624432804822" />
-    <state width="1897" height="256" key="GridCell.Tab.1.bottom" timestamp="1624432804824">
-      <screen x="0" y="27" width="1920" height="1053" />
+    <state width="1897" height="256" key="GridCell.Tab.0.right/308.1080.1366.768/0.27.1920.1053@308.1080.1366.768" timestamp="1624964352177" />
+    <state width="1897" height="256" key="GridCell.Tab.1.bottom" timestamp="1624964352177">
+      <screen x="308" y="1080" width="1366" height="768" />
     </state>
     <state width="1897" height="308" key="GridCell.Tab.1.bottom/308.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1624101225113" />
     <state width="1343" height="305" key="GridCell.Tab.1.bottom/308.1080.1366.768/0.27.1366.741@0.27.1366.741" timestamp="1624211905772" />
     <state width="1897" height="256" key="GridCell.Tab.1.bottom/308.1080.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1624432804824" />
-    <state width="1897" height="256" key="GridCell.Tab.1.center" timestamp="1624432804823">
-      <screen x="0" y="27" width="1920" height="1053" />
+    <state width="1897" height="256" key="GridCell.Tab.1.bottom/308.1080.1366.768/0.27.1920.1053@308.1080.1366.768" timestamp="1624964352177" />
+    <state width="1897" height="256" key="GridCell.Tab.1.center" timestamp="1624964352177">
+      <screen x="308" y="1080" width="1366" height="768" />
     </state>
     <state width="1897" height="308" key="GridCell.Tab.1.center/308.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1624101225113" />
     <state width="1343" height="305" key="GridCell.Tab.1.center/308.1080.1366.768/0.27.1366.741@0.27.1366.741" timestamp="1624211905772" />
     <state width="1897" height="256" key="GridCell.Tab.1.center/308.1080.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1624432804823" />
-    <state width="1897" height="256" key="GridCell.Tab.1.left" timestamp="1624432804823">
-      <screen x="0" y="27" width="1920" height="1053" />
+    <state width="1897" height="256" key="GridCell.Tab.1.center/308.1080.1366.768/0.27.1920.1053@308.1080.1366.768" timestamp="1624964352177" />
+    <state width="1897" height="256" key="GridCell.Tab.1.left" timestamp="1624964352177">
+      <screen x="308" y="1080" width="1366" height="768" />
     </state>
     <state width="1897" height="308" key="GridCell.Tab.1.left/308.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1624101225113" />
     <state width="1343" height="305" key="GridCell.Tab.1.left/308.1080.1366.768/0.27.1366.741@0.27.1366.741" timestamp="1624211905772" />
     <state width="1897" height="256" key="GridCell.Tab.1.left/308.1080.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1624432804823" />
-    <state width="1897" height="256" key="GridCell.Tab.1.right" timestamp="1624432804823">
-      <screen x="0" y="27" width="1920" height="1053" />
+    <state width="1897" height="256" key="GridCell.Tab.1.left/308.1080.1366.768/0.27.1920.1053@308.1080.1366.768" timestamp="1624964352177" />
+    <state width="1897" height="256" key="GridCell.Tab.1.right" timestamp="1624964352177">
+      <screen x="308" y="1080" width="1366" height="768" />
     </state>
     <state width="1897" height="308" key="GridCell.Tab.1.right/308.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1624101225113" />
     <state width="1343" height="305" key="GridCell.Tab.1.right/308.1080.1366.768/0.27.1366.741@0.27.1366.741" timestamp="1624211905772" />
     <state width="1897" height="256" key="GridCell.Tab.1.right/308.1080.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1624432804823" />
-    <state width="1897" height="256" key="GridCell.Tab.2.bottom" timestamp="1624432804826">
-      <screen x="0" y="27" width="1920" height="1053" />
+    <state width="1897" height="256" key="GridCell.Tab.1.right/308.1080.1366.768/0.27.1920.1053@308.1080.1366.768" timestamp="1624964352177" />
+    <state width="1897" height="256" key="GridCell.Tab.2.bottom" timestamp="1624964352178">
+      <screen x="308" y="1080" width="1366" height="768" />
     </state>
     <state width="1897" height="308" key="GridCell.Tab.2.bottom/308.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1624101223355" />
     <state width="1343" height="305" key="GridCell.Tab.2.bottom/308.1080.1366.768/0.27.1366.741@0.27.1366.741" timestamp="1624211905772" />
     <state width="1897" height="256" key="GridCell.Tab.2.bottom/308.1080.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1624432804826" />
-    <state width="1897" height="256" key="GridCell.Tab.2.center" timestamp="1624432804825">
-      <screen x="0" y="27" width="1920" height="1053" />
+    <state width="1897" height="256" key="GridCell.Tab.2.bottom/308.1080.1366.768/0.27.1920.1053@308.1080.1366.768" timestamp="1624964352178" />
+    <state width="1897" height="256" key="GridCell.Tab.2.center" timestamp="1624964352178">
+      <screen x="308" y="1080" width="1366" height="768" />
     </state>
     <state width="1897" height="308" key="GridCell.Tab.2.center/308.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1624101223355" />
     <state width="1343" height="305" key="GridCell.Tab.2.center/308.1080.1366.768/0.27.1366.741@0.27.1366.741" timestamp="1624211905772" />
     <state width="1897" height="256" key="GridCell.Tab.2.center/308.1080.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1624432804825" />
-    <state width="1897" height="256" key="GridCell.Tab.2.left" timestamp="1624432804824">
-      <screen x="0" y="27" width="1920" height="1053" />
+    <state width="1897" height="256" key="GridCell.Tab.2.center/308.1080.1366.768/0.27.1920.1053@308.1080.1366.768" timestamp="1624964352178" />
+    <state width="1897" height="256" key="GridCell.Tab.2.left" timestamp="1624964352177">
+      <screen x="308" y="1080" width="1366" height="768" />
     </state>
     <state width="1897" height="308" key="GridCell.Tab.2.left/308.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1624101223355" />
     <state width="1343" height="305" key="GridCell.Tab.2.left/308.1080.1366.768/0.27.1366.741@0.27.1366.741" timestamp="1624211905772" />
     <state width="1897" height="256" key="GridCell.Tab.2.left/308.1080.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1624432804824" />
-    <state width="1897" height="256" key="GridCell.Tab.2.right" timestamp="1624432804826">
-      <screen x="0" y="27" width="1920" height="1053" />
+    <state width="1897" height="256" key="GridCell.Tab.2.left/308.1080.1366.768/0.27.1920.1053@308.1080.1366.768" timestamp="1624964352177" />
+    <state width="1897" height="256" key="GridCell.Tab.2.right" timestamp="1624964352178">
+      <screen x="308" y="1080" width="1366" height="768" />
     </state>
     <state width="1897" height="308" key="GridCell.Tab.2.right/308.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1624101223355" />
     <state width="1343" height="305" key="GridCell.Tab.2.right/308.1080.1366.768/0.27.1366.741@0.27.1366.741" timestamp="1624211905772" />
     <state width="1897" height="256" key="GridCell.Tab.2.right/308.1080.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1624432804826" />
+    <state width="1897" height="256" key="GridCell.Tab.2.right/308.1080.1366.768/0.27.1920.1053@308.1080.1366.768" timestamp="1624964352178" />
     <state width="1897" height="461" key="GridCell.Tab.3.bottom" timestamp="1624044827699">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -439,38 +374,27 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/services/fetchApi.ts</url>
           <line>25</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/services/fetchApi.ts</url>
           <line>35</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/services/fetchApi.ts</url>
           <line>38</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/services/fetchApi.ts</url>
           <line>42</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/services/fetchApi.ts</url>
           <line>41</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="25" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/actions/refreshTokens.ts</url>
-          <line>19</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="26" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

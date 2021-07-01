@@ -1,16 +1,16 @@
 import { Request, Response, NextFunction, Router } from 'express';
 
 import Constants from '../../constants/constants';
-import { IController } from '../interfaces/controller';
+import { IBaseController } from '../interfaces/controller';
 import { IUserService } from '../interfaces/service';
 
-class BaseController implements IController {
-    public service: IUserService | any;
+class BaseController implements IBaseController {
     public router: Router;
+    public service: IUserService | any;
 
     constructor(service: IUserService) {
-        this.service = service;
         this.router = Router();
+        this.service = service;
     }
 
     public async registerElement(req: Request, res: Response, next: NextFunction): Promise<void> {

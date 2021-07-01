@@ -23,6 +23,7 @@ const registerSchema = Joi.object({
         .min(3)
         .max(30)
         .required(),
+
     refreshTokens: Joi.array()
         .default([])
         .max(5),
