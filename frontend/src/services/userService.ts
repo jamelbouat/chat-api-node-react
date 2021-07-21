@@ -1,6 +1,6 @@
-import { ILoginResponseData, ILoginValues, IRegisterValues } from '../interfaces';
 import { fetchApi } from './fetchApi';
 import { getAccessToken } from '../utils/tokens';
+import { ILoginResponseData, ILoginValues, IRegisterValues } from '../interfaces/user';
 
 const loginPathname = process.env.REACT_APP_API_LOGIN_USER || '';
 const registerPathname = process.env.REACT_APP_API_REGISTER_USER || '';

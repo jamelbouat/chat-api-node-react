@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
 import { ROUTES } from '../constants';
-import { IRoute } from '../interfaces';
+import { IRoute } from '../interfaces/routes';
 
 const RestrictRoute: React.FC<IRoute> = (props) => {
     const { isAuthenticated, component: Component, ...rest } = props;

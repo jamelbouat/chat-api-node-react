@@ -18,8 +18,8 @@ import {
     userRegisterDataValidation,
     userUpdateDataValidation
 } from '../validations/userDataValidation';
-import { generateAccessAndRefreshTokens, removeSensitiveDataFromUser } from '../../utils/token';
-import { IResponseDataType, IUserService } from '../interfaces/service';
+import { generateAccessAndRefreshTokens, removeSensitiveDataFromUser } from '../utils/token';
+import { IResponseDataType, IUserService } from '../interfaces/services';
 import ResourceNotFoundError from '../errors/ResourceNotFoundError';
 
 class UserService extends BaseService implements IUserService {
@@ -41,7 +41,7 @@ class UserService extends BaseService implements IUserService {
 
         const salt = await bcrypt.genSalt();
         reqData.password = await bcrypt.hash(reqData.password, salt);
-        await super.registerBaseElement(reqData);
+        await this.registerBaseElement(reqData);
     }
 
     public async getElement(_id: string): Promise<IUserWithoutSensitiveData | HttpError> {
@@ -49,7 +49,7 @@ class UserService extends BaseService implements IUserService {
         if (!user) {
             throw new ResourceNotFoundError('User does not exist');
         }
-        const userWithoutSensitiveData = removeSensitiveDataFromUser(user) ;
+        const userWithoutSensitiveData = removeSensitiveDataFromUser(user);
         return { ...userWithoutSensitiveData };
     }
 

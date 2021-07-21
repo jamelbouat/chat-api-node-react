@@ -1,6 +1,6 @@
 import CryptoJS from 'crypto-js';
+import { RootState } from '../interfaces/state';
 
-import { RootState } from '../interfaces';
 // import { ITokens, IAccessToken } from '../interfaces';
 
 const secretKey = process.env.REACT_APP_API_SECRET_KEY as string;

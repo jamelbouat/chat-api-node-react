@@ -1,4 +1,3 @@
-import { ITokenAction } from '../interfaces';
 import {
     CLEAR_REFRESH_TOKENS_PROMISE,
     REMOVE_TOKENS,
@@ -6,6 +5,7 @@ import {
     SET_NEW_TOKENS,
     SET_REFRESH_TOKENS_PROMISE
 } from '../actions/types';
+import { ITokenAction } from '../interfaces/actions';
 
 const initialState = {
     accessToken: {

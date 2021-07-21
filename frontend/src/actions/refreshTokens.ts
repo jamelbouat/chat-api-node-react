@@ -2,7 +2,6 @@ import { Action, Dispatch } from 'redux';
 import { push } from 'connected-react-router';
 
 import { refreshTokensService } from '../services';
-import { ILoginResponseData, ITokens } from '../interfaces';
 import { ALERT_TYPE, ROUTES } from '../constants';
 import { removeUserData, setLoginAlert } from './login';
 import * as storage from '../utils/sessionStorage';
@@ -13,6 +12,8 @@ import {
     SET_NEW_TOKENS,
     SET_REFRESH_TOKENS_PROMISE
 } from './types';
+import { ILoginResponseData } from '../interfaces/user';
+import { ITokens } from '../interfaces/tokens';
 
 export const refreshTokens = async (dispatch: Dispatch, refreshToken: string): Promise<void> => {
     const refreshTokensPromise = async (): Promise<void> => {

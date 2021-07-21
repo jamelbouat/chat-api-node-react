@@ -1,5 +1,5 @@
 import { fetchApi } from './fetchApi';
-import { ITokens } from '../interfaces';
+import { ITokens } from '../interfaces/tokens';
 
 const tokenPathname = process.env.REACT_APP_API_TOKEN_USER || '';
 const stringifyBody = (refreshToken: string) => JSON.stringify({ refreshToken });

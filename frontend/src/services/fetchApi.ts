@@ -1,4 +1,4 @@
-import { methodType } from '../interfaces';
+import { methodType } from '../interfaces/fetchAPI';
 
 const apiUrl = process.env.REACT_APP_API_URL;
 

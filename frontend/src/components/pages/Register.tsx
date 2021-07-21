@@ -5,12 +5,13 @@ import { Form, Formik, FormikHelpers } from 'formik';
 
 import { MyTextField, MyPasswordField } from '../CustomFields';
 import useStyles from '../makeFormStyles';
-import { IAlert, IRegisterValues } from '../../interfaces';
 import { removeProperties } from '../../utils/objects';
 import AlertInfo from '../AlertInfo';
 import ProgressIndicator from '../ProgressIndicator';
 import { ROUTES } from '../../constants';
 import { registerFormFieldsValidationSchema } from '../../utils/formsDataValidation';
+import { IRegisterValues } from '../../interfaces/user';
+import { IAlert } from '../../interfaces/alert';
 
 type Values = IRegisterValues & { confirmPassword: string };
 

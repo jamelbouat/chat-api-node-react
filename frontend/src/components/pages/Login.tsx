@@ -4,12 +4,13 @@ import { Form, Formik, FormikHelpers } from 'formik';
 
 import { MyTextField, MyPasswordField } from '../CustomFields';
 import useStyles from '../makeFormStyles';
-import { IAlert, ILoginValues } from '../../interfaces';
 import AlertInfo from '../AlertInfo';
 import ProgressIndicator from '../ProgressIndicator';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '../../constants';
 import { loginFormFieldsValidationSchema } from '../../utils/formsDataValidation';
+import { ILoginValues } from '../../interfaces/user';
+import { IAlert } from '../../interfaces/alert';
 
 interface Props {
     isLoading: boolean,

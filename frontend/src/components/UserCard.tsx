@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, CardContent, makeStyles, Typography } from '@material-ui/core';
 
 import { capitalizeFirstLetter, convertToReadableDate } from '../utils/strings';
-import { IUser } from '../interfaces';
+import { IUser } from '../interfaces/user';
 
 const useStyles = makeStyles({
     root: {

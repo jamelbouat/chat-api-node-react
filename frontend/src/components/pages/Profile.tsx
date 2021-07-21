@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { IUser } from '../../interfaces';
 import UserCard from '../UserCard';
+import { IUser } from '../../interfaces/user';
 
 interface Props {
     user: IUser

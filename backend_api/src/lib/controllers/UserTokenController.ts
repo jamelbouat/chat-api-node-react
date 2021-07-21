@@ -2,8 +2,8 @@ import { NextFunction, Request, Response, Router } from 'express';
 
 import { GET_NEW_USER_TOKEN_URL } from '../../config/url.config';
 import AccessForbiddenError from '../errors/AccessForbiddenError';
-import { IController } from '../interfaces/controller';
-import { IUserTokenService } from '../interfaces/service';
+import { IController } from '../interfaces/controllers';
+import { IUserTokenService } from '../interfaces/services';
 
 class UserTokenController implements IController {
     public router: Router;

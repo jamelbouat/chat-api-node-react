@@ -3,9 +3,9 @@ import { ThunkDispatch } from 'redux-thunk';
 import { connect } from 'react-redux';
 import Register from '../components/pages/Register';
 
-import { IRegisterValues } from '../interfaces';
 import { clearRegisterAlert, registerUser } from '../actions/register';
-import { RootState } from '../interfaces';
+import { IRegisterValues } from '../interfaces/user';
+import { RootState } from '../interfaces/state';
 
 const mapStateToProps = (state: RootState) => ({
     isLoading: state.registerState.isLoading,

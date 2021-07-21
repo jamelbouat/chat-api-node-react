@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import Constants from '../constants/constants';
+import Constants from '../lib/constants/constants';
 
 class DBClient {
 

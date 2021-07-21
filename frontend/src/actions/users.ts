@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 
 import { GET_USERS_FAILURE, GET_USERS_REQUEST, GET_USERS_SUCCESS } from './types';
 import { userService } from '../services';
-import { IUser } from '../interfaces';
+import { IUser } from '../interfaces/user';
 
 export const getUsers = () => async (dispatch: Dispatch) => {
     dispatch(getUsersRequest());

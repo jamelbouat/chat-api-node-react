@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { Action } from 'redux';
 
-import { RootState } from '../interfaces';
 import Home from '../components/pages/Home';
+import { RootState } from '../interfaces/state';
 
 const mapStateToProps = (state: RootState) => ({
 });

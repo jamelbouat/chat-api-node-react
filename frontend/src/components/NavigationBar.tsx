@@ -3,6 +3,9 @@ import { AppBar, Button, makeStyles, Toolbar, Typography, Tooltip } from '@mater
 import { Chat as ChatIcon, ExitToApp as ExitToAppIcon, AccountBoxRounded, Home as HomeIcon } from '@material-ui/icons';
 
 const useStyles = makeStyles(() => ({
+    layout: {
+        position: 'relative'
+    },
     title: {
         flexGrow: 1
     },
@@ -43,7 +46,7 @@ const NavigationBar: React.FC<Props> = (props) => {
     const handleRegisterClick = () => redirectToRegister();
 
     return(
-        <AppBar position='relative'>
+        <AppBar className={ classes.layout }>
             <Toolbar>
                 <ChatIcon />
                 <Typography variant='h6' className={ classes.title }>

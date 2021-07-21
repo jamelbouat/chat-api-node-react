@@ -1,4 +1,5 @@
 import { Document } from 'mongoose';
+
 import { IAccessToken } from './token';
 
 interface IUser extends Document {

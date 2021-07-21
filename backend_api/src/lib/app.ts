@@ -4,9 +4,9 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 
 import DBClient from '../config/db.config';
-import Constants from '../constants/constants';
+import Constants from './constants/constants';
 import errorHandlerMiddleware from './middlewares/errorHandlerMiddleware';
-import { IController } from './interfaces/controller';
+import { IController } from './interfaces/controllers';
 
 class App {
     private app: Application;
@@ -48,6 +48,10 @@ class App {
         this.app.listen(process.env.PORT, () => {
             console.log(Constants.SERVER_RUNNING);
         });
+    }
+
+    public getApp(): Application {
+        return this.app;
     }
 }
 

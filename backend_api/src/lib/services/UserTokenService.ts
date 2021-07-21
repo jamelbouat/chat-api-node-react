@@ -1,7 +1,7 @@
 import { IUser } from '../interfaces/user';
 import { ITokens } from '../interfaces/token';
-import { generateAccessAndRefreshTokens } from '../../utils/token';
-import { IUserService, IUserTokenService } from '../interfaces/service';
+import { generateAccessAndRefreshTokens } from '../utils/token';
+import { IUserService, IUserTokenService } from '../interfaces/services';
 
 class UserTokenService implements IUserTokenService {
     private userService: IUserService;

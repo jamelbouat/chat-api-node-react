@@ -4,10 +4,10 @@ import { Action } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { push } from 'connected-react-router';
 
-import { RootState } from '../interfaces';
 import NavigationBar from '../components/NavigationBar';
 import { ROUTES } from '../constants';
 import { logoutAndRedirectToHome } from '../actions/login';
+import { RootState } from '../interfaces/state';
 
 const mapStateToProps = (state: RootState) => ({
     isAuthenticated: state.loginState.isAuthenticated

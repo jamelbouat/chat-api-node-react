@@ -1,6 +1,6 @@
-import { IUsersAction } from '../interfaces';
 import { GET_USERS_FAILURE, GET_USERS_REQUEST, GET_USERS_SUCCESS } from '../actions/types';
 import { ALERT_TYPE } from '../constants';
+import { IUsersAction } from '../interfaces/actions';
 
 const initialState = {
     isLoading: false,

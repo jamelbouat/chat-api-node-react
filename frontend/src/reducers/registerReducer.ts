@@ -1,6 +1,6 @@
 import { CLEAR_REGISTER_ALERT, REGISTER_FAILURE, REGISTER_REQUEST, REGISTER_SUCCESS } from '../actions/types';
 import { ALERT_TYPE } from '../constants';
-import { IRegisterAction } from '../interfaces';
+import { IRegisterAction } from '../interfaces/actions';
 
 const initialState = {
     isLoading: false,

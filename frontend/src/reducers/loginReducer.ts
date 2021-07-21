@@ -1,4 +1,3 @@
-import { ILoginAction } from '../interfaces';
 import { ALERT_TYPE } from '../constants';
 import {
     CLEAR_LOGIN_ALERT,
@@ -7,6 +6,7 @@ import {
     LOGIN_SUCCESS,
     REMOVE_USER_DATA, SET_LOGIN_ALERT,
 } from '../actions/types';
+import { ILoginAction } from '../interfaces/actions';
 
 const initialState = {
     isLoading: false,

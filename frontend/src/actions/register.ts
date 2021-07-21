@@ -1,11 +1,11 @@
 import { Action, Dispatch } from 'redux';
 import { push } from 'connected-react-router';
 
-import { IRegisterValues } from '../interfaces';
 import { CLEAR_REGISTER_ALERT, REGISTER_FAILURE, REGISTER_REQUEST, REGISTER_SUCCESS } from './types';
 import { userService } from '../services';
 import { ALERT_TYPE, ROUTES } from '../constants';
 import { setLoginAlert } from './login';
+import { IRegisterValues } from '../interfaces/user';
 
 export const registerUser = (values: IRegisterValues) => async (dispatch: Dispatch): Promise<void> => {
     dispatch(registerRequest());

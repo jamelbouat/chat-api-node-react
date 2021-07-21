@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 
 import BaseController from './BaseController';
-import { IUserService } from '../interfaces/service';
+import { IUserService } from '../interfaces/services';
 import {
     ALL_USER_URL,
     DELETE_USER_URL,
@@ -13,6 +13,7 @@ import {
 } from '../../config/url.config';
 
 class UserController extends BaseController {
+    public service: IUserService;
     private userAuthMiddleware: () => Promise<void>;
     private isUserRefreshTokenValid: () => Promise<void>;
 
@@ -24,6 +25,7 @@ class UserController extends BaseController {
                     })
     {
         super(userService);
+        this.service = userService;
         this.userAuthMiddleware = userAuthMiddleware;
         this.isUserRefreshTokenValid = isUserRefreshTokenValid;
         this.initializeRoutes();

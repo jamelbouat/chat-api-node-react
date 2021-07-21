@@ -2,9 +2,9 @@ import { connect } from 'react-redux';
 import { Action } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 
-import { RootState } from '../interfaces';
-import Dashboard from '../components/pages/Dashboard';
 import { getUsers } from '../actions/users';
+import Dashboard from '../components/pages/dashboard';
+import { RootState } from '../interfaces/state';
 
 const mapStateToProps = (state: RootState) => ({
     isLoading: state.usersState.isLoading,

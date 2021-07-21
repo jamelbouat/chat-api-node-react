@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 
 import { ROUTES } from '../constants';
-import { IRoute } from '../interfaces';
+import { IRoute } from '../interfaces/routes';
 
 const PrivateRoute: React.FC<IRoute> = (props) => {
     const { isAuthenticated, component: Component, ...rest } = props;

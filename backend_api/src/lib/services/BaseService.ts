@@ -1,26 +1,26 @@
 import { Model } from 'mongoose';
 
 import ResourceNotRegisteredError from '../errors/ResourceNotRegisteredError';
-import { IRequestDataType, IResponseDataType, IBaseService } from '../interfaces/service';
-import { IUser } from '../interfaces/user';
+import { IRequestDataType, IResponseDataType, IBaseService } from '../interfaces/services';
 import HttpError from '../errors/commons/HttpError';
 import ResourceNotFoundError from '../errors/ResourceNotFoundError';
 import ResourceNotUpdatedError from '../errors/ResourceNotUpdatedError';
 import ResourceNotDeletedError from '../errors/ResourceNotDeletedError';
 
 class BaseService implements IBaseService {
-    public model: Model<IUser>;
+    public model: Model<any>;
 
-    constructor(model: Model<IUser>) {
+    constructor(model: Model<any>) {
         this.model = model;
     }
 
-    public async registerBaseElement(reqData: IRequestDataType): Promise<void | HttpError> {
+    public async registerBaseElement(reqData: IRequestDataType): Promise<IResponseDataType | HttpError> {
         const Model = this.model;
         const data = new Model({ ...reqData });
 
         try {
             await data.save();
+            return data;
         } catch (error) {
             throw new ResourceNotRegisteredError(error.message);
         }

@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { Action } from 'redux';
 
-import { RootState } from '../interfaces';
 import RestrictRoute from '../routes/RestrictRoute';
+import { RootState } from '../interfaces/state';
 
 const mapStateToProps = (state: RootState) => ({
     isAuthenticated: state.loginState.isAuthenticated

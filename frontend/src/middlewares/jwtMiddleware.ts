@@ -1,9 +1,9 @@
 import { Action, Dispatch, Middleware } from 'redux';
 
 import { refreshTokens } from '../actions/refreshTokens';
-import { RootState } from '../interfaces';
 import { ThunkDispatch } from 'redux-thunk';
 import { CLEAR_REFRESH_TOKENS_PROMISE, SET_NEW_TOKENS, SET_REFRESH_TOKENS_PROMISE } from '../actions/types';
+import { RootState } from '../interfaces/state';
 
 export const jwtMiddleware: Middleware = ({ getState, dispatch } : { getState: RootState, dispatch: ThunkDispatch<RootState, any, Action> }) =>
     (next: Dispatch) => (action: Action) => {

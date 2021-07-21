@@ -1,7 +1,6 @@
 import { Action, Dispatch } from 'redux';
 import { push } from 'connected-react-router';
 
-import { ILoginResponseData, ILoginValues, IRegisterAction } from '../interfaces';
 import { userService } from '../services';
 import * as storage from '../utils/sessionStorage';
 import { removeTokens, setInitialTokens } from './refreshTokens';
@@ -14,6 +13,8 @@ import {
     REMOVE_USER_DATA,
     SET_LOGIN_ALERT
 } from './types';
+import { ILoginResponseData, ILoginValues } from '../interfaces/user';
+import { IRegisterAction } from '../interfaces/actions';
 
 export const loginUser = (values: ILoginValues) => async (dispatch: Dispatch): Promise<void> => {
     dispatch(loginRequest());

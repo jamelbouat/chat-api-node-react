@@ -1,13 +1,13 @@
 import jwt from 'jsonwebtoken';
-import { IObject } from '../lib/interfaces/object';
-import { IUser, IUserWithoutSensitiveData } from '../lib/interfaces/user';
-import { IAccessToken, ITokens } from '../lib/interfaces/token';
-import { removePropertiesFromCurrentObject } from './objects';
+
+import { IUser, IUserWithoutSensitiveData } from '../interfaces/user';
+import { IAccessToken, ITokens } from '../interfaces/token';
+import { IObject, removePropertiesFromCurrentObject } from './objects';
 
 const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET as string;
 const refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET as string;
-const accessTokenExpiresIn = 30; // seconds
-const refreshTokenExpiresIn = 60; // seconds
+const accessTokenExpiresIn = 3000; // seconds
+const refreshTokenExpiresIn = 6000; // seconds
 
 const getNewJwtToken = (payload: IObject, secret: string, expiresIn: number): string => {
     return jwt.sign({ user: payload }, secret, { expiresIn });
@@ -36,6 +36,19 @@ const generateAccessAndRefreshTokens = (user: IUser): ITokens => {
     return { accessToken, refreshToken };
 };
 
-export { removeSensitiveDataFromUser, generateAccessAndRefreshTokens };
+const verifyAccessTokenValidation = (accessToken: string): { user: IUserWithoutSensitiveData } => {
+    return jwt.verify(accessToken, accessTokenSecret) as { user: IUserWithoutSensitiveData };
+};
+
+const verifyRefreshTokenValidation = (refreshToken: string): { user: IUserWithoutSensitiveData } => {
+    return jwt.verify(refreshToken, refreshTokenSecret) as { user: IUserWithoutSensitiveData };
+};
+
+export {
+    removeSensitiveDataFromUser,
+    generateAccessAndRefreshTokens,
+    verifyAccessTokenValidation,
+    verifyRefreshTokenValidation
+};
 
 

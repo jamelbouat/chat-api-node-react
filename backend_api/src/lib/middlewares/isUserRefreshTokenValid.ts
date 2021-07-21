@@ -1,15 +1,14 @@
 import { Request, Response, NextFunction } from 'express';
-import jwt from 'jsonwebtoken';
 
 import RefreshTokenMissingError from '../errors/RefreshTokenMissingError';
 import AccessForbiddenError from '../errors/AccessForbiddenError';
-import { IUser, IUserWithoutSensitiveData } from '../interfaces/user';
+import { IUser } from '../interfaces/user';
 import AccessUnauthorizedError from '../errors/AccessUnauthorizedError';
-import { IUserService } from '../interfaces/service';
+import { IUserService } from '../interfaces/services';
+import { verifyRefreshTokenValidation } from '../utils/token';
 
 function IsUserRefreshTokenValid({ userService }: { userService: IUserService }) {
     return async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-        const refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET as string;
         const refreshToken = req.body.refreshToken;
         let verifiedRefreshToken;
 
@@ -19,7 +18,7 @@ function IsUserRefreshTokenValid({ userService }: { userService: IUserService })
         }
 
         try {
-            verifiedRefreshToken = jwt.verify(refreshToken, refreshTokenSecret) as { user: IUserWithoutSensitiveData };
+            verifiedRefreshToken = verifyRefreshTokenValidation(refreshToken);
         } catch (error) {
             next(new AccessUnauthorizedError());
             return;

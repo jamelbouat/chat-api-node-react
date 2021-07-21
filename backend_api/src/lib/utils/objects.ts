@@ -1,4 +1,5 @@
-import { IObject } from '../lib/interfaces/object';
+
+export type IObject = { [name: string]: any };
 
 export const removePropertiesFromCurrentObject = (object: IObject, ...removeKeys: Array<string>): IObject => {
     return Object

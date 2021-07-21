@@ -1,14 +1,14 @@
 import { Request, Response, NextFunction, Router } from 'express';
 
-import Constants from '../../constants/constants';
-import { IBaseController } from '../interfaces/controller';
-import { IUserService } from '../interfaces/service';
+import Constants from '../constants/constants';
+import { IBaseController } from '../interfaces/controllers';
+import { IConversationService, IUserService } from '../interfaces/services';
 
 class BaseController implements IBaseController {
     public router: Router;
-    public service: IUserService | any;
+    public service: IUserService | IConversationService;
 
-    constructor(service: IUserService) {
+    constructor(service: IUserService | IConversationService) {
         this.router = Router();
         this.service = service;
     }
@@ -16,8 +16,9 @@ class BaseController implements IBaseController {
     public async registerElement(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             const reqData = req.body;
-            await this.service.registerElement(reqData);
-            res.status(201).json( { message: Constants.CREATION_SUCCESS });
+            const element = await this.service.registerElement(reqData);
+            const returnBody = element ? element : { message: Constants.CREATION_SUCCESS };
+            res.status(201).json(returnBody);
         } catch (error) {
             next(error);
         }
@@ -35,7 +36,7 @@ class BaseController implements IBaseController {
 
     public async updateElement(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
-            const _id = req.user._id;
+            const _id = req.params.id;
             const reqData = req.body;
             const element = await this.service.updateElement(_id, reqData);
             res.status(200).json( { ...element });
