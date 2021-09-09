@@ -1,17 +1,23 @@
 import { Document } from 'mongoose';
 
-interface IMessage {
-    _id: string;
-    from: string;
-    content: string;
-    time: string;
-    read: boolean
-}
-
 interface IConversation extends Document {
     _id: string;
     userIds: string[];
-    messages: IMessage[];
+    messageIds: string[];
+    createdAt: string;
+    updatedAt: string;
+}
+
+interface IConversationUser {
+    _id: string,
+    firstName: string,
+    lastName: string
+}
+
+interface IConversationWithUsersAndMessagesData {
+    _id: string;
+    users: IConversationUser[];
+    messageIds: string[];
     createdAt: string;
     updatedAt: string;
 }
@@ -19,7 +25,7 @@ interface IConversation extends Document {
 interface IConversationData {
     _id: string;
     userIds: string[];
-    messages: IMessage[];
+    messageIds: string[];
     createdAt: string;
     updatedAt: string
 }
@@ -30,7 +36,14 @@ interface IConversationRegisterData {
 
 interface IConversationUpdateData {
     userIds?: string[];
-    messages?: IMessage[]
+    messageIds?: string[]
 }
 
-export { IMessage, IConversation, IConversationData, IConversationRegisterData, IConversationUpdateData };
+export {
+    IConversationUser,
+    IConversation,
+    IConversationData,
+    IConversationRegisterData,
+    IConversationUpdateData,
+    IConversationWithUsersAndMessagesData
+};

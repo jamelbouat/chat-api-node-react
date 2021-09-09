@@ -14,14 +14,17 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<RootState, any, Action>) => ({
-    logoutUser: () => {
-        dispatch(logoutAndRedirectToHome());
+    redirectToDashboard: () => {
+        dispatch(push(ROUTES.DASHBOARD));
+    },
+    redirectToConversations: () => {
+        dispatch(push(ROUTES.CONVERSATIONS.replace(':id', '0')));
     },
     redirectToProfile: () => {
         dispatch(push(ROUTES.PROFILE));
     },
-    redirectToDashboard: () => {
-        dispatch(push(ROUTES.DASHBOARD));
+    logoutUser: () => {
+        dispatch(logoutAndRedirectToHome());
     },
     redirectToLogin: () => {
         dispatch(push(ROUTES.LOGIN));

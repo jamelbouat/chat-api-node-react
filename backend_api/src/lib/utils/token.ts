@@ -6,8 +6,8 @@ import { IObject, removePropertiesFromCurrentObject } from './objects';
 
 const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET as string;
 const refreshTokenSecret = process.env.REFRESH_TOKEN_SECRET as string;
-const accessTokenExpiresIn = 3000; // seconds
-const refreshTokenExpiresIn = 6000; // seconds
+const accessTokenExpiresIn = 300000; // seconds
+const refreshTokenExpiresIn = 600000; // seconds
 
 const getNewJwtToken = (payload: IObject, secret: string, expiresIn: number): string => {
     return jwt.sign({ user: payload }, secret, { expiresIn });

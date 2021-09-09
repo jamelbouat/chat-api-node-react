@@ -2,9 +2,11 @@
 export enum ROUTES {
     LOGIN = '/app/login',
     REGISTER = '/app/register',
-    DASHBOARD = '/app',
     PROFILE = '/app/profile',
     HOME = '/',
+    DASHBOARD = '/app',
+    CONTACT = '/app/contact/:id',
+    CONVERSATIONS = '/app/conversation/:id'
 }
 
 export enum ALERT_TYPE {

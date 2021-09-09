@@ -3,8 +3,9 @@ import { Action } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
 
 import { getUsers } from '../actions/users';
-import Dashboard from '../components/pages/dashboard';
 import { RootState } from '../interfaces/state';
+import Dashboard from '../components/pages/dashboard';
+import { connectToSocketService } from '../actions/messages';
 
 const mapStateToProps = (state: RootState) => ({
     isLoading: state.usersState.isLoading,
@@ -15,6 +16,9 @@ const mapStateToProps = (state: RootState) => ({
 const mapDispatchToProps = (dispatch: ThunkDispatch<RootState, any, Action>) => ({
     getUsers: async () => {
         await dispatch(getUsers());
+    },
+    connectToSocketService: () => {
+        dispatch(connectToSocketService);
     }
 });
 

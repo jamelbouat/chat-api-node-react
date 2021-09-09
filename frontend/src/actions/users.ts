@@ -22,7 +22,9 @@ const getUsersRequest = () => ({
 
 const getUsersSuccess = (users: IUser[]) => ({
     type: GET_USERS_SUCCESS,
-    payload: { users }
+    payload: {
+        users
+    }
 });
 
 const getUsersFailure = (errorMessage: string) => ({

@@ -1,20 +1,19 @@
 import { Socket } from 'socket.io';
 import { verifyAccessTokenValidation } from '../utils/token';
-import { addToSocketUsersList } from './usersSockets';
-import AccessTokenMissingError from '../errors/AccessTokenMissingError';
-import AccessUnauthorizedError from '../errors/AccessUnauthorizedError';
+import { addToUserSocketsList } from './usersSockets';
 
 export const newConnection = (socket: Socket): void => {
     const accessToken = socket.handshake.query.token as string;
     if (!accessToken) {
-        throw new AccessTokenMissingError();
+        console.log('Missing access token');
     }
 
     const verifiedConnectedUser = verifyAccessTokenValidation(accessToken);
     if (!verifiedConnectedUser) {
-        throw new AccessUnauthorizedError;
+        console.log('User unauthorized to connect');
     }
 
     const userId = verifiedConnectedUser.user._id;
-    addToSocketUsersList(userId, socket);
+    socket.data.userId = userId ;
+    addToUserSocketsList(userId, socket);
 };

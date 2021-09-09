@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 import BaseController from './BaseController';
 import { IUserService } from '../interfaces/services';
 import {
-    ALL_USER_URL,
+    ALL_USERS_URL,
     DELETE_USER_URL,
     GET_USER_URL,
     LOGIN_USER_URL,
@@ -36,7 +36,7 @@ class UserController extends BaseController {
         this.router.get(GET_USER_URL, this.userAuthMiddleware, this.getUser);
         this.router.post(UPDATE_USER_URL, this.userAuthMiddleware, this.updateUser);
         this.router.delete(DELETE_USER_URL, this.userAuthMiddleware, this.deleteUser);
-        this.router.get(ALL_USER_URL, this.userAuthMiddleware, this.getAllUsers);
+        this.router.get(ALL_USERS_URL, this.userAuthMiddleware, this.getAllUsers);
         this.router.post(LOGIN_USER_URL, this.loginUser);
         this.router.post(LOGOUT_USER_URL, this.logoutUser);
     }

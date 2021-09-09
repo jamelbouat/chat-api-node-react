@@ -1,7 +1,7 @@
 import { Model } from 'mongoose';
 
 import ResourceNotRegisteredError from '../errors/ResourceNotRegisteredError';
-import { IRequestDataType, IResponseDataType, IBaseService } from '../interfaces/services';
+import { IBaseService, IRequestDataType, IResponseDataType } from '../interfaces/services';
 import HttpError from '../errors/commons/HttpError';
 import ResourceNotFoundError from '../errors/ResourceNotFoundError';
 import ResourceNotUpdatedError from '../errors/ResourceNotUpdatedError';
@@ -60,7 +60,7 @@ class BaseService implements IBaseService {
 
     public async getAllBaseElements(): Promise<IResponseDataType[] | HttpError> {
         try {
-            return await this.model.find();
+            return await this.model.find({});
         } catch (error) {
             throw new ResourceNotFoundError(error.message);
         }

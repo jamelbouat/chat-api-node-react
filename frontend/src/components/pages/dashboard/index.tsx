@@ -1,18 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Grid, makeStyles, Theme } from '@material-ui/core';
 
-import Spinner from '../../Spinner';
-import toastAlert from '../../toastAlert';
-import ChatContainer from './chat';
+import ContactsContainer from './contactsContainer';
 import SideBar from './sideBar';
 import { IUser } from '../../../interfaces/user';
 import { IAlert } from '../../../interfaces/alert';
+import toastAlert from '../../toastAlert';
 
 const useStyles = makeStyles((theme: Theme) => ({
     layout: {
-        height: '90vh'
+        height: '100%',
     },
     gridWrapper: {
+        position: 'relative',
         height: '100%',
         padding: theme.spacing(1)
     },
@@ -22,15 +22,16 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface Props {
-    isLoading: boolean,
-    users: IUser[],
-    alertInfo: IAlert
-    getUsers: () => void
+    isLoading: boolean;
+    users: IUser[];
+    alertInfo: IAlert;
+    getUsers: () => void;
+    connectToSocketService: () => void
 }
 
 const Dashboard: React.FC<Props> = (props) => {
     const classes = useStyles();
-    const { isLoading, users, alertInfo, getUsers } = props;
+    const { isLoading, users, alertInfo, getUsers, connectToSocketService } = props;
     const alertType = alertInfo.alertType;
     const alertMessage = alertInfo.alertMessage || 'error !';
 
@@ -39,21 +40,19 @@ const Dashboard: React.FC<Props> = (props) => {
         getUsers();
     }, []);
 
+    useEffect(() => {
+        connectToSocketService();
+    },[]);
+
     return (
-        <main>
-            {
-                isLoading ?
-                    <Spinner /> :
-                    <Grid container className={ classes.layout }>
-                        <Grid item xs={ 3 } className={ `${ classes.gridWrapper } ${ classes.borderRight }` }>
-                            <SideBar users={ users } />
-                        </Grid>
-                        <Grid item xs={ 9 } className={ classes.gridWrapper } >
-                            <ChatContainer />
-                        </Grid>
-                    </Grid>
-            }
-        </main>
+        <Grid container className={ classes.layout }>
+            <Grid item xs={ 3 } className={ `${ classes.gridWrapper } ${ classes.borderRight }` }>
+                <SideBar users={ users }/>
+            </Grid>
+            <Grid item xs={ 9 } className={ classes.gridWrapper } >
+                <ContactsContainer users={ users } />
+            </Grid>
+        </Grid>
     );
 };
 

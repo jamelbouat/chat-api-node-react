@@ -6,15 +6,14 @@ import * as storage from '../utils/sessionStorage';
 import { removeTokens, setInitialTokens } from './refreshTokens';
 import { ALERT_TYPE, ROUTES } from '../constants';
 import {
-    CLEAR_LOGIN_ALERT,
-    LOGIN_FAILURE,
-    LOGIN_REQUEST,
-    LOGIN_SUCCESS,
-    REMOVE_USER_DATA,
-    SET_LOGIN_ALERT
+    CLEAR_LOGIN_ALERT, LOGIN_FAILURE,
+    LOGIN_REQUEST, LOGIN_SUCCESS,
+    REMOVE_USER_DATA, SET_LOGIN_ALERT
 } from './types';
 import { ILoginResponseData, ILoginValues } from '../interfaces/user';
 import { IRegisterAction } from '../interfaces/actions';
+import { removeSocketConnection } from './messages';
+import { removeConversationsFromStore } from './conversations';
 
 export const loginUser = (values: ILoginValues) => async (dispatch: Dispatch): Promise<void> => {
     dispatch(loginRequest());
@@ -67,6 +66,8 @@ export const clearLoginAlert = (): Action =>({
 export const logoutAndRedirectToHome = () => (dispatch: Dispatch): void => {
     dispatch(removeTokens());
     dispatch(removeUserData());
+    dispatch(removeSocketConnection());
+    dispatch(removeConversationsFromStore());
     storage.removeStateFromStorage();
     dispatch(push(ROUTES.HOME));
 };

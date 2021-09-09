@@ -1,4 +1,4 @@
-import { Document, Model } from 'mongoose';
+import { Model } from 'mongoose';
 
 import {
     IUser,
@@ -14,12 +14,13 @@ import {
     IConversation,
     IConversationData,
     IConversationRegisterData,
-    IConversationUpdateData,
-    IMessage
+    IConversationUpdateData, IConversationWithUsersAndMessagesData
 } from './conversation';
+import { IMessage, IMessageData, IMessageRegisterData, IMessageUpdateData } from './message';
 
-export type IRequestDataType = IUserRegisterData | IUserUpdateData | IConversationRegisterData | IConversationUpdateData;
-export type IResponseDataType = IUser | IConversation | null;
+export type IRequestDataType = IUserRegisterData | IUserUpdateData |
+    IConversationRegisterData | IConversationUpdateData | IMessageRegisterData;
+export type IResponseDataType = IUser | IConversation | IConversationData | IMessageData | null;
 
 interface IBaseService {
     model: Model<any>;
@@ -37,25 +38,39 @@ interface IUserService {
     getElementWithSensitiveData: (_id: string) => Promise<IResponseDataType | HttpError>;
     updateElement: (_id: string, reqData: IUserUpdateData) => Promise<IUserWithoutSensitiveData | HttpError>;
     deleteElement: (_id: string) => Promise<void | HttpError>;
-    getAllElements: () => Promise<IUserWithoutSensitiveData[] | HttpError>;
+    getAllElements: (_id: string) => Promise<IUserWithoutSensitiveData[] | HttpError>;
     logoutUser: (user: IUser, refreshToken: string) => Promise<void>;
     loginUser: (reqData: IUserLoginData) => Promise<IUserLoginResponseData | HttpError>;
 }
 
 interface IConversationService {
-    registerElement: (reqData: IConversationRegisterData) => Promise<IConversationData | HttpError>;
-    getElement: (_id: string) => Promise<IConversationData | HttpError>;
+    registerElement: (reqData: IConversationRegisterData) => Promise<IConversationWithUsersAndMessagesData | HttpError>;
+    getElement: (_id: string) => Promise<IConversationWithUsersAndMessagesData | HttpError>;
     updateElement: (_id: string, reqData: IConversationUpdateData) => Promise<IConversationData | HttpError>;
     deleteElement: (_id: string) => Promise<void | HttpError>;
-    getAllElements: () => Promise<IConversationData[] | HttpError>;
-    addNewMessage: (_id: string, message: IMessage) => Promise<IConversationData | HttpError>
-    deleteMessage: (_id: string, messageId: string) => Promise<IConversationData | HttpError>
-    addNewUsers: (_id: string, userId: string[]) => Promise<IConversationData | HttpError>
-    deleteUsers: (_id: string, userId: string[]) => Promise<IConversationData | HttpError>
+    getAllElements: (_id: string) => Promise<IConversationWithUsersAndMessagesData[] | HttpError>;
+    addNewUsers: (_id: string, userIds: string[]) => Promise<IConversationData | HttpError>;
+    deleteUsers: (_id: string, userIds: string[]) => Promise<IConversationData | HttpError>;
+    addNewMessages: (_id: string, messageIds: string[]) => Promise<IConversationData | HttpError>;
+    deleteMessages: (_id: string, messageIds: string[]) => Promise<IConversationData | HttpError>;
+}
+
+interface IMessageService {
+    registerElement: (reqData: IMessageRegisterData) => Promise<IMessageData | HttpError>;
+    getElement: (_id: string) => Promise<IMessageData | HttpError>;
+    updateElement: (_id: string, reqData: IMessageUpdateData) => Promise<IMessageData | HttpError>;
+    deleteElement: (_id: string) => Promise<void | HttpError>;
+    getAllElements: (conversationId: string) => Promise<IMessageData[] | HttpError>;
 }
 
 interface IUserTokenService {
-    getNewUserTokens: (user: IUser, oldRefreshToken: string) => ITokens
+    getNewUserTokens: (user: IUser, oldRefreshToken: string) => ITokens;
 }
 
-export { IBaseService, IUserService, IConversationService, IUserTokenService };
+export {
+    IBaseService,
+    IUserService,
+    IConversationService,
+    IMessageService,
+    IUserTokenService
+};

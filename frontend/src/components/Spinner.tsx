@@ -1,15 +1,16 @@
 import React from 'react';
-import { CircularProgress, createStyles, makeStyles } from '@material-ui/core';
+import { CircularProgress, makeStyles } from '@material-ui/core';
 
-const useStyles = makeStyles(() =>
-    createStyles({
-        spinner: {
-            position: 'absolute',
-            top: '50vh',
-            left: '50vw'
-        }
-    }),
-);
+const useStyles = makeStyles(() => ({
+    spinner: {
+        margin: 'auto',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0
+    }
+}));
 
 const Spinner: React.FC = () => {
     const classes = useStyles();

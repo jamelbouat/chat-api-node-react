@@ -1,15 +1,31 @@
 
 export interface IMessage {
+    _id: string;
+    conversationId: string;
     from: string;
     content: string;
-    time: string;
-    read: boolean
+    time?: string;
+    read?: boolean;
+    createdAt?: string;
+    updatedAt?: string
+}
+
+export interface ISendMessage {
+    conversationId: string;
+    from: string;
+    content: string;
+}
+
+export interface IConversationUser {
+    _id: string;
+    firstName: string;
+    lastName: string
 }
 
 export interface IConversation {
     _id: string;
-    userIds: string[];
+    users: IConversationUser[];
     messages: IMessage[];
     createdAt: string;
-    updatedAt: string
+    updatedAt: string;
 }

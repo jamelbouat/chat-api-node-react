@@ -4,8 +4,16 @@ import { ILoginResponseData, ILoginValues, IRegisterValues } from '../interfaces
 
 const loginPathname = process.env.REACT_APP_API_LOGIN_USER || '';
 const registerPathname = process.env.REACT_APP_API_REGISTER_USER || '';
+const getUserPathname = process.env.REACT_APP_API_GET_USER || '';
 const getUsersPathname = process.env.REACT_APP_API_GET_USERS || '';
 const stringifyBody = (values: ILoginValues | IRegisterValues) => JSON.stringify({ ...values });
+
+const getHeaders = () => {
+    const accessToken = () => getAccessToken();
+    return new Headers({
+        'Authorization': `Bearer ${ accessToken() }`
+    });
+};
 
 const loginUser = async (values: ILoginValues) => {
     try {
@@ -24,14 +32,17 @@ const registerUser = async (values: IRegisterValues) => {
     }
 };
 
-const getUsers = async () => {
-    const accessToken = getAccessToken();
-    const headers = new Headers({
-        'Authorization': `Bearer ${ accessToken }`
-    });
-
+const getUser = async (_id: string) => {
     try {
-        return await fetchApi(getUsersPathname, 'GET', headers);
+        return await fetchApi(`${ getUserPathname }/${ _id }`, 'GET', getHeaders());
+    } catch (error) {
+        throw error;
+    }
+};
+
+const getUsers = async () => {
+    try {
+        return await fetchApi(getUsersPathname, 'GET', getHeaders());
     } catch (error) {
         throw error;
     }

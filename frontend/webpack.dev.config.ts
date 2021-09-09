@@ -39,6 +39,10 @@ const config: webpack.Configuration = {
                     },
                 },
             },
+            {
+                test: /\.sharedworker\.(js|ts)x?$/,
+                loader: 'worker-plugin/loader'
+            }
         ],
     },
     resolve: {

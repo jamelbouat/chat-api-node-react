@@ -1,12 +1,12 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import { IConversationService, IUserService } from './services';
+import { IConversationService, IMessageService, IUserService } from './services';
 
 interface IController {
     router: Router;
 }
 
 interface IBaseController extends IController {
-    service: IUserService | IConversationService;
+    service: IUserService | IConversationService | IMessageService;
     registerElement: (req: Request, res: Response, next: NextFunction) => Promise<void>;
     getElement: (req: Request, res: Response, next: NextFunction) => Promise<void>;
     updateElement: (req: Request, res: Response, next: NextFunction) => Promise<void>;

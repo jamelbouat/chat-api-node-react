@@ -4,9 +4,10 @@ import { Action } from 'redux';
 
 import RestrictRoute from '../routes/RestrictRoute';
 import { RootState } from '../interfaces/state';
+import { isUserAuthenticatedSelector } from '../selectors/users';
 
 const mapStateToProps = (state: RootState) => ({
-    isAuthenticated: state.loginState.isAuthenticated
+    isAuthenticated: isUserAuthenticatedSelector(state)
 });
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<RootState, any, Action>) => ({

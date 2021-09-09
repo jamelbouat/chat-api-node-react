@@ -21,7 +21,9 @@ export const saveStateToSessionStorage = (state: RootState): void => {
     try {
         const encryptedState = encryptState(state);
         sessionStorage.setItem('state', encryptedState);
-    } catch(e) {}
+    } catch(e) {
+        console.log(e);
+    }
 };
 
 export const removeStateFromStorage = (): void => {

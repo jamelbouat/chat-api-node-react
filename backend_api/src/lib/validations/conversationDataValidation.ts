@@ -1,22 +1,6 @@
 import Joi, { ValidationResult } from 'joi';
+
 import { IConversationRegisterData, IConversationUpdateData } from '../interfaces/conversation';
-
-const messageSchema = Joi.object({
-    from: Joi.string()
-        .alphanum()
-        .required(),
-
-    content: Joi.string()
-        .alphanum()
-        .required(),
-
-    time: Joi.string()
-        .alphanum()
-        .required(),
-
-    read: Joi.bool()
-        .required(),
-});
 
 const conversationRegisterSchema = Joi.object({
     userIds: Joi.array()
@@ -31,11 +15,12 @@ const conversationUpdateSchema = Joi.object({
         .min(2)
         .items(Joi.string()),
 
-    messages: Joi.array()
-        .items(messageSchema)
+    messageIds: Joi.array()
+        .default([])
+        .items(Joi.string())
 });
 
-const conversationRegisterDataValidation = (data: IConversationRegisterData | IConversationUpdateData): ValidationResult => {
+const conversationRegisterDataValidation = (data: IConversationRegisterData): ValidationResult => {
     return conversationRegisterSchema.validate(data);
 };
 

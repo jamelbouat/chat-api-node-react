@@ -1,25 +1,37 @@
 import { Socket } from 'socket.io';
 
 interface IUsersSocketsList {
-    [key: string]: Socket
+    [key: string]: Socket[]
 }
 
-const usersSocketsList: IUsersSocketsList = {};
+const userSocketsList: IUsersSocketsList = {};
+const isUserExistsInSocketsList = (userId: string): boolean => {
+    return userSocketsList[userId] !== undefined;
+};
 
 const getUsersSocketsList = (): IUsersSocketsList  => {
-    return usersSocketsList;
+    return userSocketsList;
 };
 
-const getUserSocket = (userId: string): Socket => {
-    return usersSocketsList[userId];
+const getUserSockets = (userId: string): Socket[] => {
+    return userSocketsList[userId];
 };
 
-const addToSocketUsersList = (userId: string, socket: Socket): void => {
-    usersSocketsList[userId] = socket;
+const addToUserSocketsList = (userId: string, socket: Socket): void => {
+    isUserExistsInSocketsList(userId) ?
+        userSocketsList[userId].push(socket) :
+        userSocketsList[userId] = [socket];
 };
+
+const removeFromUserSocketsList = (socketToRemove: Socket): void => {
+    const userId = socketToRemove.data.userId;
+    userSocketsList[userId] = userSocketsList[userId].filter(socket => socket.id !== socketToRemove.id);
+};
+
 
 export {
     getUsersSocketsList,
-    getUserSocket,
-    addToSocketUsersList
+    getUserSockets,
+    addToUserSocketsList,
+    removeFromUserSocketsList
 };

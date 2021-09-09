@@ -24,11 +24,12 @@ const requestOptions = (method: methodType, headers?: Headers, body?: string) =>
 
 export const fetchApi = async (fetchPathname: string, method: methodType, headers?: Headers, body?: string) => {
     const options = requestOptions(method, headers, body);
+
     try {
         const response = await fetch(`${ apiUrl }/${ fetchPathname }`, options);
         const data = await response.json();
-        console.log('Response data= ', data);
-        console.log(`URL = ${ apiUrl }/${ fetchPathname }`);
+        console.log('Fetched Response data= ', data);
+        console.log(`FetchURL = ${ apiUrl }/${ fetchPathname }`);
 
         if (response.status >= 200 && response.status < 300) {
             // const contentType = response.headers.get('Content-Type');

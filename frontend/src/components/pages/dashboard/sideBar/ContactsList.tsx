@@ -1,18 +1,25 @@
 import React, { FC } from 'react';
-import { List } from '@material-ui/core';
+import { List, makeStyles } from '@material-ui/core';
 
 import ContactItem from './ContactItem';
 import { IUser } from '../../../../interfaces/user';
 
 interface Props {
     users: IUser[],
-    handleAlignment: (alignment: string) => void
 }
 
+const useStyles = makeStyles(() => ({
+    layout: {
+        overflow: 'auto',
+        flex: '1 1 auto',
+    }
+}));
+
 const ContactsList: FC<Props> = ({ users, ...rest }) => {
+    const classes = useStyles();
 
     return (
-        <div>
+        <div className={ classes.layout }>
             <List>
                 {
                     users && users.map(user =>

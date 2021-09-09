@@ -2,19 +2,21 @@ import { makeStyles, Theme } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) => ({
     layout: {
-        marginTop: theme.spacing(4),
-        marginBottom: theme.spacing(4),
-        maxWidth: 500,
+        height: '100%',
+        overflow: 'auto',
+        marginTop: theme.spacing(3),
+        marginBottom: theme.spacing(3),
+        maxWidth: '500px',
         marginLeft: 'auto',
         marginRight: 'auto',
         position: 'relative'
     },
     paper: {
-        paddingTop: theme.spacing(3),
-        paddingBottom: theme.spacing(3),
+        paddingTop: theme.spacing(1),
+        paddingBottom: theme.spacing(1),
     },
     field: {
-        height: theme.spacing(5),
+        height: theme.spacing(4),
         marginBottom: theme.spacing(6),
     },
     button: {

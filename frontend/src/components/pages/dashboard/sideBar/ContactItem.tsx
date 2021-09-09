@@ -3,7 +3,7 @@ import { ListItem, ListItemAvatar, ListItemText, makeStyles, Tooltip } from '@ma
 import MessageOutlinedIcon from '@material-ui/icons/MessageOutlined';
 
 import { capitalizeFirstLetter } from '../../../../utils/strings';
-import AvatarWithBadge from '../../../AvatarWithBadge';
+import AvatarGroupWithBadges from '../../conversations/AvatarGroupWithBadges';
 import { IUser } from '../../../../interfaces/user';
 
 const useStyles = makeStyles(() => ({
@@ -26,17 +26,15 @@ const useStyles = makeStyles(() => ({
 interface Props {
     user: IUser,
     status: boolean,
-    handleAlignment: (alignment: string) => void
 }
 
-const ContactItem: FC<Props> = ({ user, status, handleAlignment }) => {
+const ContactItem: FC<Props> = ({ user, status }) => {
     const classes = useStyles();
     const [showIcon, setShowIcon] = useState(false);
     const handleOnMouseOver = () => setShowIcon(prevState => !prevState);
 
     const handleClickedContact = () => {
-        handleAlignment('conversations');
-
+        'hello';
     };
 
     return (
@@ -47,7 +45,7 @@ const ContactItem: FC<Props> = ({ user, status, handleAlignment }) => {
             onMouseLeave={ handleOnMouseOver }
         >
             <ListItemAvatar>
-                <AvatarWithBadge status={ status }/>
+                <AvatarGroupWithBadges conversationUsers={ [ { _id: user._id, firstName: user.firstName, lastName: user.lastName }] }/>
             </ListItemAvatar>
             <ListItemText
                 primary={ `${ capitalizeFirstLetter(user.firstName) } ${ capitalizeFirstLetter(user.lastName) }` }

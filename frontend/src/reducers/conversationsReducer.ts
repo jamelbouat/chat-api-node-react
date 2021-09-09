@@ -1,10 +1,16 @@
 import {
-    GET_CONVERSATIONS_REQUEST, GET_CONVERSATIONS_FAILURE,
-    GET_CONVERSATIONS_SUCCESS, ADD_NEW_CONVERSATION_SUCCESS, REMOVE_CONVERSATION_SUCCESS, REMOVE_CONVERSATION_FAILURE, ADD_NEW_CONVERSATION_FAILURE
+    GET_CONVERSATIONS_REQUEST,
+    GET_CONVERSATIONS_FAILURE,
+    GET_CONVERSATIONS_SUCCESS,
+    ADD_NEW_CONVERSATION_SUCCESS,
+    REMOVE_CONVERSATION_SUCCESS,
+    REMOVE_CONVERSATION_FAILURE,
+    ADD_NEW_CONVERSATION_FAILURE,
+    REMOVE_CONVERSATIONS_FROM_STORE, ON_RECEIVED_MESSAGE,
 } from '../actions/types';
 import { ALERT_TYPE } from '../constants';
 import { IConversationsAction } from '../interfaces/actions';
-import { IConversation } from '../interfaces/conversations';
+import { IConversation, IMessage } from '../interfaces/conversations';
 
 const initialState = {
     isLoading: false,
@@ -14,6 +20,18 @@ const initialState = {
         alertMessage: null
     }
 };
+
+function addNewMessage(conversations: IConversation[], message: IMessage | undefined): IConversation[] {
+    if (!message) {
+        return conversations;
+    }
+    return conversations.map(conversation => {
+        if (conversation._id === message.conversationId) {
+            return  { ...conversation, messages: [ ...conversation.messages, message ] };
+        }
+        return conversation;
+    });
+}
 
 export const conversationsReducer = (state= initialState, action: IConversationsAction) => {
     switch (action.type) {
@@ -43,6 +61,12 @@ export const conversationsReducer = (state= initialState, action: IConversations
                 }
             };
 
+        case ON_RECEIVED_MESSAGE:
+            return {
+                ...state,
+                conversations: addNewMessage(state.conversations, action.payload.message)
+            };
+
         case ADD_NEW_CONVERSATION_SUCCESS:
             return {
                 ...state,
@@ -62,7 +86,8 @@ export const conversationsReducer = (state= initialState, action: IConversations
             return {
                 isLoading: false,
                 conversations: [
-                    ...state.conversations
+                    ...state
+                        .conversations
                         .filter((conversation: IConversation) => conversation._id !== action.payload._id)
                 ],
                 alertInfo: {
@@ -78,6 +103,11 @@ export const conversationsReducer = (state= initialState, action: IConversations
                     alertType: ALERT_TYPE.ERROR,
                     alertMessage: action.payload.alertMessage
                 }
+            };
+
+        case REMOVE_CONVERSATIONS_FROM_STORE:
+            return {
+                ...initialState
             };
 
         default:

@@ -47,7 +47,7 @@ class UserService extends BaseService implements IUserService {
     public async getElement(_id: string): Promise<IUserWithoutSensitiveData | HttpError> {
         const user = await this.getBaseElementById(_id) as IUser;
         if (!user) {
-            throw new ResourceNotFoundError('User does not exist');
+            throw new ResourceNotFoundError('User does not found');
         }
         const userWithoutSensitiveData = removeSensitiveDataFromUser(user);
         return { ...userWithoutSensitiveData };
@@ -75,12 +75,13 @@ class UserService extends BaseService implements IUserService {
         return await this.deleteBaseElement(_id);
     }
 
-    public async getAllElements(): Promise<IUserWithoutSensitiveData[] | HttpError> {
-        const users = await this.getAllBaseElements() as IUser[];
-        if (!users) {
-            throw new ResourceNotFoundError('Users list is empty');
+    public async getAllElements(_id: string): Promise<IUserWithoutSensitiveData[] | HttpError> {
+        try {
+            const users =  await this.model.find({ _id: { $ne: _id } });
+            return users.map((user: IUser) => removeSensitiveDataFromUser(user));
+        } catch (error) {
+            throw new ResourceNotFoundError(error.message);
         }
-        return users.map((user: IUser) => removeSensitiveDataFromUser(user));
     }
 
     public async logoutUser(user: IUser, refreshToken: string): Promise<void> {

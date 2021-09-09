@@ -18,13 +18,13 @@ class App {
         this.dbClient = dbClient;
         this.controllers = controllers;
 
-        this.makeDatabaseConnection();
+        (async () => await this.makeDatabaseConnection())();
         this.initializeMiddlewares();
         this.initializeRoutes();
         this.initializeErrorHandlers();
     }
 
-    private async makeDatabaseConnection() {
+    private async makeDatabaseConnection(): Promise<void> {
         await this.dbClient.makeDatabaseConnection();
     }
 
@@ -34,13 +34,13 @@ class App {
         this.app.use(cors());
     }
 
-    private initializeRoutes() {
+    private initializeRoutes(): void {
         this.controllers.map(controller => {
             this.app.use('/', controller.router);
         });
     }
 
-    private initializeErrorHandlers() {
+    private initializeErrorHandlers(): void {
         this.app.use(errorHandlerMiddleware);
     }
 

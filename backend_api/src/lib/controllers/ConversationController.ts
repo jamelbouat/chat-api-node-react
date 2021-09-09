@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 
 import BaseController from './BaseController';
 import {
-    ALL_CONVERSATION_URL,
+    ALL_CONVERSATIONS_URL,
     DELETE_CONVERSATION_URL, DELETE_MESSAGE_FROM_CONVERSATION_URL,
     GET_CONVERSATION_URL,
     POST_CONVERSATION_URL,
@@ -27,12 +27,12 @@ class ConversationController extends BaseController {
     }
 
     private initializeRoutes() {
-        this.router.post(POST_CONVERSATION_URL, this.registerConversation);
-        this.router.get(GET_CONVERSATION_URL, this.getConversation);
-        this.router.post(UPDATE_CONVERSATION_URL, this.updateConversation);
-        this.router.delete(DELETE_CONVERSATION_URL, this.deleteConversation);
-        this.router.get(ALL_CONVERSATION_URL, this.getAllConversations);
-        this.router.delete(DELETE_MESSAGE_FROM_CONVERSATION_URL, this.deleteMessage);
+        this.router.post(POST_CONVERSATION_URL, this.userAuthMiddleware, this.registerConversation);
+        this.router.get(GET_CONVERSATION_URL, this.userAuthMiddleware, this.getConversation);
+        this.router.post(UPDATE_CONVERSATION_URL, this.userAuthMiddleware, this.updateConversation);
+        this.router.delete(DELETE_CONVERSATION_URL, this.userAuthMiddleware, this.deleteConversation);
+        this.router.get(ALL_CONVERSATIONS_URL, this.userAuthMiddleware, this.getAllConversations);
+        // this.router.delete(DELETE_MESSAGE_FROM_CONVERSATION_URL, this.userAuthMiddleware, this.deleteMessage);
     }
 
     private registerConversation = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
@@ -55,17 +55,17 @@ class ConversationController extends BaseController {
         await this.getAllElements(req, res, next);
     }
 
-    private deleteMessage = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-        try {
-            const _id = req.body.conversationId;
-            const messageId = req.body.messageId;
-
-            const updatedConversation = await this.service.deleteMessage(_id, messageId);
-            res.status(200).json( { ...updatedConversation });
-        } catch (error) {
-            next(error);
-        }
-    }
+    // private deleteMessage = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    //     try {
+    //         const _id = req.body.conversationId;
+    //         const messageId = req.body.messageId;
+    //
+    //         const updatedConversation = await this.service.deleteMessage(_id, messageId);
+    //         res.status(200).json( { ...updatedConversation });
+    //     } catch (error) {
+    //         next(error);
+    //     }
+    // }
 }
 
 export default ConversationController;

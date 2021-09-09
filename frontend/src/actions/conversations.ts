@@ -1,18 +1,20 @@
 import { Action, Dispatch } from 'redux';
+import { push } from 'connected-react-router';
 
 import {
     ADD_NEW_CONVERSATION_FAILURE, ADD_NEW_CONVERSATION_SUCCESS,
-    GET_CONVERSATIONS_FAILURE,
-    GET_CONVERSATIONS_REQUEST,
-    GET_CONVERSATIONS_SUCCESS, REMOVE_CONVERSATION_FAILURE, REMOVE_CONVERSATION_SUCCESS
+    GET_CONVERSATIONS_FAILURE, GET_CONVERSATIONS_REQUEST,
+    GET_CONVERSATIONS_SUCCESS, REMOVE_CONVERSATION_FAILURE,
+    REMOVE_CONVERSATION_SUCCESS, REMOVE_CONVERSATIONS_FROM_STORE
 } from './types';
 import { IConversation } from '../interfaces/conversations';
 import { conversationsService } from '../services';
 import { IConversationsAction } from '../interfaces/actions';
+import { RootState } from '../interfaces/state';
+import { ROUTES } from '../constants';
 
-export const getConversations = () => async (dispatch: Dispatch) => {
+export const getConversations = async (dispatch: Dispatch) => {
     dispatch(getConversationsRequest());
-
     try {
         const conversations = await conversationsService.getConversations();
         dispatch(getConversationsSuccess(conversations));
@@ -39,21 +41,31 @@ const getConversationsFailure = (errorMessage: string) =>({
     }
 });
 
-export const addNewConversation = (userIds: string[]) => async (dispatch: Dispatch) => {
+export const addNewConversation = (userIds: string[]) => async (dispatch: Dispatch, getState: RootState) => {
     try {
-        const newConversation = await conversationsService.addNewConversation(userIds);
+        const currentUserId = getState().loginState.user._id;
+        const newConversation = await conversationsService.addNewConversation([currentUserId, ...userIds]);
+
+        !isConversationExists(getState().conversationsState.conversations, newConversation) &&
         dispatch(addNewConversationSuccess(newConversation));
+
+        dispatch(push(ROUTES.CONVERSATIONS.replace(':id', newConversation._id)));
     } catch (error) {
         dispatch(addNewConversationFailure(error.message));
     }
 };
 
-const addNewConversationSuccess = (conversation: IConversation) => ({
-    type: ADD_NEW_CONVERSATION_SUCCESS,
-    payload: {
-        conversation
-    }
-});
+const isConversationExists = (conversations: IConversation[], newConversation: IConversation) =>
+    conversations.some(conversation => conversation._id === newConversation._id);
+
+const addNewConversationSuccess = (conversation: IConversation) => {
+    return {
+        type: ADD_NEW_CONVERSATION_SUCCESS,
+        payload: {
+            conversation
+        }
+    };
+};
 
 const addNewConversationFailure = (errorMessage: string) => ({
     type: ADD_NEW_CONVERSATION_FAILURE,
@@ -83,5 +95,9 @@ const removeConversationFailure = (errorMessage: string) => ({
     payload: {
         alertMessage: errorMessage
     }
+});
+
+export const removeConversationsFromStore = () => ({
+    type: REMOVE_CONVERSATIONS_FROM_STORE,
 });
 

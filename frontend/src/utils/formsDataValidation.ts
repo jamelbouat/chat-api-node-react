@@ -40,8 +40,8 @@ export const registerFormFieldsValidationSchema = Yup.object({
 });
 
 export const chatFormFieldsValidationSchema = Yup.object({
-    message: Yup.string()
-        .min(2, '')
+    content: Yup.string()
         .trim()
+        .min(2, '')
         .required('')
 });

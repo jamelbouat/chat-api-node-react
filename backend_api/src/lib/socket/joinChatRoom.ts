@@ -1,14 +1,13 @@
 import { Socket } from 'socket.io';
 
-import { getUserSocket } from './usersSockets';
+import { getUserSockets } from './usersSockets';
 import { addToRoomsList, isRoomExits } from './rooms';
 
 export const joinChatRoom = (socket: Socket, room: string, userIds: string[]): void => {
-    if (isRoomExits(room)) {
-        return;
+    if (!isRoomExits(room)) {
+        addToRoomsList(room);
     }
 
-    socket.join(room);
-    userIds.forEach(userId => getUserSocket(userId).join(room));
-    addToRoomsList(room);
+    userIds.forEach(userId => getUserSockets(userId) &&
+        getUserSockets(userId).map(socket => socket.join(room)));
 };

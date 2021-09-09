@@ -2,13 +2,13 @@ import { Request, Response, NextFunction, Router } from 'express';
 
 import Constants from '../constants/constants';
 import { IBaseController } from '../interfaces/controllers';
-import { IConversationService, IUserService } from '../interfaces/services';
+import { IConversationService, IMessageService, IUserService } from '../interfaces/services';
 
 class BaseController implements IBaseController {
     public router: Router;
-    public service: IUserService | IConversationService;
+    public service: IUserService | IConversationService | IMessageService;
 
-    constructor(service: IUserService | IConversationService) {
+    constructor(service: IUserService | IConversationService | IMessageService) {
         this.router = Router();
         this.service = service;
     }
@@ -27,6 +27,7 @@ class BaseController implements IBaseController {
     public async getElement(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             const _id = req.params.id;
+            const currentUserId = req.user._id;
             const element = await this.service.getElement(_id);
             res.status(200).json( { ...element });
         } catch (error) {
@@ -57,7 +58,8 @@ class BaseController implements IBaseController {
 
     public async getAllElements(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
-            const elements = await this.service.getAllElements();
+            const currentUserId = req.user._id;
+            const elements = await this.service.getAllElements(currentUserId);
             res.status(200).json(elements);
         } catch(error) {
             next(error);

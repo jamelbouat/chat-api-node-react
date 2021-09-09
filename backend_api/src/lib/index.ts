@@ -8,6 +8,7 @@ import DBClient from '../config/db.config';
 import { IController } from './interfaces/controllers';
 import Constants from './constants/constants';
 import listenToSocketEvents from './socket';
+import { IConversationService, IMessageService } from './interfaces/services';
 
 setupDIContainer();
 
@@ -18,14 +19,22 @@ const dbClient: DBClient = container.resolve('dbClient');
 const userController: IController = container.resolve('userController');
 const userTokenController: IController = container.resolve('userTokenController');
 const conversationController: IController = container.resolve('conversationController');
+const messageController: IController = container.resolve('messageController');
+const conversationService: IConversationService = container.resolve('conversationService');
+const messageService: IMessageService = container.resolve('messageService');
 
-// Entry point of the application
-const application = new App(dbClient, [userController, userTokenController, conversationController]);
+// Application entry point
+const application = new App(dbClient, [
+    userController,
+    userTokenController,
+    conversationController,
+    messageController
+]);
 
 // Socket initialization
 const httpServer = createServer(application.getApp());
-global.io = new Server(httpServer);
-listenToSocketEvents();
+global.io = new Server(httpServer, { cors: { origin: '*' } });
+listenToSocketEvents(conversationService, messageService);
 
 httpServer.listen(process.env.PORT, () => {
     console.log(Constants.SERVER_RUNNING);
