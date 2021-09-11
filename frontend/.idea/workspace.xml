@@ -23,109 +23,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cc81a06f-aa8b-4af9-8a82-fa15fa32c6b4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../backend_api/src/lib/controllers/MessageController.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend_api/src/lib/interfaces/message.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend_api/src/lib/models/MessageModel.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend_api/src/lib/services/MessageService.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend_api/src/lib/utils/conversation.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend_api/src/lib/validations/messageDataValidation.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/pages/ContactProfile.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/pages/conversations/AvatarGroupWithBadges.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/pages/conversations/GroupedConversationUserNames.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/pages/conversations/chatContainer/ChatBar.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/pages/conversations/chatContainer/ReceivedMessageBox.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/pages/conversations/chatContainer/SentMessageBox.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/pages/conversations/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/pages/conversations/sideBar/AddConversationGroupButton.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/pages/conversations/sideBar/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/pages/dashboard/contactsContainer/ContactsCard.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/pages/dashboard/contactsContainer/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/AddConversationGroupButton.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/ChatContainer.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/ChatConversation.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/ChatForm.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/ContactCard.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/ConversationsList.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/CurrentUserProvider.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/context/CurrentUserProvider.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/selectors/messages.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/selectors/socket.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/selectors/users.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/messagesService.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/usePreviousHook.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/user.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/typings/sharedworker-loader.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/typings/worker-loader.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend_api/src/lib/socket/onlineUsers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/BadgeComponent.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/containers/BadgeComponent.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend_api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/config/di.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/config/di.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/config/url.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/config/url.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/app.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/controllers/BaseController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/controllers/BaseController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/controllers/ConversationController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/controllers/ConversationController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/controllers/UserController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/controllers/UserController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/interfaces/controllers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/interfaces/controllers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/interfaces/conversation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/interfaces/conversation.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/interfaces/services.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/interfaces/services.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/models/ConversationModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/models/ConversationModel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/services/BaseService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/services/BaseService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/services/ConversationService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/services/ConversationService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/services/UserService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/services/UserService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/socket/broadcastMessage.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/socket/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/socket/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/socket/joinChatRoom.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/socket/joinChatRoom.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/socket/newConnection.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/socket/newConnection.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/socket/usersSockets.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/socket/usersSockets.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/utils/token.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/utils/token.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend_api/src/lib/validations/conversationDataValidation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../backend_api/src/lib/validations/conversationDataValidation.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/conversation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/messages.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/conversations.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/conversations.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/login.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/login.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/messages.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/messages.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/actions/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/types.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/actions/users.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/users.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AvatarWithBadge.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/NavigationBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NavigationBar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Spinner.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Spinner.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/UserCard.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/makeFormStyles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/makeFormStyles.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pages/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/Profile.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pages/dashboard/chat/ChatConversation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/conversations/chatContainer/ChatConversation.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pages/dashboard/chat/ChatForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/conversations/chatContainer/ChatForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pages/dashboard/chat/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/conversations/chatContainer/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pages/dashboard/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/dashboard/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pages/dashboard/sideBar/ContactItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/dashboard/sideBar/ContactItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pages/dashboard/sideBar/ContactsList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/dashboard/sideBar/ContactsList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pages/dashboard/sideBar/ConversationItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/conversations/sideBar/ConversationItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pages/dashboard/sideBar/ConversationsList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/conversations/sideBar/ConversationsList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pages/dashboard/sideBar/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/dashboard/sideBar/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Dashboard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Dashboard.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/NavigationBar.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/NavigationBar.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Profile.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Profile.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/RestrictRoute.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/RestrictRoute.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/pages/conversations/AvatarGroupWithBadges.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/conversations/AvatarGroupWithBadges.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/pages/conversations/sideBar/ConversationItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/conversations/sideBar/ConversationItem.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/interfaces/actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/actions.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/interfaces/conversations.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/conversations.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mainTheme.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/mainTheme.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/conversationReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/messagesReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/conversationsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/conversationsReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/selectors/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/selectors/conversations.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/conversationsService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/conversationsService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/fetchApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/fetchApi.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/user.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reducers/usersReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/usersReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/selectors/users.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/selectors/users.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/socket/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/socket/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/userService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/userService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/formsDataValidation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/formsDataValidation.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/sessionStorage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/sessionStorage.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/strings.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/strings.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/throttle.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/throttle.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/tokens.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/tokens.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.dev.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.dev.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,8 +58,8 @@
         <option value="package.json" />
         <option value="HTML File" />
         <option value="HTTP Request" />
-        <option value="TypeScript JSX File" />
         <option value="JavaScript File" />
+        <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
       </list>
     </option>
@@ -279,7 +199,7 @@
       <workItem from="1630151882798" duration="20024000" />
       <workItem from="1630195680619" duration="66561000" />
       <workItem from="1630578661726" duration="5081000" />
-      <workItem from="1630590710630" duration="118630000" />
+      <workItem from="1630590710630" duration="132319000" />
     </task>
     <servers />
   </component>
@@ -358,50 +278,50 @@
     <state x="655" y="239" width="424" height="520" key="FileChooserDialogImpl/0.0.1920.1848@0.0.1920.1848" timestamp="1628012630224" />
     <state x="655" y="164" width="424" height="491" key="FileChooserDialogImpl/0.27.1920.1053/332.1080.1366.768@0.27.1920.1053" timestamp="1630343115646" />
     <state x="655" y="218" width="424" height="491" key="FileChooserDialogImpl/308.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1624017157468" />
-    <state width="1897" height="139" key="GridCell.Tab.0.bottom" timestamp="1630592643914">
+    <state width="1897" height="139" key="GridCell.Tab.0.bottom" timestamp="1631268453494">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="1897" height="296" key="GridCell.Tab.0.bottom/0.0.1920.1080/0.1080.1366.768@0.0.1920.1080" timestamp="1629415432005" />
     <state width="1897" height="296" key="GridCell.Tab.0.bottom/0.0.1920.1848@0.0.1920.1848" timestamp="1628260335818" />
     <state width="1343" height="83" key="GridCell.Tab.0.bottom/0.27.1366.741/332.1080.1366.768@0.27.1366.741" timestamp="1630539617469" />
     <state width="1343" height="159" key="GridCell.Tab.0.bottom/0.27.1366.741@0.27.1366.741" timestamp="1627778939524" />
-    <state width="1897" height="139" key="GridCell.Tab.0.bottom/0.27.1920.1053/332.1080.1366.768@0.27.1920.1053" timestamp="1630592643914" />
+    <state width="1897" height="139" key="GridCell.Tab.0.bottom/0.27.1920.1053/332.1080.1366.768@0.27.1920.1053" timestamp="1631268453494" />
     <state width="1897" height="308" key="GridCell.Tab.0.bottom/308.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1624101223510" />
     <state width="1343" height="305" key="GridCell.Tab.0.bottom/308.1080.1366.768/0.27.1366.741@0.27.1366.741" timestamp="1624211905772" />
     <state width="1897" height="256" key="GridCell.Tab.0.bottom/308.1080.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1624432804823" />
     <state width="1897" height="256" key="GridCell.Tab.0.bottom/308.1080.1366.768/0.27.1920.1053@308.1080.1366.768" timestamp="1624964352177" />
-    <state width="1897" height="139" key="GridCell.Tab.0.center" timestamp="1630592643913">
+    <state width="1897" height="139" key="GridCell.Tab.0.center" timestamp="1631268453493">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="1897" height="296" key="GridCell.Tab.0.center/0.0.1920.1080/0.1080.1366.768@0.0.1920.1080" timestamp="1629415432005" />
     <state width="1897" height="296" key="GridCell.Tab.0.center/0.0.1920.1848@0.0.1920.1848" timestamp="1628260335815" />
     <state width="1343" height="83" key="GridCell.Tab.0.center/0.27.1366.741/332.1080.1366.768@0.27.1366.741" timestamp="1630539617468" />
     <state width="1343" height="159" key="GridCell.Tab.0.center/0.27.1366.741@0.27.1366.741" timestamp="1627778939519" />
-    <state width="1897" height="139" key="GridCell.Tab.0.center/0.27.1920.1053/332.1080.1366.768@0.27.1920.1053" timestamp="1630592643913" />
+    <state width="1897" height="139" key="GridCell.Tab.0.center/0.27.1920.1053/332.1080.1366.768@0.27.1920.1053" timestamp="1631268453493" />
     <state width="1897" height="308" key="GridCell.Tab.0.center/308.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1624101223509" />
     <state width="1343" height="305" key="GridCell.Tab.0.center/308.1080.1366.768/0.27.1366.741@0.27.1366.741" timestamp="1624211905772" />
     <state width="1897" height="256" key="GridCell.Tab.0.center/308.1080.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1624432804822" />
     <state width="1897" height="256" key="GridCell.Tab.0.center/308.1080.1366.768/0.27.1920.1053@308.1080.1366.768" timestamp="1624964352177" />
-    <state width="1897" height="139" key="GridCell.Tab.0.left" timestamp="1630592643913">
+    <state width="1897" height="139" key="GridCell.Tab.0.left" timestamp="1631268453493">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="1897" height="296" key="GridCell.Tab.0.left/0.0.1920.1080/0.1080.1366.768@0.0.1920.1080" timestamp="1629415432004" />
     <state width="1897" height="296" key="GridCell.Tab.0.left/0.0.1920.1848@0.0.1920.1848" timestamp="1628260335814" />
     <state width="1343" height="83" key="GridCell.Tab.0.left/0.27.1366.741/332.1080.1366.768@0.27.1366.741" timestamp="1630539617468" />
     <state width="1343" height="159" key="GridCell.Tab.0.left/0.27.1366.741@0.27.1366.741" timestamp="1627778939518" />
-    <state width="1897" height="139" key="GridCell.Tab.0.left/0.27.1920.1053/332.1080.1366.768@0.27.1920.1053" timestamp="1630592643913" />
+    <state width="1897" height="139" key="GridCell.Tab.0.left/0.27.1920.1053/332.1080.1366.768@0.27.1920.1053" timestamp="1631268453493" />
     <state width="1897" height="308" key="GridCell.Tab.0.left/308.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1624101223509" />
     <state width="1343" height="305" key="GridCell.Tab.0.left/308.1080.1366.768/0.27.1366.741@0.27.1366.741" timestamp="1624211905772" />
     <state width="1897" height="256" key="GridCell.Tab.0.left/308.1080.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1624432804822" />
     <state width="1897" height="256" key="GridCell.Tab.0.left/308.1080.1366.768/0.27.1920.1053@308.1080.1366.768" timestamp="1624964352177" />
-    <state width="1897" height="139" key="GridCell.Tab.0.right" timestamp="1630592643914">
+    <state width="1897" height="139" key="GridCell.Tab.0.right" timestamp="1631268453493">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="1897" height="296" key="GridCell.Tab.0.right/0.0.1920.1080/0.1080.1366.768@0.0.1920.1080" timestamp="1629415432005" />
     <state width="1897" height="296" key="GridCell.Tab.0.right/0.0.1920.1848@0.0.1920.1848" timestamp="1628260335817" />
     <state width="1343" height="83" key="GridCell.Tab.0.right/0.27.1366.741/332.1080.1366.768@0.27.1366.741" timestamp="1630539617469" />
     <state width="1343" height="159" key="GridCell.Tab.0.right/0.27.1366.741@0.27.1366.741" timestamp="1627778939524" />
-    <state width="1897" height="139" key="GridCell.Tab.0.right/0.27.1920.1053/332.1080.1366.768@0.27.1920.1053" timestamp="1630592643914" />
+    <state width="1897" height="139" key="GridCell.Tab.0.right/0.27.1920.1053/332.1080.1366.768@0.27.1920.1053" timestamp="1631268453493" />
     <state width="1897" height="308" key="GridCell.Tab.0.right/308.1080.1366.768/0.0.1920.1080@0.0.1920.1080" timestamp="1624101223510" />
     <state width="1343" height="305" key="GridCell.Tab.0.right/308.1080.1366.768/0.27.1366.741@0.27.1366.741" timestamp="1624211905772" />
     <state width="1897" height="256" key="GridCell.Tab.0.right/308.1080.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1624432804822" />

@@ -14,7 +14,11 @@ export interface IRegisterAction extends Action {
 }
 
 export interface IUsersAction extends Action {
-    payload: { users: IUser[] } & { alertMessage: string }
+    payload: {
+        users: IUser[],
+        alertMessage: string,
+        userIds: string[]
+    }
 }
 
 export interface IConversationsAction extends Action {

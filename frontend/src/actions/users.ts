@@ -1,10 +1,10 @@
 import { Dispatch } from 'redux';
 
-import { GET_USERS_FAILURE, GET_USERS_REQUEST, GET_USERS_SUCCESS } from './types';
+import { GET_USERS_FAILURE, GET_USERS_REQUEST, GET_USERS_SUCCESS, SET_USERS_OFFLINE, SET_USERS_ONLINE } from './types';
 import { userService } from '../services';
 import { IUser } from '../interfaces/user';
 
-export const getUsers = () => async (dispatch: Dispatch) => {
+const getUsers = () => async (dispatch: Dispatch) => {
     dispatch(getUsersRequest());
 
     try {
@@ -33,3 +33,24 @@ const getUsersFailure = (errorMessage: string) => ({
         alertMessage: errorMessage
     }
 });
+
+const onSetUsersOnline = (userIds: string[]) => ({
+    type: SET_USERS_ONLINE,
+    payload: {
+        userIds
+    }
+});
+
+const onSetUsersOffline = (userIds: string[]) => ({
+    type: SET_USERS_OFFLINE,
+    payload: {
+        userIds
+    }
+});
+
+export {
+    getUsers,
+    onSetUsersOnline,
+    onSetUsersOffline
+};
+

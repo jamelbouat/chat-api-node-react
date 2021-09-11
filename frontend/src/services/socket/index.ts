@@ -8,7 +8,9 @@ const api_url = process.env.REACT_APP_API_URL as string;
 enum EVENTS {
     CHAT_MESSAGE = 'chat-message',
     JOIN_ROOM = 'join-chat-room',
-    CONNECT = 'connect'
+    CONNECT = 'connect',
+    ONLINE_USERS = 'online-users',
+    OFFLINE_USERS = 'offline-users'
 }
 
 class SocketService {
@@ -36,6 +38,14 @@ class SocketService {
         this.socket.on(EVENTS.CONNECT, () => {
             dispatch(onNewSocketConnection(this.socket.id));
         });
+    }
+
+    public listenToUsersStatusChangeOnline(dispatch: Dispatch, onSetUsersOnline: (userIds: string[]) => any): void {
+        this.socket.on(EVENTS.ONLINE_USERS, userIds => dispatch(onSetUsersOnline(userIds)));
+    }
+
+    public listenToUsersStatusChangeOffline(dispatch: Dispatch, onSetUsersOffline: (userIds: string[]) => any): void {
+        this.socket.on(EVENTS.OFFLINE_USERS, userIds => dispatch(onSetUsersOffline(userIds)));
     }
 
     public disconnect(): void {

@@ -22,6 +22,13 @@ export interface IConversationUser {
     lastName: string
 }
 
+export interface IConversationUserWithStatus {
+    _id: string;
+    firstName: string;
+    lastName: string;
+    online: boolean
+}
+
 export interface IConversation {
     _id: string;
     users: IConversationUser[];

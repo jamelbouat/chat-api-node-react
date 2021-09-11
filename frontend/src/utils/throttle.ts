@@ -1,5 +1,5 @@
 
-let timeout: number;
+let timeout: NodeJS.Timeout;
 
 export const throttle = (func: () => void, time: number): void => {
     clearTimeout(timeout);

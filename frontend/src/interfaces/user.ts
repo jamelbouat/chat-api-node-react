@@ -5,8 +5,9 @@ export interface IUser {
     email: string;
     firstName: string;
     lastName: string;
+    online: boolean;
     createdAt: string;
-    updatedAt: string
+    updatedAt: string;
 }
 
 export interface ILoginValues {

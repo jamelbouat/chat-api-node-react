@@ -3,9 +3,9 @@ import { useParams } from 'react-router-dom';
 import { ListItem, makeStyles, Tooltip } from '@material-ui/core';
 import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 
-import AvatarGroupWithBadges from '../AvatarGroupWithBadges';
 import { IConversation } from '../../../../interfaces/conversations';
 import GroupedConversationUserNames from '../GroupedConversationUserNames';
+import AvatarGroupWithBadges from '../AvatarGroupWithBadges';
 
 const useStyles = makeStyles(() => ({
     layout: {

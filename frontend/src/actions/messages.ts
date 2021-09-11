@@ -13,15 +13,17 @@ import { getAccessToken } from '../utils/tokens';
 import { isUserAuthenticated } from '../utils/user';
 import SocketService from '../services/socket';
 import { store } from '../index';
-import { conversationsService } from '../services';
 import { messagesService } from '../services/messagesService';
+import { onSetUsersOffline, onSetUsersOnline } from './users';
 
 let socketService: SocketService;
 
 const createNewSocketService = () => {
     socketService = new SocketService(getAccessToken());
-    socketService.listenToReceivedMessage(store.dispatch, onReceiveMessage);
     socketService.setNewSocketConnection(store.dispatch, onNewSocketConnection);
+    socketService.listenToReceivedMessage(store.dispatch, onReceiveMessage);
+    socketService.listenToUsersStatusChangeOnline(store.dispatch, onSetUsersOnline);
+    socketService.listenToUsersStatusChangeOffline(store.dispatch, onSetUsersOffline);
 };
 
 const connectToSocketService = (): void => {

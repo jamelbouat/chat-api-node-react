@@ -1,6 +1,13 @@
-import { GET_USERS_FAILURE, GET_USERS_REQUEST, GET_USERS_SUCCESS } from '../actions/types';
+import {
+    GET_USERS_FAILURE,
+    GET_USERS_REQUEST,
+    GET_USERS_SUCCESS,
+    SET_USERS_OFFLINE,
+    SET_USERS_ONLINE
+} from '../actions/types';
 import { ALERT_TYPE } from '../constants';
 import { IUsersAction } from '../interfaces/actions';
+import { IUser } from '../interfaces/user';
 
 const initialState = {
     isLoading: false,
@@ -39,7 +46,28 @@ export const usersReducer = (state = initialState, action: IUsersAction) => {
                 }
             };
 
+        case SET_USERS_ONLINE:
+            return {
+                ...state,
+                users: changeUsersStatus(state.users, action.payload.userIds)
+            };
+
+        case SET_USERS_OFFLINE:
+            return {
+                ...state,
+                users: changeUsersStatus(state.users, action.payload.userIds)
+            };
+
         default:
             return state;
     }
+};
+
+const changeUsersStatus = (users: IUser[], userIds: string[]): IUser[] => {
+    return users.map(user => {
+        if (userIds.includes(user._id)) {
+            return { ...user, online: !user.online };
+        }
+        return user;
+    });
 };

@@ -8,6 +8,5 @@ export const joinChatRoom = (socket: Socket, room: string, userIds: string[]): v
         addToRoomsList(room);
     }
 
-    userIds.forEach(userId => getUserSockets(userId) &&
-        getUserSockets(userId).map(socket => socket.join(room)));
+    userIds.forEach(userId => getUserSockets(userId)?.map(socket => socket.join(room)));
 };

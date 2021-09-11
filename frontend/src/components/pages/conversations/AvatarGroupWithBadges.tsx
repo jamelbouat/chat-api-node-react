@@ -1,10 +1,11 @@
 import React  from 'react';
 import { AvatarGroup } from '@material-ui/lab';
-import { Avatar, Badge, makeStyles, Tooltip } from '@material-ui/core';
+import { Avatar, makeStyles, Tooltip } from '@material-ui/core';
 
 import { IConversationUser } from '../../../interfaces/conversations';
 import { useCurrentUser } from '../../../context/CurrentUserProvider';
 import { getFirstName, getFullName } from '../../../utils/user';
+import BadgeComponent from '../../../containers/BadgeComponent';
 
 const useStyles = makeStyles(() => ({
     badge: {
@@ -38,24 +39,13 @@ const AvatarGroupWithBadges: React.FC<Props> = ({ conversationUsers }) => {
     return (
         <AvatarGroup max={ 3 } spacing={ 12 } classes={ { avatar: classes.avatar } }>
             {
-                conversationUsers &&
-                conversationUsers.map((user, index) => (
+                conversationUsers?.map((user, index) => (
                     !user ?
                         <Tooltip title={ 'Unknown user' } key={ index }>
                             <Avatar />
                         </Tooltip> :
                         user._id !== currentUser?._id &&
-                        <Badge
-                            className={ classes.badge }
-                            classes={ { badge: status ? classes.onlineBadge : classes.offlineBadge } }
-                            key={ user._id }
-                            variant='dot'
-                            overlap='circular'
-                            anchorOrigin={ {
-                                vertical: 'bottom',
-                                horizontal: 'right',
-                            } }
-                        >
+                        <BadgeComponent key={ user._id } conversationUser={ user }>
                             <Tooltip title={ getFullName(user) }>
                                 <Avatar
                                     classes={ { root: classes.root } }
@@ -63,7 +53,7 @@ const AvatarGroupWithBadges: React.FC<Props> = ({ conversationUsers }) => {
                                     src={ getFullName(user) }
                                 />
                             </Tooltip>
-                        </Badge>
+                        </BadgeComponent>
                 ))
             }
         </AvatarGroup>
