@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 
 import { RootState } from '../interfaces/state';
-import ContactsCard from '../components/pages/dashboard/contactsContainer/ContactsCard';
+import ContactCard from '../components/pages/dashboard/contactsContainer/ContactCard';
 import { push } from 'connected-react-router';
 import { ROUTES } from '../constants';
 import { addNewConversation } from '../actions/conversations';
@@ -22,4 +22,4 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<RootState, any, Action>) => 
 
 export default connect(
     mapStateToProps, mapDispatchToProps
-)(ContactsCard);
+)(ContactCard);

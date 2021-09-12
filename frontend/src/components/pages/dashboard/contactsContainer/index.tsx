@@ -2,7 +2,7 @@ import React from 'react';
 import { ImageList, ImageListItem, makeStyles } from '@material-ui/core';
 
 import { IUser } from '../../../../interfaces/user';
-import UserCard from '../../../../containers/ContactCard';
+import ContactCard from '../../../../containers/ContactCard';
 
 const useStyles = makeStyles(() => ({
     layout: {
@@ -33,7 +33,7 @@ const ContactsContainer: React.FC<Props> = ({ users }) => {
                 {
                     users && users.map(user => (
                         <ImageListItem key={ user._id } rows={ 1 } className={ classes.imageListItem }>
-                            <UserCard user={ user } />
+                            <ContactCard user={ user } />
                         </ImageListItem>
                     ))
                 }

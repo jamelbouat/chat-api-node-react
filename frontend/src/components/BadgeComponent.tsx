@@ -5,7 +5,8 @@ import { IConversationUser } from '../interfaces/conversations';
 const useStyles = makeStyles(() => ({
     badge: {
         border: 'none',
-        height: 35
+        height: 40,
+        marginLeft: -8
     },
     onlineStatus: {
         backgroundColor: 'green'
@@ -16,7 +17,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 interface Props {
-    children:  JSX.Element[] | JSX.Element;
+    children: JSX.Element[] | JSX.Element;
     conversationUser: IConversationUser;
     status: boolean | undefined
 }

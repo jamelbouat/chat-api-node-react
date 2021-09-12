@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, CardActions, CardContent, makeStyles, Tooltip, Typography } from '@material-ui/core';
 import { AccountBoxRounded as AccountBoxRoundedIcon, MessageOutlined as MessageOutlinedIcon } from '@material-ui/icons';
 
-import { capitalizeFirstLetter, convertToReadableDate } from '../../../../utils/strings';
+import { convertToReadableDate } from '../../../../utils/strings';
 import { IUser } from '../../../../interfaces/user';
 import { getFullName } from '../../../../utils/user';
 
@@ -29,15 +29,15 @@ interface Props {
     addNewConversation: (_id: string) => void
 }
 
-const ContactsCard: React.FC<Props> = (props) => {
+const ContactCard: React.FC<Props> = (props) => {
     const classes = useStyles();
     const { user, redirectToContactProfile, addNewConversation } = props;
 
-    const handleClickedConversationIcon = () => {
+    const handleOnClickConversationIcon = () => {
         addNewConversation(user._id);
     };
 
-    const handleClickedProfileIcon = () => {
+    const handleOnClickProfileIcon = () => {
         redirectToContactProfile(user._id);
     };
 
@@ -68,13 +68,13 @@ const ContactsCard: React.FC<Props> = (props) => {
                 <Tooltip title='Send message'>
                     <MessageOutlinedIcon
                         className={ classes.icon }
-                        onClick={ handleClickedConversationIcon }
+                        onClick={ handleOnClickConversationIcon }
                     />
                 </Tooltip>
                 <Tooltip title='View profile'>
                     <AccountBoxRoundedIcon
                         className={ classes.icon }
-                        onClick={ handleClickedProfileIcon }
+                        onClick={ handleOnClickProfileIcon }
                     />
                 </Tooltip>
             </CardActions>
@@ -82,4 +82,4 @@ const ContactsCard: React.FC<Props> = (props) => {
     );
 };
 
-export default ContactsCard;
+export default ContactCard;

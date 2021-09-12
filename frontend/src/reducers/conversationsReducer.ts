@@ -25,12 +25,14 @@ function addNewMessage(conversations: IConversation[], message: IMessage | undef
     if (!message) {
         return conversations;
     }
-    return conversations.map(conversation => {
+    return conversations.reduce((arr: IConversation[], conversation: IConversation) => {
         if (conversation._id === message.conversationId) {
-            return  { ...conversation, messages: [ ...conversation.messages, message ] };
+            arr.unshift({ ...conversation, messages: [ ...conversation.messages, message ] });
+            return arr;
         }
-        return conversation;
-    });
+        arr.push(conversation);
+        return arr;
+    }, []);
 }
 
 export const conversationsReducer = (state= initialState, action: IConversationsAction) => {
@@ -70,7 +72,7 @@ export const conversationsReducer = (state= initialState, action: IConversations
         case ADD_NEW_CONVERSATION_SUCCESS:
             return {
                 ...state,
-                conversations: [ ...state.conversations, action.payload.conversation]
+                conversations: [ action.payload.conversation, ...state.conversations]
             };
 
         case ADD_NEW_CONVERSATION_FAILURE:

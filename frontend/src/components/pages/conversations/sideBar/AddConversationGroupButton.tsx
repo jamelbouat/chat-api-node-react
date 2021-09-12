@@ -1,16 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Autocomplete } from '@material-ui/lab';
 import AddIcon from '@material-ui/icons/Add';
-import {
-    makeStyles,
-    Dialog,
-    Button,
-    DialogContent,
-    DialogTitle,
-    Fab,
-    TextField,
-    Tooltip,
-    DialogActions, Theme
+import { makeStyles, Dialog, Button, DialogContent, DialogTitle,
+    Fab, TextField, Tooltip, DialogActions, Theme
 } from '@material-ui/core';
 
 import { IUser } from '../../../../interfaces/user';
@@ -27,12 +19,14 @@ const useStyle = makeStyles((theme: Theme) => ({
 }));
 
 interface Props {
-    users: IUser[]
+    users: IUser[];
+    addNewConversation: (userIds: string[]) => void;
 }
 
-const AddConversationGroupButton: React.FC<Props> = ({ users }) => {
+const AddConversationGroupButton: React.FC<Props> = ({ users, addNewConversation }) => {
     const classes = useStyle();
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
+    const [selectedUsers, setSelectedUsers] = useState<IUser[]>();
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -40,6 +34,12 @@ const AddConversationGroupButton: React.FC<Props> = ({ users }) => {
 
     const handleClose = () => {
         setOpen(false);
+    };
+
+    const handleOnClickAddNewConversation = () => {
+        const userIds = selectedUsers?.map(user => user._id);
+        userIds && addNewConversation(userIds);
+        handleClose();
     };
 
     return(
@@ -64,6 +64,9 @@ const AddConversationGroupButton: React.FC<Props> = ({ users }) => {
                         options={ users }
                         getOptionLabel={ (option) => `${ option.firstName } ${ option.lastName }` }
                         filterSelectedOptions
+                        onChange={ (_, selectedUsers: IUser[]) => {
+                            setSelectedUsers(selectedUsers);
+                        } }
                         renderInput={ (params) => (
                             <TextField
                                 { ...params }
@@ -78,7 +81,7 @@ const AddConversationGroupButton: React.FC<Props> = ({ users }) => {
                     <Button onClick={ handleClose } color='primary' variant='contained'>
                         Cancel
                     </Button>
-                    <Button onClick={ handleClose } color='primary' variant='contained'>
+                    <Button onClick={ handleOnClickAddNewConversation } color='primary' variant='contained'>
                         Add
                     </Button>
                 </DialogActions>

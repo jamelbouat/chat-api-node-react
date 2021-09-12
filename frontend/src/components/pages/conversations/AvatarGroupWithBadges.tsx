@@ -8,23 +8,15 @@ import { getFirstName, getFullName } from '../../../utils/user';
 import BadgeComponent from '../../../containers/BadgeComponent';
 
 const useStyles = makeStyles(() => ({
-    badge: {
-        border: 'none',
-        height: 35
-    },
-    root: {
+    avatarRoot: {
         border: '2px solid white',
-        fontSize: '1em',
-        padding: '.3em',
+        fontSize: '1em'
     },
     avatar: {
-        fontSize: '1em',
+        fontSize: '1em'
     },
-    onlineBadge: {
-        backgroundColor: 'green'
-    },
-    offlineBadge: {
-        backgroundColor: 'red'
+    groupRoot:{
+        marginLeft: 8
     }
 }));
 
@@ -37,7 +29,7 @@ const AvatarGroupWithBadges: React.FC<Props> = ({ conversationUsers }) => {
     const currentUser = useCurrentUser();
 
     return (
-        <AvatarGroup max={ 3 } spacing={ 12 } classes={ { avatar: classes.avatar } }>
+        <AvatarGroup max={ 3 } spacing={ 12 } classes={ { root: classes.groupRoot, avatar: classes.avatar } }>
             {
                 conversationUsers?.map((user, index) => (
                     !user ?
@@ -48,7 +40,7 @@ const AvatarGroupWithBadges: React.FC<Props> = ({ conversationUsers }) => {
                         <BadgeComponent key={ user._id } conversationUser={ user }>
                             <Tooltip title={ getFullName(user) }>
                                 <Avatar
-                                    classes={ { root: classes.root } }
+                                    classes={ { root: classes.avatarRoot } }
                                     alt={ getFirstName(user) }
                                     src={ getFullName(user) }
                                 />

@@ -1,4 +1,4 @@
-import React, { FC, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Form, Formik, FormikHelpers } from 'formik';
 import Grid from '@material-ui/core/Grid';
 import { Button, Divider, makeStyles, Theme } from '@material-ui/core';
@@ -26,10 +26,14 @@ interface Props {
     sendMessage: (message: IMessageValues) => void
 }
 
-const ChatForm: FC<Props> = ({ sendMessage }) => {
+const ChatForm: React.FC<Props> = ({ sendMessage }) => {
     const classes = useStyles();
     const initialValues = { content: '' };
     const textFieldRef = useRef<HTMLInputElement | null>(null);
+
+    useEffect(() => {
+        textFieldRef.current?.focus();
+    });
 
     return (
         <div className={ classes.layout }>
@@ -42,7 +46,6 @@ const ChatForm: FC<Props> = ({ sendMessage }) => {
                     // setSubmitting(true);
                     sendMessage(values);
                     // setSubmitting(false);
-                    textFieldRef.current?.focus();
                     resetForm({});
                 } }
             >

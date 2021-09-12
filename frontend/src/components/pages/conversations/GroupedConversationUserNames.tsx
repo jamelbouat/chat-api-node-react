@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         textOverflow: 'ellipsis',
         whiteSpace: 'nowrap',
         marginLeft: theme.spacing(1)
-    },
+    }
 }));
 
 interface Props {
@@ -33,7 +33,7 @@ const GroupedConversationUserNames: React.FC<Props> = ({ conversationUsers }) =>
     return(
         <div className={ classes.layout }>
             {
-                groupedUserNames && groupedUserNames.filter(Boolean).join(', ')
+                groupedUserNames?.filter(Boolean).join(', ')
             }
         </div>
     );
