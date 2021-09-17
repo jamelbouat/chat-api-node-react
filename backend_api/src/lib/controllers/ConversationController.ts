@@ -3,12 +3,13 @@ import { NextFunction, Request, Response } from 'express';
 import BaseController from './BaseController';
 import {
     ALL_CONVERSATIONS_URL,
-    DELETE_CONVERSATION_URL, DELETE_MESSAGE_FROM_CONVERSATION_URL,
+    DELETE_CONVERSATION_URL,
     GET_CONVERSATION_URL,
     POST_CONVERSATION_URL,
     UPDATE_CONVERSATION_URL
 } from '../../config/url.config';
 import { IConversationService } from '../interfaces/services';
+import Constants from '../constants/constants';
 
 class ConversationController extends BaseController {
     public service: IConversationService;
@@ -48,7 +49,14 @@ class ConversationController extends BaseController {
     }
 
     private deleteConversation = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-        await this.deleteElement(req, res, next);
+        try {
+            const conversationId = req.params.id;
+            const currentUserId = req.user._id;
+            await this.service.deleteUsers(conversationId, [currentUserId]);
+            res.status(200).json( { message: Constants.DELETION_SUCCESS });
+        } catch (error) {
+            next(error);
+        }
     }
 
     private getAllConversations = async (req: Request, res: Response, next: NextFunction): Promise<void> => {

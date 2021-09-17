@@ -5,7 +5,7 @@ import { RouteComponentProps } from 'react-router';
 import ChatBar from './ChatBar';
 import { IConversation } from '../../../../interfaces/conversations';
 import ChatForm from '../../../../containers/ChatForm';
-import ChatConversation from '../../../../containers/ChatConversation';
+import ChatConversation from './ChatConversation';
 
 const useStyles= makeStyles(() => ({
     layout: {
@@ -24,7 +24,7 @@ interface Props extends RouteComponentProps<ParamsProps> {
     currentConversation: IConversation | undefined;
     setDefaultConversationPath: (_id: string) => void;
     joinConversationRoom: (currentConversation: IConversation) => void;
-    socketId: string
+    socketId: string;
 }
 
 const ChatContainer: React.FC<Props> = (props) => {
@@ -37,12 +37,15 @@ const ChatContainer: React.FC<Props> = (props) => {
         socketId,
         match
     } = props;
-    const conversationId = match.params.id && match.params.id;
+    const conversationParamsId = match.params.id && match.params.id;
 
     useEffect(() => {
-        conversationId === '0' && currentConversation && setDefaultConversationPath(currentConversation._id);
+        currentConversation &&
+        conversationParamsId === '0' &&
+        setDefaultConversationPath(currentConversation._id);
         currentConversation && joinConversationRoom(currentConversation);
-    }, [currentConversation, socketId]);
+
+    }, [currentConversation, conversationParamsId, socketId]);
 
     return (
         <div className={ classes.layout }>
@@ -50,9 +53,9 @@ const ChatContainer: React.FC<Props> = (props) => {
                 !isLoading ?
                     !currentConversation ? 'There is no conversation':
                         <>
-                            <ChatBar conversationUsers={ currentConversation.users }/>
-                            <ChatConversation currentConversation={ currentConversation }/>
-                            <ChatForm currentConversation={ currentConversation }/>
+                            <ChatBar conversationUsers={ currentConversation.users } />
+                            <ChatConversation currentConversation={ currentConversation } />
+                            <ChatForm currentConversation={ currentConversation } />
                         </>
                     : null
             }

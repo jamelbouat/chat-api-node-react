@@ -4,16 +4,16 @@ import { ThunkDispatch } from 'redux-thunk';
 
 import { RootState } from '../interfaces/state';
 import ContactCard from '../components/pages/dashboard/contactsContainer/ContactCard';
-import { push } from 'connected-react-router';
 import { ROUTES } from '../constants';
 import { addNewConversation } from '../actions/conversations';
+import { routeChange } from '../actions/routes';
 
 const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<RootState, any, Action>) => ({
     redirectToContactProfile: (_id: string) => {
-        dispatch(push(ROUTES.CONTACT.replace(':id', _id)));
+        dispatch(routeChange(ROUTES.CONTACT_PROFILE, { ':id': _id }));
     },
     addNewConversation: async (_id: string) => {
         await dispatch(addNewConversation([_id]));

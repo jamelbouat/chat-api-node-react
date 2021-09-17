@@ -4,7 +4,7 @@ import { ThunkDispatch } from 'redux-thunk';
 
 import Login from '../components/pages/Login';
 import { clearLoginAlert, loginUser } from '../actions/login';
-import { ILoginValues } from '../interfaces/user';
+import { ILoginFormValues } from '../interfaces/user';
 import { RootState } from '../interfaces/state';
 
 const mapStateToProps = (state: RootState) => ({
@@ -13,7 +13,7 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<RootState, any, Action>) => ({
-    loginUser: async (values: ILoginValues) => {
+    loginUser: async (values: ILoginFormValues) => {
         await dispatch(loginUser(values));
     },
     clearLoginAlert: () => {

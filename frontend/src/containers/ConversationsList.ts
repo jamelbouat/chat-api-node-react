@@ -1,12 +1,15 @@
 import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { Action } from 'redux';
-import { push } from 'connected-react-router';
 
 import { RootState } from '../interfaces/state';
 import ConversationsList from '../components/pages/conversations/sideBar/ConversationsList';
-import { getConversations } from '../actions/conversations';
-import { ROUTES } from '../constants';
+import {
+    changeCurrentConversation,
+    clearConversationsAlertInfo,
+    getConversations,
+    removeConversation
+} from '../actions/conversations';
 import {
     conversationsAlertInfoSelector,
     conversationsLoadingSelector,
@@ -24,7 +27,13 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<RootState, any, Action>) => 
         await dispatch(getConversations);
     },
     changeCurrentConversation: (_id: string) => {
-        dispatch(push(ROUTES.CONVERSATIONS.replace(':id', _id)));
+        dispatch(changeCurrentConversation(_id));
+    },
+    removeConversation: async (_id: string) => {
+        await dispatch(removeConversation(_id));
+    },
+    clearConversationsAlertInfo: () => {
+        dispatch(clearConversationsAlertInfo());
     }
 });
 

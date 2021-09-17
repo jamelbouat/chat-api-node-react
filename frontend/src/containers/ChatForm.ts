@@ -4,7 +4,8 @@ import { ThunkDispatch } from 'redux-thunk';
 
 import { RootState } from '../interfaces/state';
 import { sendMessage } from '../actions/messages';
-import ChatForm, { IMessageValues } from '../components/pages/conversations/chatContainer/ChatForm';
+import ChatForm from '../components/pages/conversations/chatContainer/ChatForm';
+import { IMessageFormValues } from '../interfaces/conversations';
 
 const mapStateToProps = (state: RootState) => ({
 });
@@ -13,8 +14,8 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<RootState, any, Action>, own
     const conversationId = ownProps.currentConversation._id;
 
     return {
-        sendMessage: (message: IMessageValues) => {
-            conversationId && dispatch(sendMessage({ conversationId, content: message.content }));
+        sendMessage: (values: IMessageFormValues) => {
+            conversationId && dispatch(sendMessage(conversationId, values));
         }
     };
 };

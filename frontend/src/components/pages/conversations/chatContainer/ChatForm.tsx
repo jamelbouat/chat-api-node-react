@@ -5,7 +5,7 @@ import { Button, Divider, makeStyles, Theme } from '@material-ui/core';
 
 import { MyTextField } from '../../../CustomFields';
 import { chatFormFieldsValidationSchema } from '../../../../utils/formsDataValidation';
-import { IConversation } from '../../../../interfaces/conversations';
+import { IConversation, IMessageFormValues } from '../../../../interfaces/conversations';
 
 const useStyles = makeStyles((theme: Theme) => ({
     layout: {
@@ -17,13 +17,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     }
 }));
 
-export interface IMessageValues {
-    content: string
-}
-
 interface Props {
     currentConversation: IConversation | undefined;
-    sendMessage: (message: IMessageValues) => void
+    sendMessage: (values: IMessageFormValues) => void
 }
 
 const ChatForm: React.FC<Props> = ({ sendMessage }) => {
@@ -42,7 +38,7 @@ const ChatForm: React.FC<Props> = ({ sendMessage }) => {
                 initialValues={ initialValues }
                 validationSchema={ chatFormFieldsValidationSchema }
 
-                onSubmit={ (values: IMessageValues, { resetForm }: FormikHelpers<IMessageValues>) => {
+                onSubmit={ (values: IMessageFormValues, { resetForm }: FormikHelpers<IMessageFormValues>) => {
                     // setSubmitting(true);
                     sendMessage(values);
                     // setSubmitting(false);

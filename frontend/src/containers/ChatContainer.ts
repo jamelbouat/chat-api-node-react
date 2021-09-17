@@ -21,8 +21,8 @@ const mapStateToProps = (state: RootState, ownProps: RouteComponentProps<ParamsP
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<RootState, any, Action>, ownProps: RouteComponentProps) => ({
     setDefaultConversationPath: (_id: string) => {
-        const newPath = ownProps.match.path.replace(':id', _id);
-        ownProps.history.replace(newPath);
+        const defaultPath = ownProps.match.path.replace(':id', _id);
+        ownProps.history.replace(defaultPath);
     },
     joinConversationRoom: (currentConversation: IConversation) => {
         joinConversationRoom(currentConversation);

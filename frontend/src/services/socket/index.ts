@@ -1,7 +1,7 @@
 import { io, Socket } from 'socket.io-client';
-
-import { IMessage, ISendMessage } from '../../interfaces/conversations';
 import { Dispatch } from 'redux';
+
+import { IReceivedMessage, ISentMessage } from '../../interfaces/conversations';
 
 const api_url = process.env.REACT_APP_API_URL as string;
 
@@ -22,12 +22,12 @@ class SocketService {
         this.socket = io(api_url, { query: { token: this.accessToken } });
     }
 
-    public listenToReceivedMessage(dispatch: Dispatch, onReceiveMessage: (message: IMessage) => any): void {
+    public listenToReceivedMessage(dispatch: Dispatch, onReceiveMessage: (message: IReceivedMessage) => any): void {
         this.socket.on(EVENTS.CHAT_MESSAGE, message => dispatch(onReceiveMessage(message)));
     }
 
-    public sendMessage(message: ISendMessage): void {
-        this.socket.emit(EVENTS.CHAT_MESSAGE, message.conversationId, message);
+    public sendMessage(room: string, message: ISentMessage): void {
+        this.socket.emit(EVENTS.CHAT_MESSAGE, room, message);
     }
 
     public joinConversationRoom(room: string, userIds: string[]): void {

@@ -1,7 +1,7 @@
 import React, { MutableRefObject } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 
-import { IMessage } from '../../../../interfaces/conversations';
+import { IReceivedMessage } from '../../../../interfaces/conversations';
 
 const useStyles = makeStyles((theme: Theme) => ({
     sentMessageBox: {
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface Props {
-    message: IMessage;
+    message: IReceivedMessage;
     lastMessageRef: MutableRefObject<HTMLSpanElement> | null
 }
 

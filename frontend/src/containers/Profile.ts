@@ -4,7 +4,7 @@ import { ThunkDispatch } from 'redux-thunk';
 
 import Profile from '../components/pages/Profile';
 import { RootState } from '../interfaces/state';
-import { currentUserSelector } from '../selectors/users';
+import { currentUserSelector } from '../selectors/currentUser';
 
 const mapStateToProps = (state: RootState) => ({
     currentUser: currentUserSelector(state)

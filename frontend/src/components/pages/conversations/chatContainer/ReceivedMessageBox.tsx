@@ -2,7 +2,7 @@ import React, { MutableRefObject } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 
 import AvatarGroupWithBadges from '../AvatarGroupWithBadges';
-import { IConversationUser, IMessage } from '../../../../interfaces/conversations';
+import { IConversationUser, IReceivedMessage } from '../../../../interfaces/conversations';
 
 const useStyles = makeStyles((theme: Theme) => ({
     text: {
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface Props {
-    message: IMessage;
+    message: IReceivedMessage;
     conversationUser: IConversationUser;
     showAvatar: boolean;
     lastMessageRef: MutableRefObject<HTMLSpanElement> | null

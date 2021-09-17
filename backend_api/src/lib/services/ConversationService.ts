@@ -65,8 +65,8 @@ class ConversationService extends BaseService implements IConversationService {
         }
     }
 
-    public deleteElement(_id: string): Promise<void | HttpError> {
-        return Promise.resolve(undefined);
+    public async deleteElement(_id: string): Promise<void | HttpError> {
+        return await this.deleteBaseElement(_id);
     }
 
     public async getAllElements(currentUserId: string): Promise<IConversationWithUsersAndMessagesData[] | HttpError> {
@@ -102,11 +102,13 @@ class ConversationService extends BaseService implements IConversationService {
         return await this.updateElement(_id, { userIds: updatedUserIds });
     }
 
-    public async deleteUsers(_id: string, userIds: string[]): Promise<IConversationData | HttpError> {
+    public async deleteUsers(_id: string, userIds: string[]): Promise<void | HttpError> {
         const conversation = await this.getBaseElementById(_id) as IConversation;
         const _userIds = conversation.userIds;
         const updatedUserIds = _userIds.filter(_userId => !userIds.includes(_userId));
-        return await this.updateElement(_id, { userIds: updatedUserIds });
+        updatedUserIds.length === 0 ?
+            await this.deleteElement(_id) :
+            await this.updateElement(_id, { userIds: updatedUserIds });
     }
 
     public async addNewMessages(_id: string, messageIds: string[]): Promise<IConversationData | HttpError> {

@@ -3,7 +3,7 @@ import { Action } from 'redux';
 import { ITokens } from './tokens';
 import { IUser } from './user';
 import { IAlert } from './alert';
-import { IConversation, IMessage } from './conversations';
+import { IConversation, IReceivedMessage } from './conversations';
 
 export interface ILoginAction extends Action {
     payload: { user: IUser } & IAlert
@@ -27,14 +27,14 @@ export interface IConversationsAction extends Action {
         conversations?: IConversation[];
         conversation?: IConversation;
         alertMessage?: string;
-        message?: IMessage;
+        message?: IReceivedMessage;
     }
 }
 
 export interface IMessagesAction extends Action {
     payload: {
         socketId: string;
-        messages: IMessage[];
+        messages: IReceivedMessage[];
         alertMessage: string;
     }
 }

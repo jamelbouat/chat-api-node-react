@@ -12,7 +12,6 @@ const conversationRegisterSchema = Joi.object({
 
 const conversationUpdateSchema = Joi.object({
     userIds: Joi.array()
-        .min(2)
         .items(Joi.string()),
 
     messageIds: Joi.array()

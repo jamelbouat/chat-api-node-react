@@ -50,7 +50,7 @@ interface IConversationService {
     deleteElement: (_id: string) => Promise<void | HttpError>;
     getAllElements: (_id: string) => Promise<IConversationWithUsersAndMessagesData[] | HttpError>;
     addNewUsers: (_id: string, userIds: string[]) => Promise<IConversationData | HttpError>;
-    deleteUsers: (_id: string, userIds: string[]) => Promise<IConversationData | HttpError>;
+    deleteUsers: (_id: string, userIds: string[]) => Promise<void | HttpError>;
     addNewMessages: (_id: string, messageIds: string[]) => Promise<IConversationData | HttpError>;
     deleteMessages: (_id: string, messageIds: string[]) => Promise<IConversationData | HttpError>;
 }

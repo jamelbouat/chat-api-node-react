@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Register from '../components/pages/Register';
 
 import { clearRegisterAlert, registerUser } from '../actions/register';
-import { IRegisterValues } from '../interfaces/user';
+import { IRegisterFormValues } from '../interfaces/user';
 import { RootState } from '../interfaces/state';
 
 const mapStateToProps = (state: RootState) => ({
@@ -13,7 +13,7 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<RootState, any, Action>) => ({
-    registerUser: async (values: IRegisterValues) => {
+    registerUser: async (values: IRegisterFormValues) => {
         await dispatch(registerUser(values));
     },
     clearRegisterAlert: () => {

@@ -2,12 +2,12 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Action } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
-import { push } from 'connected-react-router';
 
 import NavigationBar from '../components/NavigationBar';
-import { ROUTES } from '../constants';
 import { logoutAndRedirectToHome } from '../actions/login';
 import { RootState } from '../interfaces/state';
+import { routeChange } from '../actions/routes';
+import { ROUTES } from '../constants';
 
 const mapStateToProps = (state: RootState) => ({
     isAuthenticated: state.loginState.isAuthenticated
@@ -15,22 +15,22 @@ const mapStateToProps = (state: RootState) => ({
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<RootState, any, Action>) => ({
     redirectToDashboard: () => {
-        dispatch(push(ROUTES.DASHBOARD));
+        dispatch(routeChange(ROUTES.DASHBOARD));
     },
     redirectToConversations: () => {
-        dispatch(push(ROUTES.CONVERSATIONS.replace(':id', '0')));
+        dispatch(routeChange(ROUTES.CONVERSATIONS, { ':id': '0' }));
     },
     redirectToProfile: () => {
-        dispatch(push(ROUTES.PROFILE));
+        dispatch(routeChange(ROUTES.PROFILE));
     },
     logoutUser: () => {
         dispatch(logoutAndRedirectToHome());
     },
     redirectToLogin: () => {
-        dispatch(push(ROUTES.LOGIN));
+        dispatch(routeChange(ROUTES.LOGIN));
     },
     redirectToRegister: () => {
-        dispatch(push(ROUTES.REGISTER));
+        dispatch(routeChange(ROUTES.REGISTER));
     }
 });
 

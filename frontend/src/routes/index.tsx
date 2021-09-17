@@ -15,10 +15,10 @@ import { Conversations } from '../components/pages/conversations';
 const Routes: React.FC = () => {
     return(
         <Switch>
-            <PrivateRoute exact path={ ROUTES.PROFILE } component={ Profile } />
             <PrivateRoute exact path={ ROUTES.DASHBOARD } component={ Dashboard } />
-            <PrivateRoute exact path={ ROUTES.CONTACT } component={ ContactProfile } />
             <PrivateRoute exact path={ ROUTES.CONVERSATIONS } component={ Conversations } />
+            <PrivateRoute exact path={ ROUTES.PROFILE } component={ Profile } />
+            <PrivateRoute exact path={ ROUTES.CONTACT_PROFILE } component={ ContactProfile } />
 
             <RestrictRoute exact path={ ROUTES.HOME } component={ Home } />
             <RestrictRoute exact path={ ROUTES.LOGIN } component={ Login } />

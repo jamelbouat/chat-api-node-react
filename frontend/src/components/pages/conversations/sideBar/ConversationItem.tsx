@@ -1,11 +1,12 @@
 import React, { FunctionComponent, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { ListItem, makeStyles, Tooltip } from '@material-ui/core';
-import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
+import { ListItem, makeStyles } from '@material-ui/core';
 
 import { IConversation } from '../../../../interfaces/conversations';
 import GroupedConversationUserNames from '../GroupedConversationUserNames';
 import AvatarGroupWithBadges from '../AvatarGroupWithBadges';
+import ConfirmModal from '../../../ConfirmModal';
+import DeleteIcon from '../../../DeleteIcon';
 
 const useStyles = makeStyles(() => ({
     layout: {
@@ -32,25 +33,33 @@ const useStyles = makeStyles(() => ({
 
 interface Props {
     conversation: IConversation,
-    changeCurrentConversation: (_id: string) => void
-    status?: boolean
+    changeCurrentConversation: () => void
+    removeConversation: () => void
 }
 
-interface ParamTypes {
+interface ParamsTypes {
     id: string
 }
 
 const ConversationItem: FunctionComponent<Props> = (props) => {
     const classes = useStyles();
-    const { conversation, changeCurrentConversation } = props;
-    const [showIcon, setShowIcon] = useState(false);
-    const { id } = useParams<ParamTypes>();
+    const { conversation, changeCurrentConversation, removeConversation } = props;
+    const [ showDeleteIcon, setShowDeleteIcon ] = useState<boolean>(false);
+    const [ modalOpen, setModalOpen ] = useState<boolean>(false);
+    const { id } = useParams<ParamsTypes>();
     const activeConversation = conversation._id === id;
 
-    const handleOnMouseOver = () => setShowIcon(prevState => !prevState);
-
-    const handleCurrentConversationChange = (_id: string): void => {
-        changeCurrentConversation(_id);
+    const handleChangeCurrentConversation = () => changeCurrentConversation();
+    const handleOnMouseOver = () => !modalOpen && setShowDeleteIcon(true);
+    const handleOnMouseLeave = () => setShowDeleteIcon(false);
+    const handleDeleteIconClick = () => {
+        setShowDeleteIcon(false);
+        setModalOpen(true);
+    };
+    const handleCancelModalClick = () => setModalOpen(false);
+    const handleConfirmModalClick = () => {
+        removeConversation();
+        setModalOpen(false);
     };
 
     return (
@@ -59,21 +68,23 @@ const ConversationItem: FunctionComponent<Props> = (props) => {
                 `${ classes.layout } 
                  ${ activeConversation ? classes.activeConversation : '' }`
             }
-            onMouseEnter={ handleOnMouseOver }
-            onMouseLeave={ handleOnMouseOver }
-            onClick={ () => handleCurrentConversationChange(conversation._id) }
+            onMouseOver={ handleOnMouseOver }
+            onMouseLeave={ handleOnMouseLeave }
+            onClick={ handleChangeCurrentConversation }
         >
             <AvatarGroupWithBadges conversationUsers={ conversation.users } />
             <GroupedConversationUserNames conversationUsers={ conversation.users }/>
             {
-                showIcon &&
-                <Tooltip title='Delete conversation'>
-                    <CancelOutlinedIcon
-                        className={ classes.deleteIcon }
-                        // onClick={ }
-                    />
-                </Tooltip>
+                showDeleteIcon &&
+                <DeleteIcon title='Remove conversation' onDeleteIconClick={ handleDeleteIconClick }/>
             }
+            <ConfirmModal
+                open={ modalOpen }
+                title='Remove conversation'
+                content='This action is irreversible'
+                onConfirmModalClick={ handleConfirmModalClick }
+                onCancelModalClick={ handleCancelModalClick }
+            />
         </ListItem>
     );
 };

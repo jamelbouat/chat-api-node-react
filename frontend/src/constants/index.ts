@@ -5,7 +5,7 @@ export enum ROUTES {
     PROFILE = '/app/profile',
     HOME = '/',
     DASHBOARD = '/app',
-    CONTACT = '/app/contact/:id',
+    CONTACT_PROFILE = '/app/contact/:id',
     CONVERSATIONS = '/app/conversation/:id'
 }
 

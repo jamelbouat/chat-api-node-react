@@ -1,5 +1,4 @@
 import { Action, Dispatch } from 'redux';
-import { push } from 'connected-react-router';
 
 import { userService } from '../services';
 import * as storage from '../utils/sessionStorage';
@@ -10,20 +9,19 @@ import {
     LOGIN_REQUEST, LOGIN_SUCCESS,
     REMOVE_USER_DATA, SET_LOGIN_ALERT
 } from './types';
-import { ILoginResponseData, ILoginValues } from '../interfaces/user';
+import { ILoginResponseData, ILoginFormValues } from '../interfaces/user';
 import { IRegisterAction } from '../interfaces/actions';
 import { removeSocketConnection } from './messages';
 import { removeConversationsFromStore } from './conversations';
+import { routeChange } from './routes';
 
-export const loginUser = (values: ILoginValues) => async (dispatch: Dispatch): Promise<void> => {
+const loginUser = (values: ILoginFormValues) => async (dispatch: Dispatch): Promise<void> => {
     dispatch(loginRequest());
 
     try {
         const userResponseData = await userService.loginUser(values);
         dispatch(setInitialTokens(userResponseData));
         dispatch(loginSuccess(userResponseData));
-        // dispatch(push(ROUTES.DASHBOARD));
-
     } catch (error) {
         dispatch(loginFailure(error.message));
     }
@@ -47,11 +45,11 @@ const loginFailure = (errorMessage: string) => ({
     }
 });
 
-export const removeUserData = (): Action => ({
+const removeUserData = (): Action => ({
     type: REMOVE_USER_DATA
 });
 
-export const setLoginAlert = (alertType: ALERT_TYPE, alertMessage: string): IRegisterAction => ({
+const setLoginAlert = (alertType: ALERT_TYPE, alertMessage: string): IRegisterAction => ({
     type: SET_LOGIN_ALERT,
     payload: {
         alertType,
@@ -59,15 +57,25 @@ export const setLoginAlert = (alertType: ALERT_TYPE, alertMessage: string): IReg
     }
 });
 
-export const clearLoginAlert = (): Action =>({
+const clearLoginAlert = (): Action =>({
     type: CLEAR_LOGIN_ALERT
 });
 
-export const logoutAndRedirectToHome = () => (dispatch: Dispatch): void => {
+const logoutAndRedirectToHome = () => (dispatch: Dispatch): void => {
     dispatch(removeTokens());
     dispatch(removeUserData());
     dispatch(removeSocketConnection());
     dispatch(removeConversationsFromStore());
     storage.removeStateFromStorage();
-    dispatch(push(ROUTES.HOME));
+    dispatch(routeChange(ROUTES.HOME));
 };
+
+export {
+    loginUser,
+    removeUserData,
+    setLoginAlert,
+    clearLoginAlert,
+    logoutAndRedirectToHome
+};
+
+

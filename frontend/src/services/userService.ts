@@ -1,12 +1,12 @@
 import { fetchApi } from './fetchApi';
 import { getAccessToken } from '../utils/tokens';
-import { ILoginResponseData, ILoginValues, IRegisterValues } from '../interfaces/user';
+import { ILoginResponseData, ILoginFormValues, IRegisterFormValues } from '../interfaces/user';
 
 const loginPathname = process.env.REACT_APP_API_LOGIN_USER || '';
 const registerPathname = process.env.REACT_APP_API_REGISTER_USER || '';
 const getUserPathname = process.env.REACT_APP_API_GET_USER || '';
 const getUsersPathname = process.env.REACT_APP_API_GET_USERS || '';
-const stringifyBody = (values: ILoginValues | IRegisterValues) => JSON.stringify({ ...values });
+const stringifyBody = (values: ILoginFormValues | IRegisterFormValues) => JSON.stringify({ ...values });
 
 const getHeaders = () => {
     const accessToken = () => getAccessToken();
@@ -15,7 +15,7 @@ const getHeaders = () => {
     });
 };
 
-const loginUser = async (values: ILoginValues) => {
+const loginUser = async (values: ILoginFormValues) => {
     try {
         const user: ILoginResponseData = await fetchApi(loginPathname, 'POST', undefined, stringifyBody(values));
         return user;
@@ -24,7 +24,7 @@ const loginUser = async (values: ILoginValues) => {
     }
 };
 
-const registerUser = async (values: IRegisterValues) => {
+const registerUser = async (values: IRegisterFormValues) => {
     try {
         return await fetchApi(registerPathname, 'POST', undefined, stringifyBody(values));
     } catch (error) {

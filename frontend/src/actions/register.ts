@@ -5,16 +5,17 @@ import { CLEAR_REGISTER_ALERT, REGISTER_FAILURE, REGISTER_REQUEST, REGISTER_SUCC
 import { userService } from '../services';
 import { ALERT_TYPE, ROUTES } from '../constants';
 import { setLoginAlert } from './login';
-import { IRegisterValues } from '../interfaces/user';
+import { IRegisterFormValues } from '../interfaces/user';
+import { routeChange } from './routes';
 
-export const registerUser = (values: IRegisterValues) => async (dispatch: Dispatch): Promise<void> => {
+export const registerUser = (values: IRegisterFormValues) => async (dispatch: Dispatch): Promise<void> => {
     dispatch(registerRequest());
 
     try {
         const { message } = await userService.registerUser(values);
         dispatch(registerSuccess());
         dispatch(setLoginAlert(ALERT_TYPE.SUCCESS, message));
-        dispatch(push(ROUTES.LOGIN));
+        dispatch(routeChange(ROUTES.LOGIN));
 
     } catch (error) {
         dispatch(registerFailure(error.message));

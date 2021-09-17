@@ -3,12 +3,6 @@ import { Selector } from 'react-redux';
 import { RootState } from '../interfaces/state';
 import { IUser } from '../interfaces/user';
 
-const currentUserSelector: Selector<RootState, IUser> = state =>
-    state.loginState.user;
-
-const isUserAuthenticatedSelector: Selector<RootState, boolean> = state =>
-    state.loginState.isAuthenticated;
-
 const usersSelector: Selector<RootState, IUser[]> = state =>
     state.usersState.users;
 
@@ -19,8 +13,6 @@ const conversationUserStatusSelector = (state: RootState, userId: string): boole
 };
 
 export {
-    currentUserSelector,
-    isUserAuthenticatedSelector,
     usersSelector,
     conversationUserStatusSelector
 };

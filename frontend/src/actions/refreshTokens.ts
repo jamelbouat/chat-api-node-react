@@ -14,6 +14,7 @@ import {
 } from './types';
 import { ILoginResponseData } from '../interfaces/user';
 import { ITokens } from '../interfaces/tokens';
+import { routeChange } from './routes';
 
 export const refreshTokens = async (dispatch: Dispatch, refreshToken: string): Promise<void> => {
     const refreshTokensPromise = async (): Promise<void> => {
@@ -53,7 +54,7 @@ const logoutAndRedirectToLogin = (dispatch: Dispatch) => {
     dispatch(removeUserData());
     storage.removeStateFromStorage();
     dispatch(setLoginAlert(ALERT_TYPE.INFO, 'Session timed out, try to connect !'));
-    push(ROUTES.LOGIN);
+    routeChange(ROUTES.LOGIN);
 };
 
 export const setInitialTokens = (userResponseData: ILoginResponseData) => ({

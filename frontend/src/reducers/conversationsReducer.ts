@@ -6,11 +6,11 @@ import {
     REMOVE_CONVERSATION_SUCCESS,
     REMOVE_CONVERSATION_FAILURE,
     ADD_NEW_CONVERSATION_FAILURE,
-    REMOVE_CONVERSATIONS_FROM_STORE, ON_RECEIVED_MESSAGE,
+    REMOVE_CONVERSATIONS_FROM_STORE, ON_RECEIVED_MESSAGE, CLEAR_LOGIN_ALERT, CLEAR_CONVERSATIONS_ALERT,
 } from '../actions/types';
 import { ALERT_TYPE } from '../constants';
 import { IConversationsAction } from '../interfaces/actions';
-import { IConversation, IMessage } from '../interfaces/conversations';
+import { IConversation, IReceivedMessage } from '../interfaces/conversations';
 
 const initialState = {
     isLoading: false,
@@ -21,7 +21,7 @@ const initialState = {
     }
 };
 
-function addNewMessage(conversations: IConversation[], message: IMessage | undefined): IConversation[] {
+function addNewMessage(conversations: IConversation[], message: IReceivedMessage | undefined): IConversation[] {
     if (!message) {
         return conversations;
     }
@@ -72,7 +72,7 @@ export const conversationsReducer = (state= initialState, action: IConversations
         case ADD_NEW_CONVERSATION_SUCCESS:
             return {
                 ...state,
-                conversations: [ action.payload.conversation, ...state.conversations]
+                conversations: [ action.payload.conversation, ...state.conversations ]
             };
 
         case ADD_NEW_CONVERSATION_FAILURE:
@@ -110,6 +110,15 @@ export const conversationsReducer = (state= initialState, action: IConversations
         case REMOVE_CONVERSATIONS_FROM_STORE:
             return {
                 ...initialState
+            };
+
+        case CLEAR_CONVERSATIONS_ALERT:
+            return {
+                ...state,
+                alertInfo: {
+                    alertType: null,
+                    alertMessage: null
+                }
             };
 
         default:

@@ -10,15 +10,15 @@ import AlertInfo from '../AlertInfo';
 import ProgressIndicator from '../ProgressIndicator';
 import { ROUTES } from '../../constants';
 import { registerFormFieldsValidationSchema } from '../../utils/formsDataValidation';
-import { IRegisterValues } from '../../interfaces/user';
+import { IRegisterFormValues } from '../../interfaces/user';
 import { IAlert } from '../../interfaces/alert';
 
-type Values = IRegisterValues & { confirmPassword: string };
+type Values = IRegisterFormValues & { confirmPassword: string };
 
 interface Props {
     isLoading: boolean,
     alertInfo: IAlert,
-    registerUser: (values: IRegisterValues) => void,
+    registerUser: (values: IRegisterFormValues) => void,
     clearRegisterAlert: () => void,
 }
 
@@ -60,7 +60,7 @@ const Register: React.FC<Props> = (props) => {
                         onSubmit={ async (values: Values, { setSubmitting }: FormikHelpers<Values>) => {
                             const registrationValues = removeProperties(values, 'confirmPassword');
                             // setSubmitting(true);
-                            await registerUser(registrationValues as IRegisterValues);
+                            await registerUser(registrationValues as IRegisterFormValues);
                             // setSubmitting(false);
                         } }
                     >

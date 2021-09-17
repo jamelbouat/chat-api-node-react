@@ -9,13 +9,13 @@ import AlertInfo from '../AlertInfo';
 import ProgressIndicator from '../ProgressIndicator';
 import { ROUTES } from '../../constants';
 import { loginFormFieldsValidationSchema } from '../../utils/formsDataValidation';
-import { ILoginValues } from '../../interfaces/user';
+import { ILoginFormValues } from '../../interfaces/user';
 import { IAlert } from '../../interfaces/alert';
 
 interface Props {
     isLoading: boolean,
     alertInfo: IAlert,
-    loginUser: (values: ILoginValues) => void,
+    loginUser: (values: ILoginFormValues) => void,
     clearLoginAlert: () => void
 }
 
@@ -54,7 +54,7 @@ const Login: React.FC<Props> = (props) => {
                         initialValues={ initialValues }
                         validationSchema={ loginFormFieldsValidationSchema }
 
-                        onSubmit={ async (values: ILoginValues, { setSubmitting }: FormikHelpers<ILoginValues>) => {
+                        onSubmit={ async (values: ILoginFormValues, { setSubmitting }: FormikHelpers<ILoginFormValues>) => {
                             // setSubmitting(true);
                             await loginUser(values);
                             // setSubmitting(false);

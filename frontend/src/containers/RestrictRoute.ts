@@ -4,7 +4,7 @@ import { Action } from 'redux';
 
 import RestrictRoute from '../routes/RestrictRoute';
 import { RootState } from '../interfaces/state';
-import { isUserAuthenticatedSelector } from '../selectors/users';
+import { isUserAuthenticatedSelector } from '../selectors/currentUser';
 
 const mapStateToProps = (state: RootState) => ({
     isAuthenticated: isUserAuthenticatedSelector(state)

@@ -10,12 +10,12 @@ export interface IUser {
     updatedAt: string;
 }
 
-export interface ILoginValues {
+export interface ILoginFormValues {
     email: string;
     password: string
 }
 
-export interface IRegisterValues {
+export interface IRegisterFormValues {
     firstName: string;
     lastName: string;
     email: string;

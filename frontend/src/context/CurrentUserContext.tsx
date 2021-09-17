@@ -9,7 +9,8 @@ interface Props {
 
 const CurrentUserContext = createContext<IUser | null>(null);
 
-const CurrentUserProvider: React.FC<Props>  = ({ currentUser, children }) => {
+const CurrentUserContextProvider: React.FC<Props>  = (props) => {
+    const { currentUser, children } = props;
 
     return (
         <CurrentUserContext.Provider value={ currentUser } >
@@ -18,9 +19,9 @@ const CurrentUserProvider: React.FC<Props>  = ({ currentUser, children }) => {
     );
 };
 
-const useCurrentUser = () => useContext(CurrentUserContext);
+const useCurrentUserContext = () => useContext(CurrentUserContext);
 
 export {
-    CurrentUserProvider,
-    useCurrentUser
+    CurrentUserContextProvider,
+    useCurrentUserContext
 };

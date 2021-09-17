@@ -25,21 +25,21 @@ interface Props {
 
 const AddConversationGroupButton: React.FC<Props> = ({ users, addNewConversation }) => {
     const classes = useStyle();
-    const [open, setOpen] = useState(false);
+    const [modalOpen, setModalOpen] = useState(false);
     const [selectedUsers, setSelectedUsers] = useState<IUser[]>();
 
     const handleClickOpen = () => {
-        setOpen(true);
+        setModalOpen(true);
     };
 
-    const handleClose = () => {
-        setOpen(false);
+    const handleClickClose = () => {
+        setModalOpen(false);
     };
 
-    const handleOnClickAddNewConversation = () => {
+    const handleClickAddNewConversation = () => {
         const userIds = selectedUsers?.map(user => user._id);
         userIds && addNewConversation(userIds);
-        handleClose();
+        handleClickClose();
     };
 
     return(
@@ -56,8 +56,8 @@ const AddConversationGroupButton: React.FC<Props> = ({ users, addNewConversation
                 </Fab>
             </Tooltip>
 
-            <Dialog open={ open } onClose={ handleClose } aria-labelledby='form-dialog-title' fullWidth={ true }>
-                <DialogTitle id='form-dialog-title'>New conversation group</DialogTitle>
+            <Dialog open={ modalOpen } onClose={ handleClickClose } aria-labelledby='form-dialog-title' fullWidth={ true }>
+                <DialogTitle id='form-dialog-title'>New group conversation</DialogTitle>
                 <DialogContent>
                     <Autocomplete
                         multiple
@@ -78,10 +78,10 @@ const AddConversationGroupButton: React.FC<Props> = ({ users, addNewConversation
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={ handleClose } color='primary' variant='contained'>
+                    <Button onClick={ handleClickClose } color='primary' variant='contained'>
                         Cancel
                     </Button>
-                    <Button onClick={ handleOnClickAddNewConversation } color='primary' variant='contained'>
+                    <Button onClick={ handleClickAddNewConversation } color='primary' variant='contained'>
                         Add
                     </Button>
                 </DialogActions>

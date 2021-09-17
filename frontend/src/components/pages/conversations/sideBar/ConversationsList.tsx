@@ -17,35 +17,46 @@ const useStyles = makeStyles(() => ({
 interface Props {
     isLoading: boolean;
     conversations: IConversation[];
+    alertInfo: IAlert;
     getConversations: () => void;
     changeCurrentConversation: (_id: string) => void;
-    alertInfo: IAlert
+    removeConversation: (_id: string) => void;
+    clearConversationsAlertInfo: () => void;
 }
 
 const ConversationsList: React.FC<Props> = (props) => {
     const classes = useStyles();
-    const { isLoading, conversations, getConversations, changeCurrentConversation, alertInfo } = props;
+    const {
+        isLoading, conversations, alertInfo, getConversations,
+        changeCurrentConversation, removeConversation, clearConversationsAlertInfo
+    } = props;
     const alertType = alertInfo.alertType;
     const alertMessage = alertInfo.alertMessage || 'error !';
 
     useEffect(() => {
-        alertType && !isLoading && toastAlert(alertType, alertMessage);
         getConversations();
     }, []);
 
-    const handleChangeCurrentConversation = (_id: string) => {
-        changeCurrentConversation(_id);
-    };
+    useEffect(() => {
+        alertType && !isLoading && toastAlert(alertType, alertMessage);
+        return () => {
+            clearConversationsAlertInfo();
+        };
+    }, [conversations]);
+
+    const handleChangeCurrentConversation = (_id: string) => changeCurrentConversation(_id);
+    const handleRemoveConversation = (_id: string) => removeConversation(_id);
 
     return (
         <List className={ classes.layout }>
             {
                 isLoading ? <Spinner /> :
-                    conversations.map(conversation => (
+                    conversations?.map(conversation => (
                         <ConversationItem
                             key={ conversation._id }
                             conversation={ conversation }
-                            changeCurrentConversation={ (_id) => handleChangeCurrentConversation(_id) }
+                            removeConversation={ () => handleRemoveConversation(conversation._id) }
+                            changeCurrentConversation={ () => handleChangeCurrentConversation(conversation._id) }
                         />
                     ))
             }

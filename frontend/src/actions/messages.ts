@@ -7,7 +7,7 @@ import {
     GET_MESSAGES_REQUEST,
     GET_MESSAGES_SUCCESS, GET_MESSAGES_FAILURE
 } from './types';
-import { IConversation, IMessage } from '../interfaces/conversations';
+import { IConversation, IMessageFormValues, IReceivedMessage } from '../interfaces/conversations';
 import { RootState } from '../interfaces/state';
 import { getAccessToken } from '../utils/tokens';
 import { isUserAuthenticated } from '../utils/user';
@@ -44,10 +44,10 @@ const joinConversationRoom = (currentConversation: IConversation): void => {
     socketService && socketService.joinConversationRoom(currentConversation._id, userIds);
 };
 
-const sendMessage = (message: { content: string, conversationId: string }) =>
+const sendMessage = (conversationId: string, message: IMessageFormValues) =>
     (dispatch: Dispatch, getState: RootState) => {
         const from = getState().loginState.user._id;
-        socketService && socketService.sendMessage({ ...message, from });
+        socketService && socketService.sendMessage(conversationId, { conversationId, from, ...message });
     };
 
 const removeSocketConnection = (): Action => {
@@ -64,7 +64,7 @@ const onNewSocketConnection = (socketId: string) => ({
     }
 });
 
-const onReceiveMessage = (message: IMessage) => ({
+const onReceiveMessage = (message: IReceivedMessage) => ({
     type: ON_RECEIVED_MESSAGE,
     payload: {
         message
@@ -85,7 +85,7 @@ const getMessagesRequest = () => ({
     type: GET_MESSAGES_REQUEST
 });
 
-const getMessagesSuccess = (messages: IMessage[]) => ({
+const getMessagesSuccess = (messages: IReceivedMessage[]) => ({
     type: GET_MESSAGES_SUCCESS,
     payload: {
         messages

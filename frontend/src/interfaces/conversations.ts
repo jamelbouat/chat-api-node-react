@@ -1,5 +1,5 @@
 
-export interface IMessage {
+export interface IReceivedMessage {
     _id: string;
     conversationId: string;
     from: string;
@@ -10,10 +10,14 @@ export interface IMessage {
     updatedAt?: string
 }
 
-export interface ISendMessage {
+export interface ISentMessage {
     conversationId: string;
     from: string;
     content: string;
+}
+
+export interface IMessageFormValues {
+    content: string
 }
 
 export interface IConversationUser {
@@ -32,7 +36,7 @@ export interface IConversationUserWithStatus {
 export interface IConversation {
     _id: string;
     users: IConversationUser[];
-    messages: IMessage[];
+    messages: IReceivedMessage[];
     createdAt: string;
     updatedAt: string;
 }
