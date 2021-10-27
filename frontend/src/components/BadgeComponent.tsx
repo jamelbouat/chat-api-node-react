@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Badge, makeStyles } from '@material-ui/core';
 import { IConversationUser } from '../interfaces/conversations';
 

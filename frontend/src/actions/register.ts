@@ -1,5 +1,4 @@
 import { Action, Dispatch } from 'redux';
-import { push } from 'connected-react-router';
 
 import { CLEAR_REGISTER_ALERT, REGISTER_FAILURE, REGISTER_REQUEST, REGISTER_SUCCESS } from './types';
 import { userService } from '../services';

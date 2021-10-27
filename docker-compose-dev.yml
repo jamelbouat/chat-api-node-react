@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  frontend:
+    image: frontend-image-dev
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
+
+  backend_api:
+    image: backend-image
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend_api:/usr/src/app
+      - /usr/src/app/node_modules        
+

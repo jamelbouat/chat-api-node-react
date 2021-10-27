@@ -5,7 +5,7 @@ class DBClient {
 
     public makeDatabaseConnection = async (): Promise<void> => {
         const { MONGO_USER, MONGO_PASSWORD, MONGO_PATH } = process.env;
-        const mongoose_uri = `mongodb+srv://${ MONGO_USER }:${ MONGO_PASSWORD }${ MONGO_PATH }`;
+        const mongoose_uri = `mongodb+srv://${ MONGO_USER }:${ MONGO_PASSWORD }@${ MONGO_PATH }`;
 
         try {
             await mongoose.connect(mongoose_uri, {

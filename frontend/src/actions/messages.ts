@@ -45,13 +45,14 @@ const joinConversationRoom = (currentConversation: IConversation): void => {
 };
 
 const sendMessage = (conversationId: string, message: IMessageFormValues) =>
-    (dispatch: Dispatch, getState: RootState) => {
+    (dispatch: Dispatch, getState: RootState): void => {
         const from = getState().loginState.user._id;
         socketService && socketService.sendMessage(conversationId, { conversationId, from, ...message });
     };
 
 const removeSocketConnection = (): Action => {
     socketService.disconnect();
+    window.removeEventListener('load', createNewSocketService);
     return {
         type: REMOVE_SOCKET_CONNECTION
     };
@@ -71,7 +72,7 @@ const onReceiveMessage = (message: IReceivedMessage) => ({
     }
 });
 
-const getConversationMessages = (conversationId: string) => async (dispatch: Dispatch) => {
+const getConversationMessages = (conversationId: string) => async (dispatch: Dispatch): Promise<void> => {
     dispatch(getMessagesRequest());
     try {
         const messages = await messagesService.getConversationMessages(conversationId);

@@ -4,7 +4,7 @@ import { GET_USERS_FAILURE, GET_USERS_REQUEST, GET_USERS_SUCCESS, SET_USERS_OFFL
 import { userService } from '../services';
 import { IUser } from '../interfaces/user';
 
-const getUsers = () => async (dispatch: Dispatch) => {
+const getUsers = () => async (dispatch: Dispatch): Promise<void> => {
     dispatch(getUsersRequest());
 
     try {

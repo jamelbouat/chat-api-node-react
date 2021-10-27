@@ -11,30 +11,31 @@ const config: webpack.Configuration = {
     output: {
         path: path.resolve(__dirname, 'build'),
         filename: '[name].[contenthash].js',
-        publicPath: '',
+        publicPath: '/',
     },
     module: {
         rules: [
             {
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    'css-loader'
+                ]
+            },
+            {
                 test: /\.(ts|js)x?$/i,
                 exclude: /node_modules/,
                 use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: [
-                            '@babel/preset-env',
-                            '@babel/preset-react',
-                            '@babel/preset-typescript',
-                        ],
-                    },
-                },
-            },
-        ],
+                    loader: 'babel-loader'
+                }
+            }
+        ]
     },
     resolve: {
-        extensions: ['.tsx', '.ts', '.js'],
+        extensions: ['.tsx', '.ts', '.js', '.css']
     },
     plugins: [
+        new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             template: 'src/index.html',
         }),
@@ -42,10 +43,9 @@ const config: webpack.Configuration = {
             async: false,
         }),
         new ESLintPlugin({
-            extensions: ['js', 'jsx', 'ts', 'tsx'],
+            extensions: ['js', 'jsx', 'ts', 'tsx']
         }),
-        new CleanWebpackPlugin(),
-    ],
+    ]
 };
 
 export default config;

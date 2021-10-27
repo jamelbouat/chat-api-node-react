@@ -1,5 +1,4 @@
 import { Action, Dispatch } from 'redux';
-import { push } from 'connected-react-router';
 
 import { refreshTokensService } from '../services';
 import { ALERT_TYPE, ROUTES } from '../constants';

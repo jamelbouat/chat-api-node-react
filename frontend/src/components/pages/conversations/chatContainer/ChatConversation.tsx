@@ -25,7 +25,7 @@ const ChatConversation: React.FC<Props> = ({ currentConversation }) => {
     const messages = currentConversation.messages;
 
     useEffect(() => {
-        lastMessageRef?.current?.scrollIntoView({ behavior: 'smooth', inline: 'start' });
+        lastMessageRef?.current?.scrollIntoView({ behavior: 'smooth' });
         return () => {
             messageFromRef.current = '';
         };

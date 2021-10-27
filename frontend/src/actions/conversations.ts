@@ -1,5 +1,4 @@
 import { Action, Dispatch } from 'redux';
-import { push } from 'connected-react-router';
 
 import {
     ADD_NEW_CONVERSATION_FAILURE, ADD_NEW_CONVERSATION_SUCCESS, CLEAR_CONVERSATIONS_ALERT,
@@ -14,7 +13,7 @@ import { RootState } from '../interfaces/state';
 import { ROUTES } from '../constants';
 import { routeChange } from './routes';
 
-export const getConversations = async (dispatch: Dispatch) => {
+export const getConversations = async (dispatch: Dispatch): Promise<void> => {
     dispatch(getConversationsRequest());
     try {
         const conversations = await conversationsService.getConversations();
@@ -42,11 +41,11 @@ const getConversationsFailure = (errorMessage: string) =>({
     }
 });
 
-export const changeCurrentConversation = (_id: string) => (dispatch: Dispatch) => {
+export const changeCurrentConversation = (_id: string) => (dispatch: Dispatch): void => {
     dispatch(routeChange(ROUTES.CONVERSATIONS, { ':id': _id }));
 };
 
-export const addNewConversation = (userIds: string[]) => async (dispatch: Dispatch, getState: RootState) => {
+export const addNewConversation = (userIds: string[]) => async (dispatch: Dispatch, getState: RootState): Promise<void> => {
     try {
         const currentUserId = getState().loginState.user._id;
         const newConversation = await conversationsService.addNewConversation([currentUserId, ...userIds]);
@@ -79,7 +78,7 @@ const addNewConversationFailure = (errorMessage: string) => ({
     }
 });
 
-export const removeConversation = (_id: string) => async (dispatch: Dispatch) => {
+export const removeConversation = (_id: string) => async (dispatch: Dispatch): Promise<void> => {
     try {
         const { message } = await conversationsService.removeConversation(_id);
         dispatch(removeConversationSuccess(_id, message));

@@ -1,6 +1,6 @@
 import { fetchApi } from './fetchApi';
 import { getAccessToken } from '../utils/tokens';
-import { ILoginResponseData, ILoginFormValues, IRegisterFormValues } from '../interfaces/user';
+import { ILoginFormValues, ILoginResponseData, IRegisterFormValues, IUser } from '../interfaces/user';
 
 const loginPathname = process.env.REACT_APP_API_LOGIN_USER || '';
 const registerPathname = process.env.REACT_APP_API_REGISTER_USER || '';
@@ -15,16 +15,15 @@ const getHeaders = () => {
     });
 };
 
-const loginUser = async (values: ILoginFormValues) => {
+const loginUser = async (values: ILoginFormValues): Promise<ILoginResponseData> => {
     try {
-        const user: ILoginResponseData = await fetchApi(loginPathname, 'POST', undefined, stringifyBody(values));
-        return user;
+        return await fetchApi(loginPathname, 'POST', undefined, stringifyBody(values));
     } catch (error) {
         throw error;
     }
 };
 
-const registerUser = async (values: IRegisterFormValues) => {
+const registerUser = async (values: IRegisterFormValues): Promise<{ message: string } | Error> => {
     try {
         return await fetchApi(registerPathname, 'POST', undefined, stringifyBody(values));
     } catch (error) {
@@ -32,7 +31,7 @@ const registerUser = async (values: IRegisterFormValues) => {
     }
 };
 
-const getUser = async (_id: string) => {
+const getUser = async (_id: string): Promise<IUser | Error> => {
     try {
         return await fetchApi(`${ getUserPathname }/${ _id }`, 'GET', getHeaders());
     } catch (error) {
@@ -40,7 +39,7 @@ const getUser = async (_id: string) => {
     }
 };
 
-const getUsers = async () => {
+const getUsers = async (): Promise<IUser[]> => {
     try {
         return await fetchApi(getUsersPathname, 'GET', getHeaders());
     } catch (error) {

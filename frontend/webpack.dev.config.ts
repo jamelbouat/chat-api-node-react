@@ -16,12 +16,8 @@ const config: webpack.Configuration = {
             {
                 test: /\.css$/,
                 use: [
-                    {
-                        loader: 'style-loader'
-                    },
-                    {
-                        loader: 'css-loader'
-                    }
+                    'style-loader',
+                    'css-loader'
                 ]
             },
             {
@@ -29,24 +25,12 @@ const config: webpack.Configuration = {
                 exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
-                    options: {
-                        presets: [
-                            '@babel/preset-env',
-                            '@babel/preset-react',
-                            '@babel/preset-typescript',
-                        ],
-                        plugins: [ 'react-hot-loader/babel' ]
-                    },
-                },
-            },
-            {
-                test: /\.sharedworker\.(js|ts)x?$/,
-                loader: 'worker-plugin/loader'
+                }
             }
-        ],
+        ]
     },
     resolve: {
-        extensions: ['.tsx', '.ts', '.js', '.css'],
+        extensions: ['.tsx', '.ts', '.js', '.css']
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -54,9 +38,6 @@ const config: webpack.Configuration = {
         }),
         new webpack.HotModuleReplacementPlugin(),
         new ForkTsCheckerWebpackPlugin(),
-        new webpack.ProvidePlugin({
-            process: 'process/browser',
-        }),
         new DotenvWebpackPlugin(),
         new NodePolyfillPlugin()
     ],
@@ -64,10 +45,11 @@ const config: webpack.Configuration = {
     devServer: {
         contentBase: path.join(__dirname, 'build'),
         historyApiFallback: true,
+        host: '0.0.0.0',
         port: 4000,
         open: true,
         hot: true
-    },
+    }
 };
 
 export default config;
