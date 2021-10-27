@@ -3,3 +3,4 @@
 - make build-dev
 ### Run development:
 - make run-dev
+- localhost:4000
