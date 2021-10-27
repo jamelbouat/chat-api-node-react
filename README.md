@@ -1,6 +1,8 @@
-## Development:
+## Development
+- cd chat-api-node-react
+
 ### Build docker images:
 - make build-dev
 ### Run development:
 - make run-dev
-- localhost:4000
+- Navigate to: http://localhost:4000/
