@@ -1,5 +1,4 @@
 ## Development
-- cd chat-api-node-react
 
 ### Build docker images:
 - make build-dev
